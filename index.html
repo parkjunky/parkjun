@@ -54,8 +54,7 @@
         .ebook-image {
             max-width: 200px;
             height: auto;
-            margin: 0 auto;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            object-fit: contain;
         }
     </style>
 </head>
@@ -127,7 +126,7 @@
             </div>
         </section>
         
-        <section id="core-offer" class="bg-gradient-to-br from-blue-800 via-indigo-800 to-navy-900 text-white py-16 md:py-24">
+        <section id="core-offer" class="bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900 text-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4">하루 만에, 당신의 연애를 재창조합니다</h2>
@@ -198,11 +197,32 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     <div class="bg-gray-50 rounded-2xl p-8 flex flex-col shadow-lg border hover:shadow-xl transition-shadow h-full">
                         <div class="text-center mb-6">
-                            <i class="fa-solid fa-phone-volume text-5xl text-blue-600 mb-4"></i>
+                            <i class="fa-solid fa-phone-volume text-5xl text-blue-500 mb-4"></i>
                             <h3 class="text-2xl font-bold text-gray-800">1:1 유료 전화 상담</h3>
-                            <p class="text-gray-500 mt-1">가장 시급한 문제 즉시 해결</p>
+                            <p class="text-blue-600 font-semibold mt-1">답답한 그 문제, 1시간 안에 명쾌한 해답을 얻으세요</p>
                         </div>
-                        <p class="text-gray-700 flex-grow mb-6">당신의 문제에 대한 명확한 진단과 즉각적인 해결책이 필요하다면, 전문가와 직접 이야기하는 것이 가장 빠른 길입니다.</p>
+                        <div class="text-gray-700 flex-grow mb-6 space-y-4">
+                            <p>카톡 하나에 전전긍긍, 그녀의 진짜 속마음이 궁금하신가요?</p>
+                            <p class="font-semibold">뜬구름 잡는 조언이 아닌, 지금 당신에게 필요한 단 하나의 '액션 플랜'을 드립니다.</p>
+                            
+                            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                <h4 class="font-bold text-gray-800 mb-3">이 전화 상담을 통해 당신이 얻게 될 3가지:</h4>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-start">
+                                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">1</span>
+                                        <p><strong>당신만의 문제점 정밀 진단:</strong> 수백 건의 상담 데이터를 기반으로, 같은 실수를 반복하는 근본적인 원인을 정확히 짚어드립니다.</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">2</span>
+                                        <p><strong>상황을 역전시킬 명확한 '다음 행동' 제시:</strong> 상담 직후 바로 써먹을 수 있는 구체적인 대화법, 행동 지침을 알려드립니다.</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">3</span>
+                                        <p><strong>불필요한 시간과 감정 낭비 방지:</strong> 잘못된 노력에 쓰던 돈과 시간을 아껴드립니다. 8만 원의 투자가 앞으로의 수십, 수백 시간을 아끼는 가장 현명한 선택이 될 겁니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="text-center my-4">
                             <p class="text-4xl font-black text-gray-700">80,000<span class="text-lg font-semibold">원/시간</span></p>
                         </div>
@@ -215,9 +235,9 @@
                     </div>
                     <div class="bg-gray-50 rounded-2xl p-8 flex flex-col shadow-lg border hover:shadow-xl transition-shadow h-full">
                         <div class="text-center mb-6">
-                             <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/7c66ca74-93de-489e-a5d5-5a79dbe377a8" alt="THE RULES 소책자" class="ebook-image mb-4">
-                            <h3 class="text-2xl font-bold text-gray-800">THE RULES: 연애 상위 1%의 비밀 노트</h3>
-                             <p class="text-gray-500 mt-1 font-semibold text-blue-600">유료 강의 신청 전, 반드시 먼저 읽어보세요</p>
+                            <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/7c66ca74-93de-489e-a5d5-5a79dbe377a8" alt="THE RULES 소책자" class="ebook-image mx-auto mb-4">
+                            <h3 class="text-2xl font-bold text-gray-800">THE RULES</h3>
+                             <p class="text-gray-500 mt-1 font-semibold text-blue-600">연애 상위 1%의 비밀 노트</p>
                         </div>
                         <div class="text-gray-700 flex-grow mb-6 space-y-4">
                             <p>저는 당신이 아직 유료 프로그램을 신청하지 않았으면 합니다.</p>
@@ -241,7 +261,7 @@
                     <p class="font-bold">이 상담은 아무나 신청할 수 없습니다.</p>
                     <p class="text-gray-600">진정으로 자신의 인생을 바꿀 의지가 있고, 투자를 결심한 분들께만 특별히 제공되는 기회입니다. 신청서를 통해 자격 요건을 확인 후, 소수 인원만 선정하여 진행합니다.</p>
                  </div>
-                 <a href="https://forms.gle/qMGhKwC73X3jZWEW7" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-gray-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-black transition-colors">
+                 <a href="https://forms.gle/qMGhKwC73X3jZWEW7" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">
                     전략 상담 자격 알아보기
                 </a>
             </div>
