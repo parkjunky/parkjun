@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>연애 그 이상의 가치, 코치 박준</title>
     
+    <!-- Tailwind CSS, Font Awesome, Google Fonts CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     
@@ -13,70 +14,73 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
+        /* 기본 폰트 및 스무딩 설정 */
         body {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        /* 히어로 섹션 배경 스타일 */
         .hero-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #3730a3 50%, #312e81 75%, #1e1b4b 100%);
+            background: linear-gradient(135deg, #111827 0%, #1e3a8a 50%, #1e1b4b 100%);
             position: relative;
         }
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23a)"/><circle cx="800" cy="800" r="200" fill="url(%23a)"/></svg>');
-            opacity: 0.3;
-        }
+        /* 플로팅 애니메이션 */
         .floating-animation {
             animation: float 6s ease-in-out infinite;
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
-        .gradient-text {
-            background: linear-gradient(45deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* 텍스트 하이라이트 효과 */
+        .highlight-text {
+            background: linear-gradient(to top, rgba(59, 130, 246, 0.4) 40%, transparent 40%);
         }
+        /* 강의 이미지 호버 효과 */
         .lecture-image {
             transition: transform 0.3s ease;
         }
         .lecture-image:hover {
             transform: scale(1.05);
         }
+        /* 전자책 이미지 스타일 */
         .ebook-image {
             max-width: 200px;
             height: auto;
             object-fit: contain;
         }
+        /* FAQ 아코디언 스타일 */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-100 text-gray-800">
 
     <!-- Header Section -->
-    <header class="hero-bg text-white relative z-10">
-        <div class="container mx-auto px-6 py-24 md:py-40 text-center relative z-20">
+    <header class="hero-bg text-white relative overflow-hidden">
+        <div class="container mx-auto px-6 py-24 md:py-32 text-center relative z-20">
             <div class="floating-animation">
-                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-tight mb-2">연애 그 이상의 가치</h2>
-                <h1 class="text-3xl md:text-5xl font-bold gradient-text mb-6">코치 박준</h1>
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+                    혹시, 당신도 <span class="highlight-text">‘착하지만 매력 없는 남자’</span>의<br class="hidden md:block"> 굴레에 갇혀 있나요?
+                </h1>
+                <p class="text-lg md:text-xl font-medium text-blue-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    10년간의 시행착오, 수백 명의 데이터가 증명합니다.<br>
+                    여자의 마음을 얻는 것은 ‘스킬’이 아닌 <strong class="text-white">‘매력의 본질’</strong>을 이해하는 것에서 시작됩니다.
+                </p>
             </div>
-            <p class="text-xl md:text-2xl font-normal mb-10 max-w-4xl mx-auto leading-relaxed">착하기만 한 남자는 더 이상 매력 없습니다.<br>여자가 <span class="text-yellow-300 font-bold">본능적으로</span> 당신에게 끌리게 되는 원리를 알려드립니다.</p>
-            <a href="#core-offer" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold text-lg py-4 px-10 rounded-full shadow-2xl transition-all transform hover:scale-105 duration-300 ease-in-out inline-block">
-                가장 빠른 해결책 확인하기 <i class="fa-solid fa-arrow-down ml-2"></i>
+            <a href="#core-offer" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold text-lg py-4 px-10 rounded-full shadow-2xl transition-all transform hover:scale-105 duration-300 ease-in-out inline-block">
+                당신의 연애를 바꾸는 방법 확인하기 <i class="fa-solid fa-arrow-right ml-2"></i>
             </a>
-            <p class="mt-4 text-blue-200 text-sm">(이론이 아닌, 10년 이상의 현장 경험으로 증명합니다.)</p>
+            <p class="mt-6 text-blue-300 text-sm">(저 역시 당신과 같은 고민을 했던, 내성적인 남자였습니다.)</p>
         </div>
     </header>
 
     <main>
-        <!-- Problem Section -->
+        <!-- Problem Section: 방문자의 문제 공감 -->
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">혹시, 당신의 이야기인가요?</h2>
@@ -98,12 +102,12 @@
             </div>
         </section>
 
-        <!-- Coach Story Section -->
+        <!-- Coach Story Section: 코치의 경험으로 신뢰 구축 -->
         <section class="bg-gray-50 py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <div class="grid lg:grid-cols-5 gap-12 items-center">
                     <div class="lg:col-span-2">
-                        <img src="https://page1.genspark.site/v1/base64_upload/dfa82cfea3edf5a99e5de9eb454ba229" alt="코치 박준 실제 강의 현장" class="lecture-image rounded-2xl shadow-2xl w-full h-full object-cover">
+                        <img src="https://page1.genspark.site/v1/base64_upload/dfa82cfea3edf5a99e5de9eb454ba229" alt="코치 박준이 수강생과 1:1로 코칭하는 실제 강의 현장" class="lecture-image rounded-2xl shadow-2xl w-full h-full object-cover">
                     </div>
                     <div class="lg:col-span-3">
                         <h2 class="text-3xl md:text-4xl font-bold mb-3">수백 명의 변화가 증명합니다. 당신도 가능합니다.</h2>
@@ -131,7 +135,7 @@
             </div>
         </section>
         
-        <!-- Core Offer Section -->
+        <!-- Core Offer Section: 핵심 상품 소개 -->
         <section id="core-offer" class="bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900 text-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                 
@@ -166,16 +170,16 @@
                         <div class="bg-gray-50 p-8 md:p-12 flex flex-col">
                              <div class="text-center">
                                   <p class="text-2xl font-bold text-gray-400 line-through">정가 590,000원</p>
-                                  <p class="text-6xl font-black text-blue-600">300,000<span class="text-3xl font-bold">원</span></p>
+                                  <p class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-600">300,000<span class="text-2xl sm:text-3xl font-bold">원</span></p>
                                   <p class="text-red-500 font-semibold text-lg mt-1">
-                                       <i class="fa-solid fa-fire mr-2"></i>기간 한정 49% 특별 할인
+                                      <i class="fa-solid fa-fire mr-2"></i>기간 한정 49% 특별 할인
                                   </p>
                              </div>
                              <div class="text-left space-y-2 my-6 text-sm text-gray-700 bg-blue-50 p-4 rounded-lg border border-blue-200">
-                                 <p class="font-bold text-gray-800 text-center mb-2 text-base">모든 불안감을 없애줄 특별 혜택</p>
-                                 <p class="font-bold text-blue-600 text-lg flex items-center"><i class="fa-solid fa-crown text-yellow-500 mr-2"></i>여친 생길 때까지 무제한 후속 케어</p>
-                                 <p class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>수강생 전용 비공개 커뮤니티</p>
-                                 <p class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>클래스 핵심 비법 요약본 PDF</p>
+                                  <p class="font-bold text-gray-800 text-center mb-2 text-base">모든 불안감을 없애줄 특별 혜택</p>
+                                  <p class="font-bold text-blue-600 text-lg flex items-center"><i class="fa-solid fa-crown text-yellow-500 mr-2"></i>여친 생길 때까지 무제한 후속 케어</p>
+                                  <p class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>수강생 전용 비공개 커뮤니티</p>
+                                  <p class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>클래스 핵심 비법 요약본 PDF</p>
                              </div>
                              <a href="https://forms.gle/YrdNC6HEf7uLVghf8" target="_blank" rel="noopener noreferrer" class="mt-auto w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 duration-300 text-xl shadow-lg">
                                  원데이 클래스 신청하기 <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -206,7 +210,7 @@
             </div>
         </section>
 
-        <!-- Alternatives Section -->
+        <!-- Alternatives Section: 대안 상품 제시 -->
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-12">
@@ -238,9 +242,6 @@
                             <p class="text-4xl font-black text-blue-600">80,000<span class="text-lg font-semibold">원/시간</span></p>
                              <p class="text-red-500 font-semibold mt-1">20% 특별 할인</p>
                         </div>
-                        <div class="bg-blue-100 text-blue-800 p-3 rounded-lg text-sm text-center mb-4">
-                            <p><i class="fa-solid fa-gift mr-2"></i><strong>상담 고객 특별 혜택</strong><br>상담 후 원데이 클래스 신청 시, <strong>상담비용 중 4만원을 수강료에서 차감</strong>해 드립니다.</p>
-                        </div>
                         <a href="https://forms.gle/SJxkq9o6zZvpjcG67" target="_blank" rel="noopener noreferrer" class="mt-auto w-full bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-black transition-colors">
                             전화 상담 신청하기
                         </a>
@@ -248,7 +249,7 @@
                     <!-- Ebook Card -->
                     <div class="bg-gray-50 rounded-2xl p-8 flex flex-col shadow-lg border hover:shadow-xl transition-shadow h-full">
                         <div class="text-center mb-6">
-                            <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/7c66ca74-93de-489e-a5d5-5a79dbe377a8" alt="THE RULES 소책자" class="ebook-image mx-auto mb-4">
+                            <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/7c66ca74-93de-489e-a5d5-5a79dbe377a8" alt="연애 상위 1%의 비밀 노트 THE RULES 전자책 표지" class="ebook-image mx-auto mb-4">
                             <h3 class="text-2xl font-bold text-gray-800">THE RULES</h3>
                              <p class="text-blue-600 mt-1 font-semibold">연애 상위 1%의 비밀 노트</p>
                         </div>
@@ -259,19 +260,19 @@
                             <p><strong class="text-gray-900 font-semibold">이 내용을 보고도 해결책을 모르겠다면, 그때 유료 코칭을 신청해도 절대 늦지 않습니다.</strong></p>
                         </div>
                          <a href="https://forms.gle/3PLY9DFJTFLH2Cww9" target="_blank" rel="noopener noreferrer" class="mt-auto w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
-                            무료 가이드북 신청하기 <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </a>
+                             무료 가이드북 신청하기 <i class="fa-solid fa-arrow-right ml-1"></i>
+                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- VVIP Consult Section -->
+        <!-- VVIP Consult Section: 특별 상담 안내 -->
         <section id="free-consult" class="bg-gray-100 pt-8 pb-16 md:pt-16 md:pb-24">
              <div class="container mx-auto px-6 text-center max-w-3xl">
                  <i class="fa-solid fa-user-shield text-5xl text-gray-400 mb-4"></i>
                  <h2 class="text-3xl md:text-4xl font-bold">VVIP를 위한 1:1 무료 전략 상담</h2>
-                 <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">"원데이 클래스(심화 코칭 포함)에 진지하게 투자를 결심했지만, 마지막으로 100% 확신이 필요하신가요? 그런 분들을 위해 코치 박준이 직접 1:1 전략 상담을 진행합니다."</p>
+                 <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">"<a href="#core-offer" class="text-blue-600 font-semibold hover:underline">원데이 클래스(심화 코칭 포함)</a>에 진지하게 투자를 결심했지만, 마지막으로 100% 확신이 필요하신가요? 그런 분들을 위해 코치 박준이 직접 1:1 전략 상담을 진행합니다."</p>
                  <div class="mt-8 bg-white p-6 rounded-lg text-sm border shadow-sm">
                      <p class="font-bold">이 상담은 아무나 신청할 수 없습니다.</p>
                      <p class="text-gray-600">진정으로 자신의 인생을 바꿀 의지가 있고, 투자를 결심한 분들께만 특별히 제공되는 기회입니다. 신청서를 통해 자격 요건을 확인 후, 소수 인원만 선정하여 진행합니다.</p>
@@ -279,10 +280,10 @@
                  <a href="https://forms.gle/qMGhKwC73X3jZWEW7" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">
                      전략 상담 자격 알아보기
                  </a>
-            </div>
+             </div>
         </section>
 
-        <!-- Testimonials Section -->
+        <!-- Testimonials Section: 수강생 후기 -->
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">수강생들의 실제 후기가 증명합니다</h2>
@@ -295,25 +296,75 @@
                     </div>
                     <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-green-100">
                        <blockquote class="text-gray-700 italic border-l-4 border-green-300 pl-4 mb-4">
-                            "형님 큰일났어요. 어제 형님한테 배운대로 했는데 너무 자연스럽게 번호도 받고 즐거운 시간 보냈어요. 와와 감사합니다 ㅜ"
+                            "형님 큰일났어요. 어제 형님한테 배운대로 했는데 너무 자연스럽게 애프터 잡고 즐거운 시간 보냈어요. 와와 감사합니다 ㅜ"
                        </blockquote>
                        <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 김OO님 (원데이 클래스 수강생)</p>
                     </div>
                     <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-purple-100">
                         <blockquote class="text-gray-700 italic border-l-4 border-purple-300 pl-4 mb-4">
-                           "형님 말대로 대화할 때 예상하지 않고, 상대가 말할 수 있도록 알아가려 하니, 주변 사람들 반응이 달라졌어요. 감사합니다."
+                            "형님 말대로 대화할 때 예상하지 않고, 상대가 말할 수 있도록 알아가려 하니, 주변 사람들 반응이 달라졌어요. 감사합니다."
                         </blockquote>
                         <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 박OO님 (원데이 클래스 수강생)</p>
                     </div>
                      <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-yellow-100">
                          <blockquote class="text-gray-700 italic border-l-4 border-yellow-300 pl-4 mb-4">
-                             "답변의 질이 너무 좋으셔서... 비용 이상의 것을 이미 해주신 것 같습니다. 다른 분들께 꼭 소개해드리고 싶네요. 정말 감사합니다."
+                               "답변의 질이 너무 좋으셔서... 비용 이상의 것을 이미 해주신 것 같습니다. 다른 분들께 꼭 소개해드리고 싶네요. 정말 감사합니다."
                          </blockquote>
                          <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 최OO님 (1:1 전화 상담)</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="bg-gray-50 py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">자주 묻는 질문 (FAQ)</h2>
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-white rounded-lg shadow-md border">
+                        <button class="faq-question w-full flex justify-between items-center text-left text-lg font-semibold p-6 focus:outline-none">
+                            <span>정말 내성적인데 저도 가능할까요?</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-700">
+                            <p>물론입니다. 저 또한 극도로 내성적인 사람이었으며, 대부분의 수강생들이 비슷한 성향을 가지고 있습니다. 이 프로그램은 외향적인 사람을 흉내 내는 것이 아니라, 당신이 가진 고유한 매력을 발견하고 자신감을 키우는 데 초점을 맞춥니다. 내성적인 성향은 오히려 깊이 있는 관계를 만드는 데 큰 장점이 될 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-white rounded-lg shadow-md border">
+                        <button class="faq-question w-full flex justify-between items-center text-left text-lg font-semibold p-6 focus:outline-none">
+                            <span>강의는 어떤 장소에서 진행되나요?</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-700">
+                            <p>1:1 코칭은 수강생의 프라이버시를 존중하고, 편안한 분위기에서 진행하기 위해 인천 송도의 스터디룸 또는 상담 센터에서 진행됩니다. 정확한 장소는 신청 후 개별적으로 안내해 드립니다. 온라인(Zoom) 코칭도 가능하니 편하게 문의해주세요.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-white rounded-lg shadow-md border">
+                        <button class="faq-question w-full flex justify-between items-center text-left text-lg font-semibold p-6 focus:outline-none">
+                            <span>다른 연애 강의와 가장 큰 차이점은 무엇인가요?</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-700">
+                            <p>가장 큰 차별점은 '결과에 대한 무한 책임'입니다. 대부분의 강의는 정해진 횟수가 끝나면 모든 것이 종료됩니다. 하지만 저희는 '여자친구가 생길 때까지'라는 명확한 목표를 달성할 때까지 1:1 피드백과 케어를 무제한으로 제공합니다. 단순히 지식을 전달하는 것을 넘어, 당신의 연애가 실제로 성공할 때까지 함께하는 진짜 파트너가 되어 드립니다.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 -->
+                    <div class="bg-white rounded-lg shadow-md border">
+                        <button class="faq-question w-full flex justify-between items-center text-left text-lg font-semibold p-6 focus:outline-none">
+                            <span>환불 규정은 어떻게 되나요?</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-700">
+                            <p>저희는 서비스에 대해 강한 자신감을 가지고 있습니다. 원데이 클래스 진행 후, 내용에 대해 불만족하셨을 경우 100% 환불을 보장합니다. 당신의 소중한 시간과 비용이 헛되지 않도록, 결과로 증명하겠습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -322,10 +373,9 @@
             <h3 class="text-2xl font-bold mb-2">코치 박준</h3>
             <p class="text-gray-400 mb-6">당신의 매력을 깨워, 진정한 관계를 만드세요.</p>
             <div class="flex justify-center flex-wrap gap-x-6 gap-y-2 mb-8">
-                <a href="#" class="hover:text-blue-400 transition-colors">핵심 이론</a>
-                <a href="#" class="hover:text-blue-400 transition-colors">온라인 코칭</a>
-                <a href="#" class="hover:text-blue-400 transition-colors">수강생 후기</a>
-                <a href="#" class="hover:text-blue-400 transition-colors">자주 묻는 질문</a>
+                <a href="#core-offer" class="hover:text-blue-400 transition-colors">원데이 클래스</a>
+                <a href="#free-consult" class="hover:text-blue-400 transition-colors">1:1 상담</a>
+                <a href="#faq" class="hover:text-blue-400 transition-colors">자주 묻는 질문</a>
             </div>
             <p class="text-gray-400 text-sm">&copy; 2025 Coach Park Jun. All Rights Reserved.</p>
             <div class="flex justify-center gap-x-4 mt-2 text-sm text-gray-500">
@@ -335,5 +385,34 @@
         </div>
     </footer>
 
+    <!-- FAQ Accordion Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(button => {
+                button.addEventListener('click', () => {
+                    const answer = button.nextElementSibling;
+                    const icon = button.querySelector('i');
+
+                    // Close all other open answers
+                    document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+                        if (otherAnswer !== answer && otherAnswer.style.maxHeight) {
+                            otherAnswer.style.maxHeight = null;
+                            otherAnswer.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                        }
+                    });
+
+                    // Toggle current answer
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.classList.remove('rotate-180');
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.classList.add('rotate-180');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
