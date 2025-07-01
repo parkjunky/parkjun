@@ -80,7 +80,7 @@
     </header>
 
     <main>
-        <!-- Problem Section: 방문자의 문제 공감 -->
+        <!-- Problem Section: 방문자의 문제 공감 (개선됨) -->
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">혹시, 당신의 이야기인가요?</h2>
@@ -97,6 +97,11 @@
                     <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg flex items-center shadow-sm hover:shadow-md transition-shadow">
                         <i class="fa-solid fa-hand-holding-dollar text-red-500 mr-4 text-xl"></i>
                         <span>마음을 얻기 위해 선물을 하고 돈을 쓰지만, <strong class="text-blue-600">관계는 더 멀어지는</strong> 느낌이다.</span>
+                    </div>
+                    <!-- 문구 수정 및 아이콘 변경 -->
+                    <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg flex items-center shadow-sm hover:shadow-md transition-shadow">
+                        <i class="fa-solid fa-person-circle-question text-red-500 mr-4 text-xl"></i>
+                        <span>분명 가까워진 것 같은데, <strong class="text-blue-600">결정적인 순간에는</strong> 항상 제자리에 머문다.</span>
                     </div>
                 </div>
             </div>
@@ -172,7 +177,7 @@
                                   <p class="text-2xl font-bold text-gray-400 line-through">정가 590,000원</p>
                                   <p class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-600">300,000<span class="text-2xl sm:text-3xl font-bold">원</span></p>
                                   <p class="text-red-500 font-semibold text-lg mt-1">
-                                      <i class="fa-solid fa-fire mr-2"></i>기간 한정 49% 특별 할인
+                                       <i class="fa-solid fa-fire mr-2"></i>기간 한정 49% 특별 할인
                                   </p>
                              </div>
                              <div class="text-left space-y-2 my-6 text-sm text-gray-700 bg-blue-50 p-4 rounded-lg border border-blue-200">
@@ -211,7 +216,7 @@
         </section>
 
         <!-- Alternatives Section: 대안 상품 제시 -->
-        <section class="bg-white py-16 md:py-24">
+        <section id="consult-options" class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-12">
                      <h2 class="text-3xl md:text-4xl font-bold">아직 확신이 서지 않으신다면?</h2>
@@ -267,7 +272,7 @@
             </div>
         </section>
 
-        <!-- VVIP Consult Section: 특별 상담 안내 -->
+        <!-- VVIP Consult Section: 특별 상담 안내 (복원됨) -->
         <section id="free-consult" class="bg-gray-100 pt-8 pb-16 md:pt-16 md:pb-24">
              <div class="container mx-auto px-6 text-center max-w-3xl">
                  <i class="fa-solid fa-user-shield text-5xl text-gray-400 mb-4"></i>
@@ -287,30 +292,47 @@
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">수강생들의 실제 후기가 증명합니다</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-blue-100">
-                        <blockquote class="text-gray-700 italic border-l-4 border-blue-300 pl-4 mb-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <!-- 기존 후기 1 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-blue-100 flex flex-col">
+                        <blockquote class="text-gray-700 italic border-l-4 border-blue-300 pl-4 mb-4 flex-grow">
                             "내공이 깊이가 다르시다는게 느껴집니다. 이런 말을 해야한다는 것에 너무 놀랐습니다. 이게 내공이구나 느꼈습니다."
                         </blockquote>
                         <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 이OO님 (1:1 전화 상담)</p>
                     </div>
-                    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-green-100">
-                       <blockquote class="text-gray-700 italic border-l-4 border-green-300 pl-4 mb-4">
+                    <!-- 기존 후기 2 -->
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-green-100 flex flex-col">
+                       <blockquote class="text-gray-700 italic border-l-4 border-green-300 pl-4 mb-4 flex-grow">
                             "형님 큰일났어요. 어제 형님한테 배운대로 했는데 너무 자연스럽게 애프터 잡고 즐거운 시간 보냈어요. 와와 감사합니다 ㅜ"
                        </blockquote>
                        <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 김OO님 (원데이 클래스 수강생)</p>
                     </div>
-                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-purple-100">
-                        <blockquote class="text-gray-700 italic border-l-4 border-purple-300 pl-4 mb-4">
+                    <!-- 기존 후기 3 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-purple-100 flex flex-col">
+                        <blockquote class="text-gray-700 italic border-l-4 border-purple-300 pl-4 mb-4 flex-grow">
                             "형님 말대로 대화할 때 예상하지 않고, 상대가 말할 수 있도록 알아가려 하니, 주변 사람들 반응이 달라졌어요. 감사합니다."
                         </blockquote>
                         <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 박OO님 (원데이 클래스 수강생)</p>
                     </div>
-                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-yellow-100">
-                         <blockquote class="text-gray-700 italic border-l-4 border-yellow-300 pl-4 mb-4">
-                               "답변의 질이 너무 좋으셔서... 비용 이상의 것을 이미 해주신 것 같습니다. 다른 분들께 꼭 소개해드리고 싶네요. 정말 감사합니다."
+                    <!-- 기존 후기 4 -->
+                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-yellow-100 flex flex-col">
+                         <blockquote class="text-gray-700 italic border-l-4 border-yellow-300 pl-4 mb-4 flex-grow">
+                                "답변의 질이 너무 좋으셔서... 비용 이상의 것을 이미 해주신 것 같습니다. 다른 분들께 꼭 소개해드리고 싶네요. 정말 감사합니다."
                          </blockquote>
                          <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 최OO님 (1:1 전화 상담)</p>
+                     </div>
+                    <!-- 구체적인 Before & After 후기 추가 -->
+                    <div class="bg-gradient-to-br from-red-50 to-yellow-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-red-100 flex flex-col sm:col-span-2 lg:col-span-1">
+                        <blockquote class="text-gray-700 italic border-l-4 border-red-300 pl-4 mb-4 flex-grow">
+                            "28년 모태솔로였습니다. 항상 차이기만 하던 제가 코칭 3개월 만에 처음으로 여자친구가 생겼습니다. 이제는 제가 먼저 거절하는 믿을 수 없는 상황도 생기네요. 인생이 바뀌었습니다."
+                        </blockquote>
+                        <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 정OO님 (심화 코칭 수강생)</p>
+                    </div>
+                     <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-teal-100 flex flex-col">
+                        <blockquote class="text-gray-700 italic border-l-4 border-teal-300 pl-4 mb-4 flex-grow">
+                            "무료 전자책만 봤는데도 머리를 한 대 맞은 것 같았습니다. 제가 왜 항상 '을의 연애'만 했는지 알겠더군요. 바로 원데이 클래스 신청했습니다."
+                        </blockquote>
+                        <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 윤OO님 (무료 가이드북 신청자)</p>
                     </div>
                 </div>
             </div>
@@ -374,7 +396,7 @@
             <p class="text-gray-400 mb-6">당신의 매력을 깨워, 진정한 관계를 만드세요.</p>
             <div class="flex justify-center flex-wrap gap-x-6 gap-y-2 mb-8">
                 <a href="#core-offer" class="hover:text-blue-400 transition-colors">원데이 클래스</a>
-                <a href="#free-consult" class="hover:text-blue-400 transition-colors">1:1 상담</a>
+                <a href="#consult-options" class="hover:text-blue-400 transition-colors">1:1 상담</a>
                 <a href="#faq" class="hover:text-blue-400 transition-colors">자주 묻는 질문</a>
             </div>
             <p class="text-gray-400 text-sm">&copy; 2025 Coach Park Jun. All Rights Reserved.</p>
