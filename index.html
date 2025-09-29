@@ -74,6 +74,31 @@
             overflow: hidden;
             transition: max-height 0.5s ease-in-out;
         }
+        
+        /* 모바일 더보기 메뉴 스타일 */
+        .mobile-more-menu {
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 더보기 버튼 호버 효과 */
+        #mobile-more-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        #mobile-more-btn {
+            transition: transform 0.2s ease;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -84,26 +109,38 @@
     <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out p-4">
         <div class="container mx-auto flex justify-between items-center">
             <a href="#" class="text-xl font-bold text-white tracking-wider">매력최적화, 박준</a>
+            <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-8">
+                <a href="#free-ebook" class="text-white hover:text-blue-300 transition-colors font-medium">무료 전자책</a>
                 <a href="#core-offer" class="text-white hover:text-blue-300 transition-colors font-medium">1:1 코칭</a>
                 <a href="#alternatives" class="text-white hover:text-blue-300 transition-colors font-medium">연애 상담</a>
                 <a href="#success-stories" class="text-white hover:text-blue-300 transition-colors font-medium">수강생 후기</a>
                 <a href="#faq" class="text-white hover:text-blue-300 transition-colors font-medium">FAQ</a>
             </div>
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden">
-                <button id="menu-btn" class="text-white focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+            
+            <!-- Mobile Menu - Always Visible -->
+            <div class="md:hidden flex items-center space-x-3">
+                <a href="#free-ebook" class="text-white hover:text-blue-300 transition-colors font-medium text-sm">전자책</a>
+                <a href="#core-offer" class="text-white hover:text-blue-300 transition-colors font-medium text-sm">코칭</a>
+                <a href="#alternatives" class="text-white hover:text-blue-300 transition-colors font-medium text-sm">연애상담</a>
+                <!-- More Menu Dropdown -->
+                <div class="relative">
+                    <button id="mobile-more-btn" class="text-white focus:outline-none flex items-center justify-center w-8 h-8 rounded-full hover:bg-white hover:bg-opacity-20 transition-all duration-200">
+                        <i class="fas fa-ellipsis-h text-base"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div id="mobile-more-menu" class="hidden mobile-more-menu absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border overflow-hidden z-50">
+                        <a href="#success-stories" class="block px-4 py-3 text-gray-800 hover:bg-blue-50 transition-colors border-b border-gray-100">
+                            <i class="fas fa-star text-blue-500 mr-2"></i>수강생 후기
+                        </a>
+                        <a href="#faq" class="block px-4 py-3 text-gray-800 hover:bg-blue-50 transition-colors">
+                            <i class="fas fa-question-circle text-blue-500 mr-2"></i>FAQ
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95 mt-4 rounded-lg overflow-hidden">
-            <a href="#core-offer" class="block text-white text-center py-4 hover:bg-gray-800 transition-colors">1:1 코칭</a>
-            <a href="#alternatives" class="block text-white text-center py-4 hover:bg-gray-800 transition-colors">연애 상담</a>
-            <a href="#success-stories" class="block text-white text-center py-4 hover:bg-gray-800 transition-colors">수강생 후기</a>
-            <a href="#faq" class="block text-white text-center py-4 hover:bg-gray-800 transition-colors">FAQ</a>
-        </div>
+
     </nav>
 
 
@@ -119,14 +156,14 @@
 
         <div class="container mx-auto px-6 py-24 md:py-32 text-center relative z-20">
             <div class="floating-animation">
-                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+                <h1 class="text-2xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
                     "왜 항상 같은 실패를 반복할까?"
                 </h1>
-                <p class="text-lg md:text-xl font-medium text-blue-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+                <p class="text-base md:text-xl font-medium text-blue-200 mb-8 max-w-3xl mx-auto leading-relaxed">
                     '10년'의 답답함을 '단 한 권'의 이론서로 끝내드립니다.
                 </p>
             </div>
-            <a href="#free-ebook" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold text-lg py-4 px-10 rounded-full shadow-2xl transition-all transform hover:scale-105 duration-300 ease-in-out inline-block">
+            <a href="https://www.notion.so/27dfc895789380bf97f2c1d10fbe7b68?source=copy_link" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold text-lg py-4 px-10 rounded-full shadow-2xl transition-all transform hover:scale-105 duration-300 ease-in-out inline-block">
                 무료 이론서 즉시 다운로드 <i class="fa-solid fa-download ml-2"></i>
             </a>
         </div>
@@ -136,10 +173,10 @@
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <div class="reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">혹시, 당신의 이야기인가요?</h2>
-                    <p class="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">이 중 2개 이상 해당된다면, 당신은 지금 '매력의 함정'에 빠져있을 확률이 높습니다.</p>
+                    <h2 class="text-xl md:text-4xl font-bold mb-4 text-center">혹시, 당신의 이야기인가요?</h2>
+                    <p class="text-sm md:text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">이 중 2개 이상 해당된다면, 당신은 지금 '매력의 함정'에 빠져있을 확률이 높습니다.</p>
                 </div>
-                <div class="max-w-2xl mx-auto space-y-4 text-lg reveal">
+                <div class="max-w-2xl mx-auto space-y-4 text-sm md:text-lg reveal">
                     <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg flex items-center shadow-sm hover:shadow-md transition-shadow">
                         <i class="fa-solid fa-user-xmark text-red-500 mr-4 text-xl"></i>
                         <span>"사람은 착한데..." 라는 말을 듣지만, 결코 <strong class="text-blue-600">이성으로</strong> 느껴지지는 않는다.</span>
@@ -166,24 +203,24 @@
         <section id="free-ebook" class="bg-gray-50 py-16 md:py-24">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-12 reveal">
-                     <h2 class="text-3xl md:text-4xl font-bold">관계의 주도권을 잡고 싶다면,<br> <span class="text-blue-600">'프레임 전쟁'</span>에서 승리해야 합니다.</h2>
+                     <h2 class="text-xl md:text-4xl font-bold">관계의 주도권을 잡고 싶다면,<br> <span class="text-blue-600">'프레임 전쟁'</span>에서 승리해야 합니다.</h2>
                  </div>
                  <div class="max-w-4xl mx-auto bg-white rounded-2xl p-8 md:p-12 shadow-xl border flex flex-col md:flex-row items-center gap-8 md:gap-12 reveal">
                      <div class="text-center md:text-left flex-1">
                          <div class="mb-6">
-                             <p class="text-xl text-gray-800 font-semibold italic">"그녀는 당신의 '진심'을 원하지 않는다"</p>
-                             <p class="text-gray-700 mt-4">지난 10년간 수백 명의 데이터를 통해 완성된 관계의 본질, [프레임 전쟁]이 당신의 연애를 180도 바꿀 것입니다.</p>
+                             <p class="text-lg md:text-xl text-gray-800 font-semibold italic">"그녀는 당신의 '진심'을 원하지 않는다"</p>
+                             <p class="text-sm md:text-base text-gray-700 mt-4">지난 10년간 수백 명의 데이터를 통해 완성된 관계의 본질, [프레임 전쟁]이 당신의 연애를 180도 바꿀 것입니다.</p>
                          </div>
                          
                          <ul class="space-y-4 text-gray-800 mb-8 list-none">
-                             <li class="flex items-start"><i class="fa-solid fa-book-open text-blue-500 mr-3 text-lg mt-1"></i> <span><strong class="text-blue-600">뜬구름 잡는 조언이 아닌,</strong> 10년간의 데이터로 증명된 핵심 이론서</span></li>
-                             <li class="flex items-start"><i class="fa-solid fa-magnifying-glass-chart text-blue-500 mr-3 text-lg mt-1"></i> <span>'착한 남자' 프레임에서 벗어나 <strong class="text-blue-600">관계의 주도권</strong>을 잡는 법</span></li>
-                             <li class="flex items-start"><i class="fa-solid fa-lightbulb text-blue-500 mr-3 text-lg mt-1"></i> <span>수많은 시행착오를 줄여줄 관계의 <strong class="text-blue-600">'필승 공식'</strong> 제시</span></li>
+                             <li class="flex items-start"><i class="fa-solid fa-book-open text-blue-500 mr-3 text-base md:text-lg mt-1"></i> <span class="text-sm md:text-base"><strong class="text-blue-600">뜬구름 잡는 조언이 아닌,</strong> 10년간의 데이터로 증명된 핵심 이론서</span></li>
+                             <li class="flex items-start"><i class="fa-solid fa-magnifying-glass-chart text-blue-500 mr-3 text-base md:text-lg mt-1"></i> <span class="text-sm md:text-base">'착한 남자' 프레임에서 벗어나 <strong class="text-blue-600">관계의 주도권</strong>을 잡는 법</span></li>
+                             <li class="flex items-start"><i class="fa-solid fa-lightbulb text-blue-500 mr-3 text-base md:text-lg mt-1"></i> <span class="text-sm md:text-base">수많은 시행착오를 줄여줄 관계의 <strong class="text-blue-600">'필승 공식'</strong> 제시</span></li>
                          </ul>
 
-                         <p class="text-gray-900 font-bold mb-6 text-center md:text-left">관계의 본질을 꿰뚫는 것만으로도, 변화는 이미 시작된 것입니다.</p>
+                         <p class="text-sm md:text-base text-gray-900 font-bold mb-6 text-center md:text-left">관계의 본질을 꿰뚫는 것만으로도, 변화는 이미 시작된 것입니다.</p>
 
-                         <a href="https://forms.gle/3PLY9DFJTFLH2Cww9" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-md hover:shadow-lg">
+                         <a href="https://www.notion.so/27dfc895789380bf97f2c1d10fbe7b68?source=copy_link" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-md hover:shadow-lg">
                              무료 이론서 즉시 받기 <i class="fa-solid fa-arrow-right ml-1"></i>
                          </a>
                      </div>
@@ -212,15 +249,15 @@
                             <div class="space-y-6">
                                 <div>
                                     <h4 class="font-bold text-gray-500 text-sm tracking-widest mb-1">THE PAST</h4>
-                                    <p class="text-gray-700 leading-relaxed">"크리스마스에 <strong class="text-black">3시간을 기다리고도 화 한번 못 냈던 남자</strong>"였습니다. 여자에게 잘 보이기 위해 온갖 노력을 다했지만, 돌아오는 것은 <strong class="text-black">'좋은 친구'라는 말뿐...</strong> 착하게만 굴면 모든 게 해결될 줄 알았지만, 관계는 언제나 제자리걸음이었습니다. 이 악순환의 고리를 끊기 위해, 답을 찾아 헤매기 시작했죠.</p>
+                                    <p class="text-sm md:text-base text-gray-700 leading-relaxed">"크리스마스에 <strong class="text-black">3시간을 기다리고도 화 한번 못 냈던 남자</strong>"였습니다. 여자에게 잘 보이기 위해 온갖 노력을 다했지만, 돌아오는 것은 <strong class="text-black">'좋은 친구'라는 말뿐...</strong> 착하게만 굴면 모든 게 해결될 줄 알았지만, 관계는 언제나 제자리걸음이었습니다. 이 악순환의 고리를 끊기 위해, 답을 찾아 헤매기 시작했죠.</p>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-gray-500 text-sm tracking-widest mb-1">THE PROCESS</h4>
-                                    <p class="text-gray-700 leading-relaxed"><strong class="text-black">길거리, 카페, 소개팅, 모임...가능한 모든 곳에서 압도적인 경험을 쌓고</strong> 그 원리를 파고들었습니다. 제 자신의 변화에만 그치지 않고, <strong class="text-black">주변 친구들마저 매력적인 남자로 변화</strong>시키는 과정을 통해 원리의 재현성을 확인했습니다. 이론의 검증을 위해, 내성적인 성격임에도 <strong class="text-black">'호스트바'에 무작정 찾아가</strong>, 이 원리가 진짜 통한다는 것을 몸소 증명했습니다.</p>
+                                    <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong class="text-black">길거리, 카페, 소개팅, 모임...가능한 모든 곳에서 압도적인 경험을 쌓고</strong> 그 원리를 파고들었습니다. 제 자신의 변화에만 그치지 않고, <strong class="text-black">주변 친구들마저 매력적인 남자로 변화</strong>시키는 과정을 통해 원리의 재현성을 확인했습니다. 이론의 검증을 위해, 내성적인 성격임에도 <strong class="text-black">'호스트바'에 무작정 찾아가</strong>, 이 원리가 진짜 통한다는 것을 몸소 증명했습니다.</p>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-gray-500 text-sm tracking-widest mb-1">THE PROOF</h4>
-                                    <p class="text-gray-700 leading-relaxed">그렇게 완성된 '매력의 원리'는 저처럼 수년간 헤맬 필요 없이, 단 하루의 <strong class="font-semibold text-black">1:1 현장 코칭</strong>으로 핵심 원리를 <strong class="font-semibold text-black">몸에 각인시키는,</strong> 검증된 시스템이 되었습니다.</p>
+                                    <p class="text-sm md:text-base text-gray-700 leading-relaxed">그렇게 완성된 '매력의 원리'는 저처럼 수년간 헤맬 필요 없이, 단 하루의 <strong class="font-semibold text-black">1:1 현장 코칭</strong>으로 핵심 원리를 <strong class="font-semibold text-black">몸에 각인시키는,</strong> 검증된 시스템이 되었습니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -385,8 +422,8 @@
         <section id="alternatives" class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-12 reveal">
-                         <h2 class="text-3xl md:text-4xl font-bold">지금 당장 해결하고 싶은 문제가 있다면?</h2>
-                         <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">1:1 코칭이 부담스럽거나, 특정 상황에 대한 빠른 해결책이 필요하다면 전화 상담이 가장 효과적인 방법입니다.</p>
+                         <h2 class="text-xl md:text-4xl font-bold">지금 당장 해결하고 싶은 문제가 있다면?</h2>
+                         <p class="mt-4 text-sm md:text-lg text-gray-600 max-w-3xl mx-auto">1:1 코칭이 부담스럽거나, 특정 상황에 대한 빠른 해결책이 필요하다면 전화 상담이 가장 효과적인 방법입니다.</p>
                 </div>
                 <div class="max-w-xl mx-auto reveal">
                     <div class="bg-gray-50 rounded-2xl p-8 flex flex-col shadow-lg border hover:shadow-xl transition-shadow h-full">
@@ -395,8 +432,8 @@
                             <h3 class="text-2xl font-bold text-gray-800">1:1 유료 전화 상담</h3>
                         </div>
                         <div class="text-gray-700 flex-grow mb-6 space-y-4">
-                            <p>카톡 하나에 전전긍긍, 그녀의 진짜 속마음이 궁금하신가요?</p>
-                            <p class="font-semibold">뜬구름 잡는 조언이 아닌, 지금 당신에게 필요한 단 하나의 '액션 플랜'을 드립니다.</p>
+                            <p class="text-sm md:text-base">카톡 하나에 전전긍긍, 그녀의 진짜 속마음이 궁금하신가요?</p>
+                            <p class="font-semibold text-sm md:text-base">뜬구름 잡는 조언이 아닌, 지금 당신에게 필요한 단 하나의 '액션 플랜'을 드립니다.</p>
                             
                             <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
                                 <h4 class="font-bold text-gray-800 mb-3 text-center">상담으로 얻게 될 3가지:</h4>
@@ -408,8 +445,8 @@
                             </div>
                         </div>
                         <div class="text-center my-4">
-                            <p class="text-xl font-bold text-gray-400 line-through">정가 50,000원</p>
-                            <p class="text-4xl font-black text-blue-600">40,000<span class="text-lg font-semibold">원/30분</span></p>
+                            <p class="text-xl font-bold text-gray-400 line-through">정가 100,000원</p>
+                            <p class="text-4xl font-black text-blue-600">80,000<span class="text-lg font-semibold">원/1시간</span></p>
                              <p class="text-red-500 font-semibold mt-1">20% 특별 할인</p>
                         </div>
                         <a href="https://forms.gle/SJxkq9o6zZvpjcG67" target="_blank" rel="noopener noreferrer" class="mt-auto w-full bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-black transition-colors">
@@ -418,7 +455,7 @@
                         <p class="text-center text-sm text-gray-600 mt-6">
                             카카오톡 채널을 통해 편하게 문의하고<br>각종 소식을 받아보실 수 있습니다.
                             <a href="http://pf.kakao.com/_YPBxin" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 font-bold text-blue-600 hover:underline">
-                                <i class="fa-solid fa-comment-dots mr-1"></i> 카카오톡 채널 바로가기
+                                <i class="fa-solid fa-comment-dots mr-1"></i> 카카오톡 채널 바로가기 (@매력최적화,박준)
                             </a>
                         </p>
                     </div>
@@ -431,7 +468,7 @@
         <!-- =================================================================== -->
         <section id="faq" class="bg-gray-100 py-16 md:py-24">
             <div class="container mx-auto px-6 max-w-3xl reveal">
-                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">자주 묻는 질문 (FAQ)</h2>
+                <h2 class="text-xl md:text-4xl font-bold mb-12 text-center">자주 묻는 질문 (FAQ)</h2>
                 <div class="space-y-4">
                     <div class="bg-white rounded-lg shadow-md border">
                         <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-8 focus:outline-none leading-relaxed">
@@ -502,7 +539,7 @@
                         <p><strong>상호:</strong> 박준커뮤니케이션 <span>&nbsp;|&nbsp;</span> <strong>대표:</strong> 박준규</p>
                         <p><strong>사업자등록번호:</strong> 614-17-02542</p>
                         <p><strong>주소:</strong> 인천광역시 연수구 송도국제대로 261</p>
-                        <p><strong>카카오톡 채널:</strong> <a href="http://pf.kakao.com/_YPBxin" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">@매력최적화</a></p>
+                        <p><strong>카카오톡 채널:</strong> <a href="http://pf.kakao.com/_YPBxin" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">@매력최적화,박준</a></p>
                     </div>
                     <p class="text-gray-500 mt-6 text-xs">&copy; 2024 Park Jun Communication. All Rights Reserved.</p>
                 </div>
@@ -522,19 +559,30 @@
                 }
             });
 
-            // --- Mobile Menu Toggle ---
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // Close mobile menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
+            // --- Mobile More Menu Toggle ---
+            const mobileMoreBtn = document.getElementById('mobile-more-btn');
+            const mobileMoreMenu = document.getElementById('mobile-more-menu');
+            
+            if (mobileMoreBtn && mobileMoreMenu) {
+                mobileMoreBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMoreMenu.classList.toggle('hidden');
                 });
-            });
+
+                // Close mobile more menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMoreBtn.contains(e.target) && !mobileMoreMenu.contains(e.target)) {
+                        mobileMoreMenu.classList.add('hidden');
+                    }
+                });
+
+                // Close mobile more menu when a link is clicked
+                mobileMoreMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMoreMenu.classList.add('hidden');
+                    });
+                });
+            }
 
             // --- Scroll Reveal Animation ---
             const observer = new IntersectionObserver((entries) => {
