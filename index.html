@@ -101,6 +101,52 @@
         #mobile-more-btn {
             transition: transform 0.2s ease;
         }
+        
+        /* 모바일 전용 스타일 */
+        @media (max-width: 768px) {
+            .mobile-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .mobile-text-spacing {
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+            
+            .mobile-section-spacing {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+            
+            .ebook-image {
+                max-width: 180px;
+                margin: 0 auto 1.5rem auto;
+            }
+            
+            .mobile-list-spacing {
+                margin-bottom: 1.5rem;
+            }
+            
+            .mobile-list-spacing li {
+                padding: 0.75rem 0;
+                border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            }
+            
+            .mobile-hero-text {
+                font-size: 1.5rem;
+                line-height: 1.4;
+            }
+            
+            .mobile-card-spacing {
+                margin-bottom: 1rem;
+            }
+            
+            .mobile-button-text {
+                font-size: 0.875rem;
+                line-height: 1.2;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -193,17 +239,23 @@
                              <p class="text-sm md:text-base text-gray-700 mt-4">지난 10년간의 상담 데이터와 실전 코칭 사례를 분석한 결과, '착한 남자'로 불리는 대부분의 사람들은 공통적으로 <strong class="text-blue-600">관계의 프레임을 잃고 있었습니다.</strong></p>
                          </div>
                          
-                         <ul class="space-y-1 text-gray-800 mb-8 list-none">
+                         <ul class="space-y-3 md:space-y-1 text-gray-800 mb-8 list-none">
                              <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">관계의 판을 바꾸는 3가지 핵심 프레임</span></li>
                              <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">여자에게 끌리는 남자의 무의식적 신호</span></li>
                              <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">대화·행동을 재설계하는 실전 공식</span></li>
                          </ul>
 
-                         <p class="text-sm md:text-base text-gray-900 font-bold mb-6 text-center md:text-left">지금 당신의 연애를 180도 뒤집을 첫 페이지를 여세요.</p>
+                         <p class="text-sm md:text-base text-gray-900 font-bold mb-8 text-center md:text-left">지금 당신의 연애를 180도 뒤집을 첫 페이지를 여세요.</p>
 
-                         <a href="https://www.notion.so/27dfc895789380bf97f2c1d10fbe7b68?source=copy_link" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-md hover:shadow-lg">
-                             지금 바로 '프레임 전쟁' 다운받기 <i class="fa-solid fa-arrow-right ml-1"></i>
+                         <a href="https://bit.ly/TheCoachJP" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto flex items-center justify-center bg-blue-600 text-white font-bold py-4 px-6 md:px-8 rounded-lg hover:bg-blue-700 transition-colors text-base md:text-lg shadow-md hover:shadow-lg mb-4">
+                             <span class="flex items-center gap-2 whitespace-nowrap">
+                                 채널 추가 후 바로 『프레임 전쟁』 받기
+                                 <i class="fa-solid fa-arrow-right flex-shrink-0"></i>
+                             </span>
                          </a>
+                         <p class="text-sm text-gray-500 text-center md:text-left">
+                             ※ 채널 추가 즉시, 『프레임 전쟁』 전자책 링크가 바로 전송됩니다.
+                         </p>
                      </div>
                      <div class="flex-shrink-0">
                          <img src="https://page.gensparksite.com/v1/base64_upload/670b5b0238daab3fd09f579580228ffb" alt="관계의 주도권을 잡는 비법서, 프레임 전쟁 전자책 표지" class="ebook-image mx-auto transform hover:scale-110 transition-transform duration-300">
@@ -280,43 +332,43 @@
         <!-- =================================================================== -->
         <!-- 4. 성공 사례 (Success Stories) -->
         <!-- =================================================================== -->
-        <section id="success-stories" class="bg-gray-50 py-16 md:py-24">
-            <div class="container mx-auto px-6">
+        <section id="success-stories" class="bg-gray-50 py-12 md:py-24 mobile-section-spacing">
+            <div class="container mx-auto px-4 md:px-6 mobile-padding">
                 <div class="reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">수강생들의 실제 후기가 증명합니다</h2>
+                    <h2 class="text-xl md:text-4xl font-bold mb-8 md:mb-12 text-center px-2 mobile-text-spacing">수강생들의 실제 후기가 증명합니다</h2>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto reveal">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-7xl mx-auto reveal px-2 md:px-0">
                     <!-- Testimonial Card 1 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative">
-                        <i class="fa-solid fa-quote-left text-4xl text-blue-100 absolute top-4 left-4"></i>
-                        <blockquote class="text-gray-700 italic border-l-4 border-blue-300 pl-4 my-8">
+                    <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
+                        <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-blue-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
+                        <blockquote class="text-gray-700 italic border-l-4 border-blue-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
                             "내공이 깊이가 다르시다는게 느껴집니다. 이런 말을 해야한다는 것에 너무 놀랐습니다. 이게 내공이구나 느꼈습니다."
                         </blockquote>
-                        <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 이OO님 (1:1 전화 상담)</p>
+                        <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 이OO님 (1:1 전화 상담)</p>
                     </div>
                     <!-- Testimonial Card 2 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative">
-                       <i class="fa-solid fa-quote-left text-4xl text-green-100 absolute top-4 left-4"></i>
-                       <blockquote class="text-gray-700 italic border-l-4 border-green-300 pl-4 my-8">
+                    <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
+                       <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-green-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
+                       <blockquote class="text-gray-700 italic border-l-4 border-green-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
                            "박준님 큰일났어요. 어제 박준님한테 배운대로 했는데 너무 자연스럽게 애프터 잡고 즐거운 시간 보냈어요. 와와 감사합니다 ㅜ"
                        </blockquote>
-                       <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 김OO님 (1:1 오프라인 코칭 수강생)</p>
+                       <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 김OO님 (1:1 오프라인 코칭 수강생)</p>
                     </div>
                     <!-- Testimonial Card 3 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative">
-                        <i class="fa-solid fa-quote-left text-4xl text-purple-100 absolute top-4 left-4"></i>
-                        <blockquote class="text-gray-700 italic border-l-4 border-purple-300 pl-4 my-8">
+                    <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
+                        <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-purple-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
+                        <blockquote class="text-gray-700 italic border-l-4 border-purple-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
                             "박준님 말대로 대화할 때 예상하지 않고, 상대가 말할 수 있도록 알아가려 하니, 주변 사람들 반응이 달라졌어요. 감사합니다."
                         </blockquote>
-                        <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 박OO님 (1:1 오프라인 코칭 수강생)</p>
+                        <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 박OO님 (1:1 오프라인 코칭 수강생)</p>
                     </div>
                      <!-- Testimonial Card 4 -->
-                      <div class="bg-white rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative">
-                        <i class="fa-solid fa-quote-left text-4xl text-yellow-100 absolute top-4 left-4"></i>
-                        <blockquote class="text-gray-700 italic border-l-4 border-yellow-300 pl-4 my-8">
+                      <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
+                        <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-yellow-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
+                        <blockquote class="text-gray-700 italic border-l-4 border-yellow-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
                             "답변의 질이 너무 좋으셔서... 비용 이상의 것을 이미 해주신 것 같습니다. 다른 분들께 꼭 소개해드리고 싶네요. 정말 감사합니다."
                         </blockquote>
-                        <p class="text-sm text-gray-600 mt-2 text-right font-semibold">- 최OO님 (1:1 전화 상담)</p>
+                        <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 최OO님 (1:1 전화 상담)</p>
                        </div>
                 </div>
             </div>
@@ -546,30 +598,30 @@
                         </div>
                     </div>
                     <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-8 focus:outline-none leading-relaxed">
-                            <span>정말 내성적인데 저도 가능할까요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        <button class="faq-question w-full flex justify-between items-start md:items-center text-left text-base md:text-xl font-semibold p-4 md:p-8 focus:outline-none leading-relaxed">
+                            <span class="pr-4">정말 내성적인데 저도 가능할까요?</span>
+                            <i class="fas fa-chevron-down transform transition-transform flex-shrink-0 mt-1 md:mt-0"></i>
                         </button>
-                        <div class="faq-answer px-8 pb-8 text-gray-700">
-                            <p class="text-lg leading-relaxed">물론입니다. 저 또한 극도로 내성적인 사람이었으며, 대부분의 수강생들이 비슷한 성향을 가지고 있습니다. 이 프로그램은 외향적인 사람을 흉내 내는 것이 아니라, 당신이 가진 고유한 매력을 발견하고 자신감을 키우는 데 초점을 맞춥니다. 내성적인 성향은 오히려 깊이 있는 관계를 만드는 데 큰 장점이 될 수 있습니다.</p>
+                        <div class="faq-answer px-4 md:px-8 pb-4 md:pb-8 text-gray-700">
+                            <p class="text-sm md:text-lg leading-relaxed mobile-text-spacing">물론입니다. 저 또한 극도로 내성적인 사람이었으며, 대부분의 수강생들이 비슷한 성향을 가지고 있습니다. 이 프로그램은 외향적인 사람을 흉내 내는 것이 아니라, 당신이 가진 고유한 매력을 발견하고 자신감을 키우는 데 초점을 맞춥니다. 내성적인 성향은 오히려 깊이 있는 관계를 만드는 데 큰 장점이 될 수 있습니다.</p>
                         </div>
                     </div>
                     <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-8 focus:outline-none leading-relaxed">
-                            <span>코칭은 어떤 장소에서 진행되나요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        <button class="faq-question w-full flex justify-between items-start md:items-center text-left text-base md:text-xl font-semibold p-4 md:p-8 focus:outline-none leading-relaxed">
+                            <span class="pr-4">코칭은 어떤 장소에서 진행되나요?</span>
+                            <i class="fas fa-chevron-down transform transition-transform flex-shrink-0 mt-1 md:mt-0"></i>
                         </button>
-                        <div class="faq-answer px-8 pb-8 text-gray-700">
-                            <p class="text-lg leading-relaxed">1:1 코칭은 수강생의 프라이버시를 존중하고, 편안한 분위기에서 진행하기 위해 인천 송도의 스터디룸 또는 상담 센터에서 진행됩니다. 정확한 장소는 신청 후 개별적으로 안내해 드립니다. 온라인(Zoom) 코칭도 가능하니 편하게 문의해주세요.</p>
+                        <div class="faq-answer px-4 md:px-8 pb-4 md:pb-8 text-gray-700">
+                            <p class="text-sm md:text-lg leading-relaxed mobile-text-spacing">1:1 코칭은 수강생의 프라이버시를 존중하고, 편안한 분위기에서 진행하기 위해 인천 송도의 스터디룸 또는 상담 센터에서 진행됩니다. 정확한 장소는 신청 후 개별적으로 안내해 드립니다. 온라인(Zoom) 코칭도 가능하니 편하게 문의해주세요.</p>
                         </div>
                     </div>
                     <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-8 focus:outline-none leading-relaxed">
-                            <span>환불 규정은 어떻게 되나요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        <button class="faq-question w-full flex justify-between items-start md:items-center text-left text-base md:text-xl font-semibold p-4 md:p-8 focus:outline-none leading-relaxed">
+                            <span class="pr-4">환불 규정은 어떻게 되나요?</span>
+                            <i class="fas fa-chevron-down transform transition-transform flex-shrink-0 mt-1 md:mt-0"></i>
                         </button>
-                        <div class="faq-answer px-8 pb-8 text-gray-700">
-                            <p class="text-lg leading-relaxed">저희는 서비스에 대해 강한 자신감을 가지고 있습니다. 오프라인 집중 코칭 진행 후, 내용에 대해 불만족하셨을 경우 100% 환불을 보장합니다. 당신의 소중한 시간과 비용이 헛되지 않도록, 결과로 증명하겠습니다.</p>
+                        <div class="faq-answer px-4 md:px-8 pb-4 md:pb-8 text-gray-700">
+                            <p class="text-sm md:text-lg leading-relaxed mobile-text-spacing">저희는 서비스에 대해 강한 자신감을 가지고 있습니다. 오프라인 집중 코칭 진행 후, 내용에 대해 불만족하셨을 경우 100% 환불을 보장합니다. 당신의 소중한 시간과 비용이 헛되지 않도록, 결과로 증명하겠습니다.</p>
                         </div>
                     </div>
                 </div>
