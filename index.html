@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>매력최적화 | 연애 그 이상의 가치, 코치 박준</title>
+    <title>무료 전자책 《프레임 전쟁》| 연애 그 이상의 가치, 코치 박준</title>
     
     <!-- Using Tailwind CSS v3 via Play CDN for modern utilities and performance -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,30 +21,36 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        
         /* 히어로 섹션 배경 스타일 */
         .hero-bg {
             background: linear-gradient(135deg, #111827 0%, #1e3a8a 50%, #1e1b4b 100%);
             position: relative;
         }
+        
         /* 플로팅 애니메이션 */
         .floating-animation {
             animation: float 6s ease-in-out infinite;
         }
+        
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
         }
+        
         /* 배경 도형 애니메이션 */
         .bg-shape {
             position: absolute;
             border-radius: 9999px;
             animation: pulse-and-move 20s infinite alternate ease-in-out;
         }
+        
         @keyframes pulse-and-move {
             0% { transform: scale(0.8) translate(0, 0); opacity: 0.1; }
             50% { transform: scale(1.2) translate(40px, -40px); opacity: 0.2; }
             100% { transform: scale(0.8) translate(0, 0); opacity: 0.1; }
         }
+        
         /* 스크롤 애니메이션을 위한 스타일 */
         .reveal {
             opacity: 0;
@@ -53,53 +58,47 @@
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             will-change: opacity, transform;
         }
+        
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        /* 강의 이미지 호버 효과 */
-        .lecture-image {
-            transition: transform 0.3s ease;
-        }
-        .lecture-image:hover {
-            transform: scale(1.05);
-        }
+        
         /* 전자책 이미지 스타일 */
         .ebook-image {
             max-width: 200px;
             height: auto;
             object-fit: contain;
         }
-        /* FAQ 아코디언 스타일 */
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
+        
+        /* 후기 슬라이더 스타일 */
+        .testimonial-slider-container {
+            position: relative;
         }
         
-        /* 모바일 더보기 메뉴 스타일 */
-        .mobile-more-menu {
-            animation: slideDown 0.3s ease-out;
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
         
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        .testimonial-slide {
+            flex: 0 0 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-slide {
+                flex: 0 0 50%;
             }
         }
         
-        /* 더보기 버튼 호버 효과 */
-        #mobile-more-btn:hover {
-            transform: scale(1.1);
+        @media (min-width: 1024px) {
+            .testimonial-slide {
+                flex: 0 0 33.333%;
+            }
         }
         
-        #mobile-more-btn {
-            transition: transform 0.2s ease;
+        .slider-dot.active {
+            background-color: #2563eb;
         }
         
         /* 모바일 전용 스타일 */
@@ -124,22 +123,9 @@
                 margin: 0 auto 1.5rem auto;
             }
             
-            .mobile-list-spacing {
-                margin-bottom: 1.5rem;
-            }
-            
-            .mobile-list-spacing li {
-                padding: 0.75rem 0;
-                border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-            }
-            
             .mobile-hero-text {
                 font-size: 1.5rem;
                 line-height: 1.4;
-            }
-            
-            .mobile-card-spacing {
-                margin-bottom: 1rem;
             }
             
             .mobile-button-text {
@@ -152,547 +138,249 @@
 <body class="bg-gray-100 text-gray-800">
 
     <!-- =================================================================== -->
-    <!-- Navigation Bar -->
+    <!-- 히어로 섹션 - 문제 제기 -->
     <!-- =================================================================== -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-white tracking-wider">매력최적화, 박준</a>
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#free-ebook" class="text-white hover:text-blue-300 transition-colors font-medium">무료 전자책</a>
-                <a href="#core-offer" class="text-white hover:text-blue-300 transition-colors font-medium">1:1 코칭</a>
-                <a href="#alternatives" class="text-white hover:text-blue-300 transition-colors font-medium">연애 상담</a>
-                <a href="#success-stories" class="text-white hover:text-blue-300 transition-colors font-medium">수강생 후기</a>
-                <a href="#faq" class="text-white hover:text-blue-300 transition-colors font-medium">FAQ</a>
-            </div>
-            
-            <!-- Mobile Menu - Always Visible -->
-            <div class="md:hidden flex items-center space-x-3">
-                <a href="#free-ebook" class="text-white hover:text-blue-300 transition-colors font-medium text-sm">전자책</a>
-                <a href="#core-offer" class="text-white hover:text-blue-300 transition-colors font-medium text-sm">코칭</a>
-                <a href="#alternatives" class="text-white hover:text-blue-300 transition-colors font-medium text-sm">연애상담</a>
-                <!-- More Menu Dropdown -->
-                <div class="relative">
-                    <button id="mobile-more-btn" class="text-white focus:outline-none flex items-center justify-center w-8 h-8 rounded-full hover:bg-white hover:bg-opacity-20 transition-all duration-200">
-                        <i class="fas fa-ellipsis-h text-base"></i>
-                    </button>
-                    <!-- Dropdown Menu -->
-                    <div id="mobile-more-menu" class="hidden mobile-more-menu absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border overflow-hidden z-50">
-                        <a href="#success-stories" class="block px-4 py-3 text-gray-800 hover:bg-blue-50 transition-colors border-b border-gray-100">
-                            <i class="fas fa-star text-blue-500 mr-2"></i>수강생 후기
-                        </a>
-                        <a href="#faq" class="block px-4 py-3 text-gray-800 hover:bg-blue-50 transition-colors">
-                            <i class="fas fa-question-circle text-blue-500 mr-2"></i>FAQ
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </nav>
-
-
-    <!-- =================================================================== -->
-    <!-- 1. 문제 제기 (Problem Introduction) - ENHANCED HERO SECTION -->
-    <!-- =================================================================== -->
-    <header class="hero-bg text-white relative overflow-hidden pt-20">
+    <header class="hero-bg text-white relative overflow-hidden min-h-screen flex items-center">
         <!-- Animated Shapes -->
         <div class="absolute top-0 left-0 w-full h-full z-10">
             <div class="bg-shape bg-blue-500 w-96 h-96 -top-20 -left-20" style="animation-delay: 0s;"></div>
             <div class="bg-shape bg-purple-500 w-72 h-72 bottom-0 -right-20" style="animation-delay: 2s;"></div>
         </div>
 
-        <div class="container mx-auto px-6 py-24 md:py-32 text-center relative z-20">
+        <div class="container mx-auto px-4 md:px-6 py-12 text-center relative z-20">
             <div class="floating-animation">
-                <h1 class="text-2xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+                <h1 class="text-xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4 md:mb-6 px-4 md:px-0 mobile-hero-text">
                     "왜 항상 같은 실패를 반복할까?"
                 </h1>
-                <p class="text-base md:text-xl font-medium text-blue-200 mb-8 max-w-3xl mx-auto leading-relaxed">
-                    '10년'의 답답함을 '단 한 권'의 이론서로 끝내드립니다.
+                <p class="text-base md:text-2xl font-medium text-blue-200 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed px-4 md:px-0">
+                    <strong class="text-white">10년의 시행착오를 단 한 권으로 압축한</strong><br>
+                    무료 전자책 《프레임 전쟁》이 모든 답을 드립니다.
                 </p>
             </div>
-            <a href="#free-ebook-anchor" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold text-lg py-4 px-10 rounded-full shadow-2xl transition-all transform hover:scale-105 duration-300 ease-in-out inline-block">
+            
+            <!-- 즉시 다운로드 버튼 -->
+            <a href="https://bit.ly/TheCoachJP" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold text-sm md:text-lg py-3 md:py-4 px-6 md:px-10 rounded-full shadow-2xl transition-all transform hover:scale-105 duration-300 ease-in-out inline-block mobile-button-text mx-4 md:mx-0 mb-6">
                 10년의 실패를 끝내줄 이론서, 지금 받기 <i class="fa-solid fa-download ml-2"></i>
             </a>
+            
+            <div class="bg-blue-800/30 rounded-xl p-4 md:p-6 border border-blue-300/50 mx-4 md:mx-0">
+                <p class="text-sm md:text-base text-yellow-200 font-semibold mb-2">
+                    📱 링크 클릭 후, [채널 추가] 하시면 1초 만에 자동 발송됩니다.
+                </p>
+                <p class="text-xs md:text-sm text-blue-100">
+                    ✅ 100% 무료 ✅ 즉시 다운로드 ✅ 이메일 불필요
+                </p>
+            </div>
         </div>
     </header>
 
     <main>
         <!-- =================================================================== -->
-        <!-- 2. 무료 전자책 (Free E-book) -->
+        <!-- 무료 전자책 가치 제안 -->
         <!-- =================================================================== -->
-        <div id="free-ebook-anchor"></div>
-        <section id="free-ebook" class="bg-gray-50 py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                 <div id="free-ebook-detail" class="text-center mb-8 reveal">
-                     <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 mb-8">
-                         <h3 class="text-2xl md:text-3xl font-bold text-blue-800 mb-3">방금 클릭하신 이 이론서, 바로 이것입니다.</h3>
-                         <p class="text-lg md:text-xl font-semibold text-blue-700">10년의 시행착오를 압축한 《프레임 전쟁》</p>
-                     </div>
-                     <h2 class="text-xl md:text-4xl font-bold">관계의 주도권을 잡고 싶다면,<br> <span class="text-blue-600">'프레임 전쟁'</span>에서 승리해야 합니다.</h2>
-                 </div>
-                 <div class="max-w-4xl mx-auto bg-white rounded-2xl p-8 md:p-12 shadow-xl border flex flex-col md:flex-row items-center gap-8 md:gap-12 reveal">
-                     <div class="text-center md:text-left flex-1">
-                         <div class="mb-6">
-                             <p class="text-lg md:text-xl text-gray-800 font-semibold italic">진심을 다했는데도, 왜 늘 같은 결말일까?<br>답은 '감정'이 아니라 '프레임' 안에 있습니다.</p>
-                             
-                             <p class="text-sm md:text-base text-gray-700 mt-4">지난 10년간의 상담 데이터와 실전 코칭 사례를 분석한 결과, '착한 남자'로 불리는 대부분의 사람들은 공통적으로 <strong class="text-blue-600">관계의 프레임을 잃고 있었습니다.</strong></p>
-                         </div>
-                         
-                         <ul class="space-y-3 md:space-y-1 text-gray-800 mb-8 list-none">
-                             <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">관계의 판을 바꾸는 3가지 핵심 프레임</span></li>
-                             <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">여자에게 끌리는 남자의 무의식적 신호</span></li>
-                             <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">대화·행동을 재설계하는 실전 공식</span></li>
-                         </ul>
-
-                         <p class="text-sm md:text-base text-gray-900 font-bold mb-8 text-center md:text-left">지금 당신의 연애를 180도 뒤집을 첫 페이지를 여세요.</p>
-
-                         <a href="https://bit.ly/TheCoachJP" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto flex items-center justify-center bg-blue-600 text-white font-bold py-4 px-6 md:px-8 rounded-lg hover:bg-blue-700 transition-colors text-base md:text-lg shadow-md hover:shadow-lg mb-4">
-                             <span class="flex items-center gap-2 whitespace-nowrap">
-                                 채널 추가 후 바로 『프레임 전쟁』 받기
-                                 <i class="fa-solid fa-arrow-right flex-shrink-0"></i>
-                             </span>
-                         </a>
-                         <p class="text-sm text-gray-500 text-center md:text-left">
-                             ※ 채널 추가 즉시, 『프레임 전쟁』 전자책 링크가 바로 전송됩니다.
-                         </p>
-                     </div>
-                     <div class="flex-shrink-0">
-                         <img src="https://page.gensparksite.com/v1/base64_upload/670b5b0238daab3fd09f579580228ffb" alt="관계의 주도권을 잡는 비법서, 프레임 전쟁 전자책 표지" class="ebook-image mx-auto transform hover:scale-110 transition-transform duration-300">
-                     </div>
-                 </div>
-            </div>
-        </section>
-
-        <!-- =================================================================== -->
-        <!-- 3. 문제 확인 (Problem Validation) -->
-        <!-- =================================================================== -->
-        <section class="bg-white py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="reveal">
-                    <h2 class="text-xl md:text-4xl font-bold mb-4 text-center">혹시, 당신의 이야기인가요?</h2>
-                    <p class="text-sm md:text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">이 중 2개 이상 해당된다면, 당신은 지금 '매력의 함정'에 빠져있을 확률이 높습니다.</p>
-                </div>
-                <div class="max-w-2xl mx-auto space-y-4 text-sm md:text-lg reveal">
-                    <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg flex items-center shadow-sm hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-user-xmark text-red-500 mr-4 text-xl"></i>
-                        <span>"사람은 착한데..." 라는 말을 듣지만, 결코 <strong class="text-blue-600">이성으로</strong> 느껴지지는 않는다.</span>
-                    </div>
-                    <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg flex items-center shadow-sm hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-comment-dots text-red-500 mr-4 text-xl"></i>
-                        <span>그녀의 짧은 카톡 답장 하나에 <strong class="text-blue-600">하루 종일</strong> 신경이 쓰인다.</span>
-                    </div>
-                    <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg flex items-center shadow-sm hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-hand-holding-dollar text-red-500 mr-4 text-xl"></i>
-                        <span>마음을 얻기 위해 선물을 하고 돈을 쓰지만, <strong class="text-blue-600">관계는 더 멀어지는</strong> 느낌이다.</span>
-                    </div>
-                    <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-r-lg flex items-center shadow-sm hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-fish text-red-500 mr-4 text-xl"></i>
-                        <span>나는 진심인데, 그녀는 나를 그저 편한 친구나 <strong class="text-blue-600">'어장 속 물고기'</strong>로만 대하는 것 같다.</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =================================================================== -->
-        <!-- 4. 코치 소개 (Coach Introduction) -->
-        <!-- =================================================================== -->
-        <section class="bg-white py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="grid lg:grid-cols-5 gap-12 items-center reveal">
-                    <div class="lg:col-span-2">
-                        <img src="https://page1.genspark.site/v1/base64_upload/dfa82cfea3edf5a99e5de9eb454ba229" alt="코치 박준이 수강생과 1:1로 코칭하는 실제 강의 현장" class="lecture-image rounded-2xl shadow-2xl w-full h-full object-cover">
-                    </div>
-                    <div class="lg:col-span-3">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-3">수백 명의 변화가 증명합니다. 당신도 가능합니다.</h2>
-                        <p class="text-lg text-gray-600 mb-8">지난 2년간, 저와 함께한 수많은 수강생들이 어색함을 자신감으로, 짝사랑을 현실 연애로 바꾸었습니다. 이것은 특별한 재능이 아니라, 누구나 배울 수 있고 즉시 써먹을 수 있는 <strong class="text-blue-600">'매력의 원리'</strong>입니다.</p>
-
-                        <div class="bg-gray-50 rounded-xl shadow-lg p-6 border">
-                            <h3 class="text-2xl font-bold mb-6 text-blue-700">저 역시 당신과 같았습니다.</h3>
-                            <div class="space-y-6">
-                                <div>
-                                    <h4 class="font-bold text-gray-500 text-sm tracking-widest mb-1">THE PAST</h4>
-                                    <p class="text-sm md:text-base text-gray-700 leading-relaxed">"크리스마스에 <strong class="text-black">3시간을 기다리고도 화 한번 못 냈던 남자</strong>"였습니다. 여자에게 잘 보이기 위해 온갖 노력을 다했지만, 돌아오는 것은 <strong class="text-black">'좋은 친구'라는 말뿐...</strong> 착하게만 굴면 모든 게 해결될 줄 알았지만, 관계는 언제나 제자리걸음이었습니다. 이 악순환의 고리를 끊기 위해, 답을 찾아 헤매기 시작했죠.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-500 text-sm tracking-widest mb-1">THE PROCESS</h4>
-                                    <p class="text-sm md:text-base text-gray-700 leading-relaxed"><strong class="text-black">길거리, 카페, 소개팅, 모임...가능한 모든 곳에서 압도적인 경험을 쌓고</strong> 그 원리를 파고들었습니다. 제 자신의 변화에만 그치지 않고, <strong class="text-black">주변 친구들마저 매력적인 남자로 변화</strong>시키는 과정을 통해 원리의 재현성을 확인했습니다. 이론의 검증을 위해, 내성적인 성격임에도 <strong class="text-black">'호스트바'에 무작정 찾아가</strong>, 이 원리가 진짜 통한다는 것을 몸소 증명했습니다.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-500 text-sm tracking-widest mb-1">THE PROOF</h4>
-                                    <p class="text-sm md:text-base text-gray-700 leading-relaxed">그렇게 완성된 '매력의 원리'는 저처럼 수년간 헤맬 필요 없이, 단 하루의 <strong class="font-semibold text-black">1:1 현장 코칭</strong>으로 핵심 원리를 <strong class="font-semibold text-black">몸에 각인시키는,</strong> 검증된 시스템이 되었습니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- =================================================================== -->
-        <!-- 4. 성공 사례 (Success Stories) -->
-        <!-- =================================================================== -->
-        <section id="success-stories" class="bg-gray-50 py-12 md:py-24 mobile-section-spacing">
+        <section class="bg-white py-12 md:py-20">
             <div class="container mx-auto px-4 md:px-6 mobile-padding">
-                <div class="reveal">
-                    <h2 class="text-xl md:text-4xl font-bold mb-8 md:mb-12 text-center px-2 mobile-text-spacing">수강생들의 실제 후기가 증명합니다</h2>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-7xl mx-auto reveal px-2 md:px-0">
-                    <!-- Testimonial Card 1 -->
-                    <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
-                        <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-blue-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
-                        <blockquote class="text-gray-700 italic border-l-4 border-blue-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
-                            "내공이 깊이가 다르시다는게 느껴집니다. 이런 말을 해야한다는 것에 너무 놀랐습니다. 이게 내공이구나 느꼈습니다."
-                        </blockquote>
-                        <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 이OO님 (1:1 전화 상담)</p>
-                    </div>
-                    <!-- Testimonial Card 2 -->
-                    <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
-                       <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-green-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
-                       <blockquote class="text-gray-700 italic border-l-4 border-green-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
-                           "박준님 큰일났어요. 어제 박준님한테 배운대로 했는데 너무 자연스럽게 애프터 잡고 즐거운 시간 보냈어요. 와와 감사합니다 ㅜ"
-                       </blockquote>
-                       <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 김OO님 (1:1 오프라인 코칭 수강생)</p>
-                    </div>
-                    <!-- Testimonial Card 3 -->
-                    <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
-                        <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-purple-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
-                        <blockquote class="text-gray-700 italic border-l-4 border-purple-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
-                            "박준님 말대로 대화할 때 예상하지 않고, 상대가 말할 수 있도록 알아가려 하니, 주변 사람들 반응이 달라졌어요. 감사합니다."
-                        </blockquote>
-                        <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 박OO님 (1:1 오프라인 코칭 수강생)</p>
-                    </div>
-                     <!-- Testimonial Card 4 -->
-                      <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 relative mobile-card-spacing">
-                        <i class="fa-solid fa-quote-left text-3xl md:text-4xl text-yellow-100 absolute top-3 md:top-4 left-3 md:left-4"></i>
-                        <blockquote class="text-gray-700 italic border-l-4 border-yellow-300 pl-3 md:pl-4 my-6 md:my-8 text-sm md:text-base mobile-text-spacing">
-                            "답변의 질이 너무 좋으셔서... 비용 이상의 것을 이미 해주신 것 같습니다. 다른 분들께 꼭 소개해드리고 싶네요. 정말 감사합니다."
-                        </blockquote>
-                        <p class="text-xs md:text-sm text-gray-600 mt-2 text-right font-semibold">- 최OO님 (1:1 전화 상담)</p>
-                       </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =================================================================== -->
-        <!-- 5. 1:1 상담 (1:1 Consultation) -->
-        <!-- =================================================================== -->
-        <section id="alternatives" class="bg-white py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                 <div class="text-center mb-12 reveal">
-                         <h2 class="text-xl md:text-4xl font-bold">지금 당장 해결하고 싶은 문제가 있다면?</h2>
-                         <p class="mt-4 text-sm md:text-lg text-gray-600 max-w-3xl mx-auto">1:1 코칭이 부담스럽거나, 특정 상황에 대한 빠른 해결책이 필요하다면 전화 상담이 가장 효과적인 방법입니다.</p>
-                </div>
-                <div class="max-w-xl mx-auto reveal">
-                    <div class="bg-gray-50 rounded-2xl p-8 flex flex-col shadow-lg border hover:shadow-xl transition-shadow h-full">
-                        <div class="text-center mb-6">
-                            <i class="fa-solid fa-phone-volume text-5xl text-blue-500 mb-4"></i>
-                            <h3 class="text-2xl font-bold text-gray-800">1:1 유료 전화 상담</h3>
-                        </div>
-                        <div class="text-gray-700 flex-grow mb-6 space-y-4">
-                            <p class="text-sm md:text-base">카톡 하나에 전전긍긍, 그녀의 진짜 속마음이 궁금하신가요?</p>
-                            <p class="font-semibold text-sm md:text-base">뜬구름 잡는 조언이 아닌, 지금 당신에게 필요한 단 하나의 '액션 플랜'을 드립니다.</p>
-                            
-                            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                                <h4 class="font-bold text-gray-800 mb-3 text-center">상담으로 얻게 될 3가지:</h4>
-                                <div class="space-y-3 text-sm text-gray-800">
-                                    <p class="flex items-start"><span class="font-bold bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">1</span><span class="flex-1">데이터에 기반한 진짜 원인 진단과 명확한 해결책 제시</span></p>
-                                    <p class="flex items-start"><span class="font-bold bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">2</span><span class="flex-1">바로 써먹을 수 있는 구체적인 대화법 및 행동 지침 제공</span></p>
-                                    <p class="flex items-start"><span class="font-bold bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">3</span><span class="flex-1">잘못된 노력으로 인한 시간과 감정 낭비를 확실하게 방지</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center my-4">
-                            <p class="text-xl font-bold text-gray-400 line-through">정가 100,000원</p>
-                            <p class="text-4xl font-black text-blue-600">80,000<span class="text-lg font-semibold">원/1시간</span></p>
-                             <p class="text-red-500 font-semibold mt-1">20% 특별 할인</p>
-                        </div>
-                        <a href="https://forms.gle/SJxkq9o6zZvpjcG67" target="_blank" rel="noopener noreferrer" class="mt-auto w-full bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-black transition-colors">
-                            전화 상담 신청하기
-                        </a>
-                        <p class="text-center text-sm text-gray-600 mt-6">
-                            카카오톡 채널을 통해 편하게 문의하고<br>각종 소식을 받아보실 수 있습니다.
-                            <a href="http://pf.kakao.com/_YPBxin" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 font-bold text-blue-600 hover:underline">
-                                <i class="fa-solid fa-comment-dots mr-1"></i> 카카오톡 채널 바로가기 (@매력최적화,박준)
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =================================================================== -->
-        <!-- 6. 8주 하이브리드 코칭 시스템 (8-Week Hybrid Coaching System) -->
-        <!-- =================================================================== -->
-        <section id="core-offer" class="bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900 text-white py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                
-                <div class="max-w-4xl mx-auto text-center mb-16 reveal">
-                    <div class="bg-gray-700/50 inline-block p-4 rounded-full mb-4 shadow-lg">
-                        <i class="fa-solid fa-calendar-check text-3xl text-blue-300"></i>
-                    </div>
-                    <h3 class="text-2xl md:text-4xl font-bold text-white mb-3">10년의 시행착오, 단 8주면 충분합니다.</h3>
-                    <p class="text-blue-200 text-lg leading-relaxed max-w-3xl mx-auto">
-                        "진심은 통하지 않았다"는 좌절을 끝내고,<br>
-                        이제 <strong class="text-blue-300">'결과로 증명되는 변화'</strong>를 경험하세요.
-                    </p>
-                </div>
-                
-                <div class="text-center mb-12 reveal">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">8주 1:1 프리미엄 코칭</h2>
-                    <p class="mt-4 text-xl text-blue-100 max-w-4xl mx-auto">
-                        단순한 연애 기술이 아닙니다.<br>
-                        당신의 사고방식, 태도, 대화 패턴까지 <strong class="text-white">완전히 새롭게 재설계</strong>하는 8주 실전 시스템.<br>
-                        결과로 증명되는 단 하나의 '매력 프로그램'.
-                    </p>
-                </div>
-
-                <div class="max-w-6xl mx-auto bg-white text-gray-800 rounded-3xl shadow-2xl overflow-hidden reveal relative mb-12">
-                    <div class="absolute top-6 right-6 bg-red-500 text-white font-bold text-sm py-1 px-4 rounded-full shadow-lg z-10">결과 보증</div>
+                <div class="max-w-6xl mx-auto">
                     
-                    <!-- 8주 프로그램 구성 -->
-                    <div class="p-8 md:p-12">
-                        <h3 class="text-2xl md:text-3xl font-extrabold text-blue-600 mb-6 text-center">8주간 단계별 매력 시스템 구축 로드맵</h3>
-                        
-                        <div class="grid md:grid-cols-3 gap-8 mb-10">
-                            <!-- Step 1 -->
-                            <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
-                                <div class="text-center mb-4">
-                                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">1</div>
-                                    <h4 class="text-xl font-bold text-blue-800">3시간 오프라인 집중 교정</h4>
-                                    <p class="text-sm text-blue-600 font-semibold">Week 1</p>
-                                </div>
-                                <div class="text-sm text-gray-700 space-y-3">
-                                    <p class="font-semibold text-blue-800">✅ 3시간 오프라인 집중 세션 (Week 1)</p>
-                                    <p>바로 그 자리에서 당신의 자세·시선·말투를 <strong>즉시 교정</strong>합니다.</p>
-                                    <p>눈빛 하나, 몸의 각도 하나가 바뀌는 순간 — '을의 프레임'이 사라집니다.</p>
-                                    <p>그 즉시 '주도권을 쥔 남자'로 다시 태어납니다.</p>
-                                </div>
-                            </div>
-
-                            <!-- Step 2 -->
-                            <div class="bg-green-50 p-6 rounded-xl border border-green-200">
-                                <div class="text-center mb-4">
-                                    <div class="bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">2</div>
-                                    <h4 class="text-xl font-bold text-green-800">8주간 1:1 온/오프라인 코칭</h4>
-                                    <p class="text-sm text-green-600 font-semibold">Week 2-8</p>
-                                </div>
-                                <div class="text-sm text-gray-700 space-y-3">
-                                    <p class="font-semibold text-green-800">✅ 8주간 1:1 맞춤 코칭 (Week 2–8)</p>
-                                    <p>실제 소개팅·대화·메시지를 분석해 즉시 피드백.</p>
-                                    <p>매주 '달라진 나'를 체감하며, 매력 지수가 눈에 보이게 상승합니다.</p>
-                                    <p>모든 과제는 당신의 현실에 맞게 설계되며, <strong>8주 뒤에는 반드시 결과로 이어집니다.</strong></p>
-                                </div>
-                            </div>
-
-                            <!-- Step 3 -->
-                            <div class="bg-purple-50 p-6 rounded-xl border border-purple-200">
-                                <div class="text-center mb-4">
-                                    <div class="bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">3</div>
-                                    <h4 class="text-xl font-bold text-purple-800">결과 보증 시스템</h4>
-                                    <p class="text-sm text-purple-600 font-semibold">100% 환불 보장</p>
-                                </div>
-                                <div class="text-sm text-gray-700 space-y-3">
-                                    <p class="font-semibold text-purple-800">💯 100% 결과 보증 시스템</p>
-                                    <p>모든 과제를 성실히 이행했음에도 '연애의 시작'이 이루어지지 않았다면,</p>
-                                    <p>단 1원의 망설임도 없이 전액 환불해드립니다.</p>
-                                    <p><strong>당신의 시간, 노력, 감정 — 모두 저희가 책임집니다.</strong></p>
-                                </div>
-                            </div>
+                    <!-- 메인 가치 제안 -->
+                    <div class="text-center mb-12 md:mb-16 reveal">
+                        <div class="bg-blue-50 p-6 md:p-8 rounded-2xl border-2 border-blue-200 mb-8 md:mb-12">
+                            <h2 class="text-2xl md:text-4xl font-bold text-blue-800 mb-4">
+                                이 무료 전자책으로 당신이 얻게 될 것
+                            </h2>
+                            <p class="text-lg md:text-2xl font-semibold text-blue-700">
+                                관계의 주도권을 되찾는 《프레임 전쟁》의 핵심 원리
+                            </p>
                         </div>
-
-                        <!-- 프로그램 특징 -->
-                        <div class="bg-gray-50 p-8 rounded-xl">
-                            <h4 class="text-2xl font-bold text-center mb-6 text-gray-800">8주 하이브리드 시스템의 핵심 차별점</h4>
-                            <div class="grid md:grid-cols-2 gap-6 text-gray-700">
-                                <div class="space-y-4">
-                                    <div class="flex items-start">
-                                        <i class="fa-solid fa-rocket text-blue-500 mr-3 text-lg mt-1"></i>
-                                        <div>
-                                            <h5 class="font-bold mb-1">즉각적 변화를 몸으로 체감</h5>
-                                            <p class="text-sm">3시간 내에 '잘못된 습관'을 차단하고 '자신감 있는 남자'의 움직임을 각인시킵니다.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <i class="fa-solid fa-chart-line text-green-500 mr-3 text-lg mt-1"></i>
-                                        <div>
-                                            <h5 class="font-bold mb-1">단계별 성장 관리 시스템</h5>
-                                            <p class="text-sm">8주간 주차별 목표와 피드백을 통해 '연애 감각'을 체계적으로 복원합니다.</p>
-                                        </div>
-                                    </div>
+                    </div>
+                    
+                    <!-- 전자책 소개 카드 -->
+                    <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-6 md:p-12 shadow-xl border-2 border-blue-100 reveal">
+                        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                            
+                            <!-- 전자책 이미지 -->
+                            <div class="flex-shrink-0 order-first md:order-last">
+                                <img src="https://page.gensparksite.com/v1/base64_upload/670b5b0238daab3fd09f579580228ffb" alt="관계의 주도권을 잡는 비법서, 프레임 전쟁 전자책 표지" class="ebook-image mx-auto transform hover:scale-110 transition-transform duration-300 shadow-2xl rounded-lg">
+                            </div>
+                            
+                            <!-- 전자책 내용 -->
+                            <div class="flex-1 text-center md:text-left">
+                                
+                                <div class="mb-4 md:mb-6">
+                                    <p class="text-base md:text-xl text-gray-800 font-semibold italic mobile-text-spacing px-1">진심을 다했는데도, 왜 늘 같은 결말일까?<br>답은 '감정'이 아니라 '프레임' 안에 있습니다.</p>
+                                    
+                                    <p class="text-sm md:text-base text-gray-700 mt-3 md:mt-4 mobile-text-spacing px-1">지난 10년간의 상담 데이터와 실전 코칭 사례를 분석한 결과, '착한 남자'로 불리는 대부분의 사람들은 공통적으로 <strong class="text-blue-600">관계의 프레임을 잃고 있었습니다.</strong></p>
                                 </div>
-                                <div class="space-y-4">
-                                    <div class="flex items-start">
-                                        <i class="fa-solid fa-target text-red-500 mr-3 text-lg mt-1"></i>
-                                        <div>
-                                            <h5 class="font-bold mb-1">결과를 끝까지 책임지는 프로그램</h5>
-                                            <p class="text-sm">단순히 '배우는 것'이 아닌, '연애의 시작'이라는 명확한 결과에 초점을 둡니다.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <i class="fa-solid fa-users text-purple-500 mr-3 text-lg mt-1"></i>
-                                        <div>
-                                            <h5 class="font-bold mb-1">함께 성장하는 공동체</h5>
-                                            <p class="text-sm">혼자가 아닙니다. 수강생 전용 커뮤니티와 코치의 정기 체크인을 통해,<br>8주간 포기하지 않게 만듭니다.</p>
-                                        </div>
-                                    </div>
+                                
+                                <ul class="space-y-3 md:space-y-1 text-gray-800 mb-8 list-none">
+                                    <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">관계의 판을 바꾸는 3가지 핵심 프레임</span></li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">여자에게 끌리는 남자의 무의식적 신호</span></li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-3 text-base md:text-lg mt-1">🔸</span> <span class="text-sm md:text-base">대화·행동을 재설계하는 실전 공식</span></li>
+                                </ul>
+                                
+                                <p class="text-sm md:text-base text-gray-900 font-bold mb-6 md:mb-8 text-center md:text-left mobile-text-spacing px-2 md:px-0">지금 당신의 연애를 180도 뒤집을 첫 페이지를 여세요.</p>
+                                
+                                <a href="https://bit.ly/TheCoachJP" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto flex items-center justify-center bg-blue-600 text-white font-bold py-3 md:py-4 px-4 md:px-8 rounded-lg hover:bg-blue-700 transition-colors text-sm md:text-lg shadow-md hover:shadow-lg mb-3 md:mb-4">
+                                    <span class="flex items-center gap-2 text-center">
+                                        채널 추가 후 바로 『프레임 전쟁』 받기
+                                        <i class="fa-solid fa-arrow-right flex-shrink-0"></i>
+                                    </span>
+                                </a>
+                                
+                                <div class="bg-blue-50 rounded-lg p-3 md:p-4 border-l-4 border-blue-500 mt-4">
+                                    <p class="text-sm md:text-base text-blue-800 font-semibold mb-1">
+                                        📱 링크 클릭 후, [채널 추가] 하시면 1초 만에 자동 발송됩니다.
+                                    </p>
+                                    <p class="text-xs md:text-sm text-gray-600">
+                                        ✅ 100% 무료 다운로드 ✅ 개인정보 불필요 ✅ 즉시 확인 가능
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- CTA 섹션 -->
-                    <div class="bg-blue-50 p-8 md:p-12 border-t border-blue-200 text-center">
-                        <div class="max-w-2xl mx-auto">
-                            <h4 class="text-2xl font-bold mb-4 text-gray-800">
-                                <i class="fa-solid fa-heart text-red-500 mr-2"></i>
-                                이제는 달라질 차례입니다.
-                            </h4>
-                            <p class="text-gray-600 mb-6 text-lg">
-                                당신이 진심으로 원했던 변화, 이번엔 '결과'로 확인하세요.<br>
-                                8주 안에 연애를 시작하지 못하면 100% 환불합니다.
+        <!-- =================================================================== -->
+        <!-- 사회적 증명 - 간단한 후기 -->
+        <!-- =================================================================== -->
+        <section class="bg-gray-50 py-12 md:py-20">
+            <div class="container mx-auto px-4 md:px-6 mobile-padding">
+                <div class="max-w-4xl mx-auto text-center reveal">
+                    
+                    <h2 class="text-xl md:text-3xl font-bold mb-8 md:mb-12 text-gray-800">
+                        이미 수많은 분들이 변화를 경험했습니다
+                    </h2>
+                    
+                    <!-- 후기 슬라이더 -->
+                    <div class="testimonial-slider-container overflow-hidden mb-12">
+                        <div class="testimonial-slider flex transition-transform duration-500 ease-in-out">
+                            
+                            <!-- 후기 1 -->
+                            <div class="testimonial-slide min-w-full md:min-w-1/2 lg:min-w-1/3 px-3">
+                                <div class="bg-white rounded-2xl p-4 md:p-6 shadow-lg border h-full">
+                                    <div class="flex items-center mb-4">
+                                        <div class="flex text-yellow-400 mb-2">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <blockquote class="text-gray-700 italic text-sm md:text-base mb-4 leading-relaxed">
+                                        "내공이 깊이가 다르시다는게 느껴집니다. 이런 말을 해야한다는 것에 너무 놀랐습니다. 이게 내공이구나 느꼈습니다."
+                                    </blockquote>
+                                    <p class="text-xs md:text-sm text-gray-600 font-semibold">- 이○○님 (1:1 전화 상담)</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 후기 2 -->
+                            <div class="testimonial-slide min-w-full md:min-w-1/2 lg:min-w-1/3 px-3">
+                                <div class="bg-white rounded-2xl p-4 md:p-6 shadow-lg border h-full">
+                                    <div class="flex items-center mb-4">
+                                        <div class="flex text-yellow-400 mb-2">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <blockquote class="text-gray-700 italic text-sm md:text-base mb-4 leading-relaxed">
+                                        "박준님 큰일났어요. 어제 박준님한테 배운대로 했는데 너무 자연스럽게 애프터 잡고 즐거운 시간 보냈어요. 와와 감사합니다 ㅜ"
+                                    </blockquote>
+                                    <p class="text-xs md:text-sm text-gray-600 font-semibold">- 김○○님 (1:1 오프라인 코칭 수강생)</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 후기 3 -->
+                            <div class="testimonial-slide min-w-full md:min-w-1/2 lg:min-w-1/3 px-3">
+                                <div class="bg-white rounded-2xl p-4 md:p-6 shadow-lg border h-full">
+                                    <div class="flex items-center mb-4">
+                                        <div class="flex text-yellow-400 mb-2">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <blockquote class="text-gray-700 italic text-sm md:text-base mb-4 leading-relaxed">
+                                        "박준님 말대로 대화할 때 예상하지 않고, 상대가 말할 수 있도록 알아가려 하니, 주변 사람들 반응이 달라졌어요. 감사합니다."
+                                    </blockquote>
+                                    <p class="text-xs md:text-sm text-gray-600 font-semibold">- 박○○님 (1:1 오프라인 코칭 수강생)</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 후기 4 -->
+                            <div class="testimonial-slide min-w-full md:min-w-1/2 lg:min-w-1/3 px-3">
+                                <div class="bg-white rounded-2xl p-4 md:p-6 shadow-lg border h-full">
+                                    <div class="flex items-center mb-4">
+                                        <div class="flex text-yellow-400 mb-2">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <blockquote class="text-gray-700 italic text-sm md:text-base mb-4 leading-relaxed">
+                                        "답변의 질이 너무 좋으셔서... 비용 이상의 것을 이미 해주신 것 같습니다. 다른 분들께 꼭 소개해드리고 싶네요. 정말 감사합니다."
+                                    </blockquote>
+                                    <p class="text-xs md:text-sm text-gray-600 font-semibold">- 최○○님 (1:1 전화 상담)</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- 슬라이더 네비게이션 -->
+                    <div class="flex justify-center items-center gap-4 mb-8">
+                        <button id="prevBtn" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="flex space-x-2">
+                            <span class="slider-dot w-3 h-3 rounded-full bg-blue-600 cursor-pointer transition-colors" data-slide="0"></span>
+                            <span class="slider-dot w-3 h-3 rounded-full bg-gray-300 cursor-pointer transition-colors" data-slide="1"></span>
+                            <span class="slider-dot w-3 h-3 rounded-full bg-gray-300 cursor-pointer transition-colors" data-slide="2"></span>
+                            <span class="slider-dot w-3 h-3 rounded-full bg-gray-300 cursor-pointer transition-colors" data-slide="3"></span>
+                        </div>
+                        <button id="nextBtn" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 최종 CTA -->
+                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 md:p-10 text-white">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">
+                            당신도 이런 변화를 경험할 준비가 되셨나요?
+                        </h3>
+                        <div class="mb-6">
+                            <p class="text-base md:text-lg mb-3 opacity-90">
+                                수년간의 답답함을 단 한 권의 책으로 끝내세요.
                             </p>
-                            <a href="https://forms.gle/YrdNC6HEf7uLVghf8" target="_blank" rel="noopener noreferrer" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 px-10 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 duration-300 text-xl shadow-lg">
-                                8주 안에 연애를 시작하고 싶은가요? 지금 문의하세요. <i class="fa-solid fa-rocket ml-2"></i>
-                            </a>
-                            <p class="text-sm text-gray-500 mt-4">🚀 <em>월 2명 한정 / 개별 상담 후 확정</em></p>
-                            <div class="bg-red-50 p-4 rounded-lg mt-4 border border-red-200">
-                                <p class="text-sm text-red-700 font-semibold text-center">
-                                    🎯 <strong>베타 파트너 특별 혜택</strong><br>
-                                    <strong class="text-red-800">40% 할인</strong><br>
-                                    <span class="text-red-600">이 기회는 단 한 번뿐입니다.</span>
+                            <div class="bg-white/20 rounded-lg p-3 border border-white/30">
+                                <p class="text-sm md:text-base text-yellow-200 font-semibold">
+                                    📱 링크 클릭 후, [채널 추가] 하시면 1초 만에 자동 발송됩니다.
                                 </p>
                             </div>
                         </div>
+                        
+                        <a href="https://bit.ly/TheCoachJP" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-600 font-bold py-4 px-8 md:px-12 rounded-2xl hover:bg-gray-100 transition-all transform hover:scale-105 text-lg md:text-xl shadow-xl inline-flex items-center">
+                            <i class="fa-solid fa-download mr-3"></i>
+                            무료 전자책 바로 받기
+                        </a>
                     </div>
-                </div>
-
-
-
-            </div>
-        </section>
-
-        <!-- =================================================================== -->
-        <!-- 7. FAQ & Footer -->
-        <!-- =================================================================== -->
-        <section id="faq" class="bg-gray-100 py-16 md:py-24">
-            <div class="container mx-auto px-6 max-w-3xl reveal">
-                <h2 class="text-xl md:text-4xl font-bold mb-12 text-center">자주 묻는 질문 (FAQ)</h2>
-                <div class="space-y-4">
-                    <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-8 focus:outline-none leading-relaxed">
-                            <span>왜 온라인이 아닌 오프라인 코칭을 고집하시나요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-8 pb-8 text-gray-700">
-                            <p>좋은 질문입니다. 전자책이나 온라인 강의만으로는 '아는 것'에서 그치기 쉽습니다. 진정한 변화는 실제 상황처럼 <strong class="text-blue-600">직접 피드백을 받고, 몸으로 체득할 때</strong> 일어납니다. 저희는 수강생의 소중한 시간과 비용이 '머리 속 지식'으로만 남는 것이 아니라, <strong class="text-blue-600">'실제 능력'</strong>이 되도록 가장 효과적인 오프라인 방식을 고집합니다.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-8 focus:outline-none leading-relaxed">
-                            <span>다른 연애 강의와 가장 큰 차이점은 무엇인가요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-8 pb-8 text-gray-700">
-                            <p class="text-lg leading-relaxed">가장 큰 차별점은 독자적으로 개발한 '매력최적화 설계 프레임워크&trade;'와 <strong class="text-blue-600">결과 중심의 1:1 오프라인 코칭</strong>입니다. 저희는 감이나 개인적인 경험에 의존하는 코칭이 아닌, 수백 명의 데이터를 통해 검증된 '시스템'을 통해 당신의 문제를 해결합니다. 또한 '여자친구가 생길 때까지'라는 명확한 목표를 달성할 때까지 1:1 피드백을 무제한으로 제공하며 결과로 증명합니다.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-start md:items-center text-left text-base md:text-xl font-semibold p-4 md:p-8 focus:outline-none leading-relaxed">
-                            <span class="pr-4">정말 내성적인데 저도 가능할까요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform flex-shrink-0 mt-1 md:mt-0"></i>
-                        </button>
-                        <div class="faq-answer px-4 md:px-8 pb-4 md:pb-8 text-gray-700">
-                            <p class="text-sm md:text-lg leading-relaxed mobile-text-spacing">물론입니다. 저 또한 극도로 내성적인 사람이었으며, 대부분의 수강생들이 비슷한 성향을 가지고 있습니다. 이 프로그램은 외향적인 사람을 흉내 내는 것이 아니라, 당신이 가진 고유한 매력을 발견하고 자신감을 키우는 데 초점을 맞춥니다. 내성적인 성향은 오히려 깊이 있는 관계를 만드는 데 큰 장점이 될 수 있습니다.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-start md:items-center text-left text-base md:text-xl font-semibold p-4 md:p-8 focus:outline-none leading-relaxed">
-                            <span class="pr-4">코칭은 어떤 장소에서 진행되나요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform flex-shrink-0 mt-1 md:mt-0"></i>
-                        </button>
-                        <div class="faq-answer px-4 md:px-8 pb-4 md:pb-8 text-gray-700">
-                            <p class="text-sm md:text-lg leading-relaxed mobile-text-spacing">1:1 코칭은 수강생의 프라이버시를 존중하고, 편안한 분위기에서 진행하기 위해 인천 송도의 스터디룸 또는 상담 센터에서 진행됩니다. 정확한 장소는 신청 후 개별적으로 안내해 드립니다. 온라인(Zoom) 코칭도 가능하니 편하게 문의해주세요.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md border">
-                        <button class="faq-question w-full flex justify-between items-start md:items-center text-left text-base md:text-xl font-semibold p-4 md:p-8 focus:outline-none leading-relaxed">
-                            <span class="pr-4">환불 규정은 어떻게 되나요?</span>
-                            <i class="fas fa-chevron-down transform transition-transform flex-shrink-0 mt-1 md:mt-0"></i>
-                        </button>
-                        <div class="faq-answer px-4 md:px-8 pb-4 md:pb-8 text-gray-700">
-                            <p class="text-sm md:text-lg leading-relaxed mobile-text-spacing">저희는 서비스에 대해 강한 자신감을 가지고 있습니다. 오프라인 집중 코칭 진행 후, 내용에 대해 불만족하셨을 경우 100% 환불을 보장합니다. 당신의 소중한 시간과 비용이 헛되지 않도록, 결과로 증명하겠습니다.</p>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </section>
     </main>
 
     <!-- =================================================================== -->
-    <!-- Footer -->
+    <!-- 간단한 푸터 -->
     <!-- =================================================================== -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-6 text-center text-sm text-gray-400">
-            <div class="max-w-3xl mx-auto">
-                <div class="flex justify-center flex-wrap gap-x-6 gap-y-2 mb-8">
-                    <a href="#core-offer" class="hover:text-blue-400 transition-colors">1:1 오프라인 코칭</a>
-                    <a href="#alternatives" class="hover:text-blue-400 transition-colors">1:1 상담</a>
-                    <a href="#faq" class="hover:text-blue-400 transition-colors">자주 묻는 질문</a>
-                    <a href="#" class="hover:text-gray-300 transition-colors">개인정보 보호 정책</a>
-                    <a href="#" class="hover:text-gray-300 transition-colors">환불 정책</a>
+    <footer class="bg-gray-800 text-white py-8 md:py-12">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <div class="max-w-2xl mx-auto">
+                <p class="mb-4 font-bold text-lg text-white">매력최적화, 박준</p>
+                <div class="text-sm text-gray-400 space-y-1">
+                    <p><strong>상호:</strong> 박준커뮤니케이션 <span class="mx-2">|</span> <strong>대표:</strong> 박준규</p>
+                    <p><strong>카카오톡 채널:</strong> <a href="http://pf.kakao.com/_YPBxin" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">@매력최적화,박준</a></p>
                 </div>
-                <div class="border-t border-gray-700 pt-8">
-                    <p class="mb-4 font-bold text-base text-white">매력최적화, 박준</p>
-                    <div class="space-y-1">
-                        <p><strong>상호:</strong> 박준커뮤니케이션 <span>&nbsp;|&nbsp;</span> <strong>대표:</strong> 박준규</p>
-                        <p><strong>사업자등록번호:</strong> 614-17-02542</p>
-                        <p><strong>주소:</strong> 인천광역시 연수구 송도국제대로 261</p>
-                        <p><strong>카카오톡 채널:</strong> <a href="http://pf.kakao.com/_YPBxin" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">@매력최적화,박준</a></p>
-                    </div>
-                    <p class="text-gray-500 mt-6 text-xs">&copy; 2024 Park Jun Communication. All Rights Reserved.</p>
-                </div>
+                <p class="text-gray-500 mt-6 text-xs">&copy; 2024 Park Jun Communication. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Navbar Scroll Effect ---
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('bg-gray-900', 'shadow-lg');
-                } else {
-                    navbar.classList.remove('bg-gray-900', 'shadow-lg');
-                }
-            });
-
-            // --- Mobile More Menu Toggle ---
-            const mobileMoreBtn = document.getElementById('mobile-more-btn');
-            const mobileMoreMenu = document.getElementById('mobile-more-menu');
-            
-            if (mobileMoreBtn && mobileMoreMenu) {
-                mobileMoreBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    mobileMoreMenu.classList.toggle('hidden');
-                });
-
-                // Close mobile more menu when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (!mobileMoreBtn.contains(e.target) && !mobileMoreMenu.contains(e.target)) {
-                        mobileMoreMenu.classList.add('hidden');
-                    }
-                });
-
-                // Close mobile more menu when a link is clicked
-                mobileMoreMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMoreMenu.classList.add('hidden');
-                    });
-                });
-            }
-
             // --- Scroll Reveal Animation ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -707,32 +395,84 @@
                 observer.observe(el);
             });
             
-            // --- FAQ Accordion ---
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            faqQuestions.forEach(button => {
-                button.addEventListener('click', () => {
-                    const answer = button.nextElementSibling;
-                    const icon = button.querySelector('i');
-
-                    // Close all other open answers before opening the new one
-                    faqQuestions.forEach(otherButton => {
-                        const otherAnswer = otherButton.nextElementSibling;
-                        if (otherAnswer !== answer && otherAnswer.style.maxHeight) {
-                            otherAnswer.style.maxHeight = null;
-                            otherButton.querySelector('i').classList.remove('rotate-180');
-                        }
-                    });
-
-                    // Toggle current answer
-                    if (answer.style.maxHeight) {
-                        answer.style.maxHeight = null;
-                        icon.classList.remove('rotate-180');
-                    } else {
-                        answer.style.maxHeight = answer.scrollHeight + 'px';
-                        icon.classList.add('rotate-180');
-                    }
+            // --- Testimonial Slider ---
+            const slider = document.querySelector('.testimonial-slider');
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            // 반응형에 따른 한 번에 보여줄 슬라이드 수
+            function getSlidesPerView() {
+                if (window.innerWidth >= 1024) return 3;
+                if (window.innerWidth >= 768) return 2;
+                return 1;
+            }
+            
+            function updateSlider() {
+                const slidesPerView = getSlidesPerView();
+                const maxSlide = totalSlides - slidesPerView;
+                
+                if (currentSlide > maxSlide) {
+                    currentSlide = maxSlide;
+                }
+                
+                const translateX = -(currentSlide * (100 / slidesPerView));
+                slider.style.transform = `translateX(${translateX}%)`;
+                
+                // 점 표시 업데이트
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                    dot.style.backgroundColor = index === currentSlide ? '#2563eb' : '#d1d5db';
+                });
+            }
+            
+            function nextSlide() {
+                const slidesPerView = getSlidesPerView();
+                const maxSlide = totalSlides - slidesPerView;
+                
+                if (currentSlide < maxSlide) {
+                    currentSlide++;
+                } else {
+                    currentSlide = 0;
+                }
+                updateSlider();
+            }
+            
+            function prevSlide() {
+                const slidesPerView = getSlidesPerView();
+                const maxSlide = totalSlides - slidesPerView;
+                
+                if (currentSlide > 0) {
+                    currentSlide--;
+                } else {
+                    currentSlide = maxSlide;
+                }
+                updateSlider();
+            }
+            
+            // 이벤트 리스너
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlider();
                 });
             });
+            
+            // 리사이즈 이벤트
+            window.addEventListener('resize', updateSlider);
+            
+            // 자동 슬라이드 (5초마다)
+            setInterval(nextSlide, 5000);
+            
+            // 초기 설정
+            updateSlider();
         });
     </script>
 </body>
