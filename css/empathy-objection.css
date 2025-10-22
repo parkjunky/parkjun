@@ -1,0 +1,89 @@
+/* 공감 및 어루만지기 섹션 */
+.empathy-section {
+    background: #FFFFFF;
+    padding: 24px;
+    border-radius: 8px;
+    margin: 24px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #666666;
+}
+
+.empathy-icon {
+    display: none;
+}
+
+.empathy-text {
+    font-size: clamp(15px, 2.8vw, 17px);
+    line-height: 1.8;
+    color: #333333;
+}
+
+.empathy-text strong {
+    font-weight: 700;
+    color: #1A1A1A;
+}
+
+/* 의문 해소 및 반론 차단 섹션 */
+.objection-section {
+    background: #FFFFFF;
+    padding: 24px;
+    border-radius: 8px;
+    margin: 24px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #666666;
+}
+
+.objection-icon {
+    display: none;
+}
+
+.objection-text {
+    font-size: clamp(15px, 2.8vw, 17px);
+    line-height: 1.8;
+    color: #333333;
+}
+
+.objection-text strong {
+    font-weight: 700;
+    color: #1A1A1A;
+}
+
+/* 연결 문구 (Bridge Text) 섹션 - 숨김 처리 */
+.bridge-section {
+    display: none;
+}
+
+.bridge-icon {
+    display: none;
+}
+
+.bridge-text {
+    display: none;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .empathy-section,
+    .objection-section,
+    .bridge-section {
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .empathy-icon,
+    .objection-icon,
+    .bridge-icon {
+        font-size: 32px;
+    }
+    
+    .empathy-text,
+    .objection-text,
+    .bridge-text {
+        font-size: 15px;
+    }
+    
+    .bridge-section::before {
+        font-size: 12px;
+        padding: 3px 12px;
+    }
+}
