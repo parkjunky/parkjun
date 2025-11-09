@@ -83,6 +83,11 @@
             transform: scale(1);
         }
 
+        /* 결과 페이지는 상단 정렬 */
+        #result-page {
+            justify-content: flex-start;
+        }
+
         .container {
             width: 100%;
             max-width: 600px;
@@ -92,6 +97,13 @@
             border-radius: 16px;
             box-shadow: var(--shadow-md);
         }
+        
+        /* 결과 페이지의 컨테이너는 위아래 마진 추가 */
+        #result-page .result-container {
+            margin-top: 24px;
+            margin-bottom: 40px;
+        }
+
 
         /* 프로그레스 바 */
         .progress-bar {
@@ -543,14 +555,8 @@
             line-height: 1.7;
             margin-bottom: 12px;
             box-shadow: var(--shadow-sm);
-
-            /* Old styles removed:
-            position: relative;
-            padding-left: 32px;
-            */
         }
         .strategy-list li::before {
-            /* Book icon removed */
             content: '';
         }
         .strategy-list li strong {
@@ -665,41 +671,55 @@
             color: var(--text-gray); /* Changed color */
         }
 
-
+        /*
+         * NEW: 다크 폼 컨테이너 스타일 (내부에 흰색 박스)
+         */
         .cta-section {
             margin-top: 32px;
-            padding: 24px; /* 내부 패딩 추가 */
-            border-top: none; /* 상단 점선 제거 */
+            padding-top: 24px;
+            border-top: 1px dashed var(--border-color);
             text-align: center;
-            background: var(--bg-white); /* 배경색 흰색으로 변경 */
-            border-radius: 12px; /* 카드형 디자인 */
-            box-shadow: var(--shadow-md); /* 그림자 추가 */
         }
-        
-        .urgency-message {
-            margin-bottom: 20px;
-        }
-        
-        .urgency-message strong {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        .urgency-message p {
-            font-size: 15px;
-            color: var(--text-gray);
-            margin-top: 4px;
-        }
-        
-        /* 구글 폼 컨테이너 스타일 */
+
         .form-container {
             position: relative;
             width: 100%;
             overflow: hidden;
-            padding-top: 20px;
-            background: #f8f9fa;
+            background: var(--text-dark); /* DARK BACKGROUND */
+            border-radius: 16px; /* Bigger radius */
+            padding: 24px; /* Dark box padding */
+        }
+        
+        /* The NEW inner white box */
+        .form-inner-white-box {
+            background: var(--bg-white);
             border-radius: 12px;
+            padding: 24px; /* White box padding */
+            overflow: hidden; /* Ensure radius clips content */
+        }
+        
+        .form-inner-white-box .urgency-message {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-inner-white-box .urgency-message strong {
+            color: var(--text-dark); /* Dark text on white bg */
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .form-inner-white-box .urgency-message p {
+            color: var(--text-gray); /* Dark text on white bg */
+            font-size: 15px;
+            margin-top: 4px;
+        }
+
+        /* Style the iframe to be inside the white box */
+        .form-inner-white-box iframe {
+            border-radius: 8px; /* Slightly smaller radius */
+            display: block;
+            width: 100%;
+            height: 600px;
+            border: 1px solid var(--border-color); /* Add border to iframe */
         }
 
         .cta-guarantee {
@@ -902,21 +922,17 @@
                 border-radius: 0;
             }
             
-            /* 결과 페이지는 모바일에서도 흰색 카드 유지 */
-            .result-container {
-                padding: 24px 16px 40px 16px;
-                box-shadow: none;
-                border-radius: 0;
-            }
-
-            /* CTA 섹션은 모바일에서 패딩 줄이고 그림자 제거 */
-            .cta-section {
-                padding: 16px;
-                box-shadow: none;
+            #result-page .result-container {
+                 margin-top: 0;
+                 margin-bottom: 0;
             }
             
             .page {
                 padding: 0;
+            }
+            
+            #result-page {
+                padding: 0; /* 모바일에서는 결과 페이지 패딩 0 */
             }
             
             .landing-compact {
@@ -936,8 +952,20 @@
                 padding: 16px 20px;
             }
             
+            .result-container {
+                 padding: 24px 16px 40px 16px;
+            }
+
             .choice-container {
                 grid-template-columns: 1fr; /* 모바일에서 세로 1줄로 */
+            }
+
+            .form-container {
+                padding: 16px; /* 모바일에서 패딩 줄임 */
+            }
+            
+            .form-inner-white-box {
+                padding: 16px; /* 모바일에서 패딩 줄임 */
             }
         }
         /* style.css 내용 끝 */
@@ -980,6 +1008,7 @@
         <div class="progress-text" id="progress-text">1 / 5</div>
     </div>
 
+    <!-- 1. 랜딩 페이지 -->
     <div id="landing-page" class="page active">
         <div class="container landing-compact">
             <header class="header-compact">
@@ -1012,6 +1041,7 @@
         </div>
     </div>
 
+    <!-- 2. 질문 페이지들 (Q1 ~ Q5) -->
     <div id="question-1" class="page hidden">
         <div class="container question-container">
             <div class="question-header">
@@ -1127,6 +1157,7 @@
         </div>
     </div>
 
+    <!-- 3. 로딩 페이지 -->
     <div id="loading-page" class="page hidden">
         <div class="container loading-container">
             <div class="loader">
@@ -1137,6 +1168,7 @@
         </div>
     </div>
 
+    <!-- 4. 결과 페이지 (진단 결과 카드) -->
     <div id="result-page" class="page hidden">
         <div class="container result-container">
             <div class="result-header">
@@ -1191,10 +1223,7 @@
 
                     <!-- 💡 맞춤 해결 전략 (이 영역은 JS에 의해 동적으로 채워집니다) -->
                     <div id="custom-strategy-section">
-                        <!-- <h3>💡 맞춤 해결 전략</h3>
-                        <ul class="strategy-list">
-                            ...
-                        </ul> -->
+                        <!-- JS로 채워짐 -->
                     </div>
 
                     <h3 class="prescription-title">당신을 위한 긴급 처방 (『프레임 전쟁』)</h3>
@@ -1243,15 +1272,21 @@
                     </div>
                 </div>
 
+                <!-- CTA 섹션 (결과 카드 내부에 위치) -->
                  <div id="cta-section" class="cta-section">
-                    <div class="urgency-message">
-                        <strong>이 지긋지긋한 서열 패턴을 끊을 유일한 기회</strong>
-                        <p>아래에 이름과 전화번호를 입력하시면,<br>『프레임 전쟁』 PDF를 문자로 즉시 보내드립니다.</p>
-                    </div>
                     
+                    <!-- *** NEW DARK FORM BOX *** -->
                     <div class="form-container">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdCFid_aCtKhPB9sbErZLOl6f_VRm91zwdnVXxv2UpnPA-O-w/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">로드 중…</iframe>
+                        <!-- *** NEW INNER WHITE BOX *** -->
+                        <div class="form-inner-white-box">
+                            <div class="urgency-message">
+                                <strong>이 지긋지긋한 서열 패턴을 끊을 유일한 기회</strong>
+                                <p>아래에 이름과 전화번호를 입력하시면,<br>『프레임 전쟁』 PDF를 문자로 즉시 보내드립니다.</p>
+                            </div>
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdCFid_aCtKhPB9sbErZLOl6f_VRm91zwdnVXxv2UpnPA-O-w/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">로드 중…</iframe>
+                        </div>
                     </div>
+                    <!-- *** END OF DARK FORM BOX *** -->
                     
                     <!-- NEW SOCIAL PROOF SECTION -->
                     <div class="social-proof-section">
@@ -1273,7 +1308,7 @@
                     <!-- NEW FINAL CHOICE SECTION -->
                     <div class="final-choice-section">
                         <div class="warning-box">
-                            <span class="icon">⚠️</span>
+                            <span class="icon" style="font-size: 28px; margin-right: 16px;">⚠️</span>
                             <p><strong>지금 행동하지 않으면 같은 패턴이 반복됩니다</strong><br>
                             이 진단 결과를 보고도 아무것도 하지 않는다면, 당신의 연애는 앞으로도 바뀌지 않습니다.</p>
                         </div>
@@ -1294,7 +1329,7 @@
                         </div>
 
                         <button class="final-cta-button" onclick="document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });">
-                            <span class="icon">📱</span>
+                            <span class="icon" style="font-size: 24px; margin-right: 12px;">📱</span>
                             <div>
                                 <span class="text-main">지금 신청하고 무료 전자책 받기</span>
                                 <span class="text-sub">『프레임 전쟁』 PDF 다운로드 링크 문자 발송</span>
@@ -1307,9 +1342,11 @@
                         ✓ 100% 무료 제공 &nbsp;&nbsp; ✓ 개인정보 보호
                     </p>
                 </div>
+                <!-- END of CTA 섹션 -->
             </div>
         </div>
-    </div>
+    </div> <!-- END of #result-page -->
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1384,7 +1421,12 @@
             // =========================================
             // 3. 핵심 로직 함수 (Core Logic)
             // =========================================
-
+            
+            // DOM 요소 캐시
+            const loadingPage = document.getElementById('loading-page');
+            const resultPage = document.getElementById('result-page');
+            const progressBar = document.getElementById('progress-bar');
+            
             // 3-1. 답변 처리 및 다음 질문 이동
             window.handleAnswer = function(score, answerText) {
                 const currentQ = state.currentQuestion; // 0-indexed
@@ -1418,14 +1460,21 @@
             // 3-3. 로딩 후 결과 계산 및 표시
             function showLoadingAndResult() {
                 hideAllPages();
-                document.getElementById('loading-page').classList.remove('hidden');
-                document.getElementById('progress-bar').classList.add('hidden');
+                loadingPage.classList.remove('hidden');
+                loadingPage.classList.add('active');
+                progressBar.classList.add('hidden');
 
                 setTimeout(() => {
                     calculateAndRenderResult();
-                    document.getElementById('loading-page').classList.add('hidden');
-                    document.getElementById('result-page').classList.remove('hidden');
-                    document.getElementById('result-page').classList.add('active'); // active 추가
+                    loadingPage.classList.add('hidden');
+                    loadingPage.classList.remove('active');
+                    
+                    // 결과 페이지만 표시
+                    resultPage.classList.remove('hidden');
+                    resultPage.classList.add('active');
+                    
+                    // 결과 페이지 최상단으로 스크롤
+                    window.scrollTo(0, 0); 
                 }, 2500); // 2.5초 로딩 연출
             }
 
@@ -1534,7 +1583,6 @@
             }
 
             function updateProgressBar(current) { // 1-indexed
-                const progressBar = document.getElementById('progress-bar');
                 const progressFill = document.getElementById('progress-fill');
                 const progressText = document.getElementById('progress-text');
 
