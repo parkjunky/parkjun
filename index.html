@@ -3,1365 +3,1563 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="프레임 설계자 - 착한 남자 프레임에서 벗어나 관계의 주도권을 잡는 근본적인 변화. 10년 검증된 매력 설계 시스템.">
-    <!-- 캐시 무효화 -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>[얼리버드 알림] 프레임 설계자 | 2차 판매 특별 할인</title>
-    <link rel="stylesheet" href="css/style.css?v=1.5.5&t=202501021000">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <title>관계 서열(Hierarchy) 패턴 무료 진단 | 프레임 전쟁</title>
+    <meta name="description" content="당신은 그녀의 '1순위'일까, 심심할 때 찾는 '보험'일까? 1분 만에 당신의 무의식적 관계 서열을 정확히 진단합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- 모바일 강제 스타일 - 캐시 우회 -->
     <style>
-        /* 책 표지 이미지 중앙 정렬 강제 */
-        .main-hero img[alt*="전자책 표지"] {
-            display: block !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
+        /* style.css 내용 시작 */
+        /* 전역 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        @media (max-width: 768px) {
-            /* 모든 그리드 강제 1단 */
-            .review-grid,
-            .book-comparison-grid,
-            .coaching-comparison-grid,
-            [style*="grid-template-columns"] {
-                display: block !important;
-                grid-template-columns: 1fr !important;
-            }
+
+        :root {
+            /* 색상 시스템 */
+            --primary-color: #FF3B3B;
+            --primary-dark: #D32F2F;
+            --secondary-color: #FEE500;
+            --text-dark: #1A1A1A;
+            --text-gray: #666666;
+            --text-light: #999999;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --border-color: #E0E0E0;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --success-bg: #e8f5e9;
+            --danger-bg: #ffebee;
             
-            .review-grid > *,
-            .book-comparison-grid > *,
-            .coaching-comparison-grid > *,
-            [style*="grid-template-columns"] > * {
-                width: 100% !important;
-                max-width: 100% !important;
-                margin-bottom: 16px !important;
-            }
+            /* 그라데이션 */
+            --gradient-primary: linear-gradient(135deg, #FF3B3B 0%, #FF6B6B 100%);
+            --gradient-dark: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+            --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             
-            /* 등호 기호 숨김 */
-            .coaching-comparison-grid > div:nth-child(2),
-            .comp-arrow {
-                display: none !important;
-            }
-            
-            /* 컨테이너 여백 */
-            .container,
-            .container-narrow {
-                padding-left: 12px !important;
-                padding-right: 12px !important;
-            }
-            
-            /* 햄버거 메뉴 표시 */
-            .hamburger {
-                display: flex !important;
-            }
-            
-            /* 네비게이션 */
-            .nav-links {
-                position: fixed !important;
-                top: 60px !important;
-                left: 0 !important;
-                right: 0 !important;
-                flex-direction: column !important;
-                background: white !important;
-                z-index: 999 !important;
-            }
-            
-            /* 책 표지 이미지 모바일 최적화 */
-            .main-hero img[alt*="전자책 표지"] {
-                max-width: 280px !important;
-                padding: 0 16px !important;
-            }
+            /* 그림자 */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
-    </style>
-   <style>
-        .mobile-notice {
-            display: none; /* 1. 데스크톱에서는 기본적으로 숨김 */
-            padding: 16px;
-            text-align: center;
-            font-size: 0.9rem;
-            line-height: 1.6;
+
+        html, body {
+            width: 100%;
+            height: 100%;
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #fff3cd; /* 눈에 띄는 노란색 배경 */
-            color: #856404; /* 가독성 좋은 어두운 글씨 */
-            border-bottom: 2px solid #ffc107;
-            box-sizing: border-box; /* 🔥 padding이 크기를 늘리지 않도록 추가 */
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .mobile-notice strong {
-            color: #856404;
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* 페이지 컨테이너 */
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .page.hidden {
+            display: none;
+            opacity: 0;
+            position: absolute;
+            transform: scale(0.98);
+        }
+
+        .page.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 24px;
+            background-color: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* 프로그레스 바 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background-color: #eee;
+            z-index: 100;
+            transition: opacity 0.3s;
+        }
+
+        .progress-bar.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: width 0.4s ease-out;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+
+        /* 1. 랜딩 페이지 (컴팩트) */
+        .landing-compact {
+            text-align: center;
+            padding: 32px 24px;
+        }
+
+        .header-compact .main-title-compact {
+            font-size: clamp(26px, 7vw, 32px);
+            font-weight: 900;
+            line-height: 1.4;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .header-compact .main-title-compact strong {
+            color: var(--primary-color);
+        }
+
+        .header-compact .sub-title-compact {
+            font-size: clamp(15px, 4vw, 17px);
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .cta-container-compact {
+            margin-top: 32px;
+        }
+
+        .start-btn-large {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .primary-btn {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 59, 59, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 59, 59, 0.4);
         }
         
-        /* 2. 모바일 화면 (가로 768px 이하)에서만 보이도록 설정 */
+        .secondary-btn {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            box-shadow: 0 4px 12px rgba(254, 229, 0, 0.3);
+        }
+        
+        .secondary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(254, 229, 0, 0.4);
+        }
+
+        .guarantee-text-compact {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 16px;
+        }
+
+        .guarantee-text-compact .icon {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+
+        /* 2. 질문 페이지 */
+        .question-container {
+            padding-top: 48px; /* 프로그레스바 공간 확보 */
+        }
+
+        .question-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .question-header .q-number {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .question-header h2 {
+            font-size: clamp(20px, 5.5vw, 24px);
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--bg-white);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 16px;
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .option-btn .check-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            margin-right: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-color);
+            background: #fff8f8;
+        }
+
+        .option-btn:hover .check-icon {
+            border-color: var(--primary-color);
+            background-color: #ffeaea;
+        }
+        
+        .option-btn .option-text {
+            flex: 1;
+            line-height: 1.6;
+        }
+
+
+        /* 3. 로딩 페이지 */
+        .loading-container {
+            text-align: center;
+        }
+
+        .loader {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px auto;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(255, 59, 59, 0.1);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .loading-sub-text {
+            font-size: 16px;
+            color: var(--text-gray);
+        }
+
+
+        /* 4. 결과 페이지 */
+        .result-container {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .result-header {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+
+        .result-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .result-title {
+            font-size: clamp(24px, 6.5vw, 30px);
+            font-weight: 900;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            background-color: var(--text-gray);
+            border-radius: 20px;
+        }
+        
+        .score-container {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px auto;
+            position: relative; /* 중앙 숫자 겹침 방지용 */
+        }
+        
+        .circular-chart {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .circle {
+            transition: stroke-dasharray 0.8s ease-out;
+            stroke-linecap: round;
+        }
+        
+        .score-text {
+            display: none; /* SVG text 비활성화 (겹침 방지) */
+        }
+        .score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1;
+            pointer-events: none;
+        }
+        
+        .score-label {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+
+        .diagnosis-content {
+            /* 각 섹션별 상하 여백 추가 */
+        }
+
+        .diagnosis-content > div:not(:last-child) {
+            margin-bottom: 32px; /* 섹션 간 여백 */
+        }
+
+        .diagnosis-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--text-dark);
+        }
+        
+        .diagnosis-content h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .core-problem-section .highlight-text {
+            font-size: 18px;
+            line-height: 1.7;
+            font-weight: 500;
+            background-color: #fff8f8;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #ffeaea;
+        }
+
+        .core-problem-section .highlight-text strong {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .evidence-section {
+            /* margin-top: 24px; */ /* 상위 div의 margin-bottom으로 대체 */
+        }
+        
+        .answer-list p {
+            font-size: 15px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .quoted-answer {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 12px;
+            border-radius: 8px;
+            font-style: italic;
+        }
+        
+        .quoted-answer strong {
+            font-style: normal;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .future-section {
+            /* margin-top: 24px; */
+        }
+        
+        .warning-box {
+            background: #fff8e1;
+            border: 1px solid #ffecb3;
+            border-left: 4px solid var(--warning-color);
+            padding: 16px 20px;
+            border-radius: 8px;
+        }
+        
+        .warning-box p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #4f4327;
+        }
+
+        .solution-section {
+            /* margin-top: 24px; */
+        }
+        
+        /* 맞춤 해결 전략 스타일 */
+        #pre-strategy-box {
+            background-color: var(--success-bg);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        #pre-strategy-box .icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        #pre-strategy-box h3 {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--success-color);
+            border: none;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+        #pre-strategy-box p {
+            font-size: 16px;
+            color: #388e3c;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        #pre-strategy-box .highlight {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+
+        .strategy-intro {
+            font-size: 15px;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 16px;
+            border-radius: 8px;
+            line-height: 1.7;
+        }
+        .strategy-intro strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .strategy-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .strategy-list li {
+            /* New box styles */
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+
+            /* Old styles removed:
+            position: relative;
+            padding-left: 32px;
+            */
+        }
+        .strategy-list li::before {
+            /* Book icon removed */
+            content: '';
+        }
+        .strategy-list li strong {
+            font-weight: 900; /* Bolder */
+            color: var(--primary-dark); /* Darker red */
+        }
+
+        /* 긴급 처방전 스타일 (보완) */
+        .prescription-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-top: 40px; /* 여백 추가 */
+            margin-bottom: 16px;
+            padding-bottom: 0;
+            border-bottom: none; /* Removed border */
+            position: relative;
+            padding-left: 20px; /* Space for bullet */
+        }
+
+        .prescription-title::before {
+            content: '🔴'; /* Bullet icon */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 16px;
+            color: var(--primary-color);
+        }
+
+        .prescription-intro {
+            font-size: 15px;
+            color: var(--text-dark); /* 강조를 위해 색상 변경 */
+            font-weight: 500; /* 강조를 위해 굵기 변경 */
+            margin-bottom: 24px;
+            background: #f8f9fa; /* Light gray box */
+            border: 1px solid #eee;
+            border-left: 4px solid var(--primary-color); /* 강조 테두리 */
+            padding: 16px;
+            border-radius: 8px;
+            line-height: 1.7;
+        }
+
+        .prescription-card {
+            background: var(--bg-white);
+            border: none; /* Removed border */
+            border-radius: 0; /* Removed radius */
+            padding: 0; /* Removed padding */
+            margin-bottom: 24px; /* Space between cards */
+            box-shadow: none; /* Removed shadow */
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--text-dark); /* Darker color */
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 24px; /* Space for bullet */
+        }
+        .card-title::before {
+            content: '■'; /* Blue square bullet */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 16px;
+            color: #1565C0;
+        }
+
+        .card-subtitle {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            padding-left: 24px; /* Align with title */
+        }
+        .card-reason-title {
+            font-size: 15px; /* Updated size */
+            font-weight: 700;
+            color: var(--text-dark); /* Changed color */
+            margin-bottom: 8px;
+            padding-left: 24px; /* Align with title */
+        }
+        .card-reason-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            padding-left: 24px; /* Align with title */
+        }
+        .card-bullets {
+            list-style: none;
+            padding-left: 24px; /* Align with title */
+            background: none; /* Removed background */
+            border-radius: 0;
+            padding: 0;
+            padding-left: 24px;
+        }
+        .card-bullets li {
+            font-size: 15px; /* Updated size */
+            line-height: 1.7; /* Updated line height */
+            color: var(--text-gray);
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+        .card-bullets li:last-child {
+            margin-bottom: 0;
+        }
+        .card-bullets li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--text-gray); /* Changed color */
+        }
+
+
+        .cta-section {
+            margin-top: 32px;
+            padding: 24px; /* 내부 패딩 추가 */
+            border-top: none; /* 상단 점선 제거 */
+            text-align: center;
+            background: var(--bg-white); /* 배경색 흰색으로 변경 */
+            border-radius: 12px; /* 카드형 디자인 */
+            box-shadow: var(--shadow-md); /* 그림자 추가 */
+        }
+        
+        .urgency-message {
+            margin-bottom: 20px;
+        }
+        
+        .urgency-message strong {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .urgency-message p {
+            font-size: 15px;
+            color: var(--text-gray);
+            margin-top: 4px;
+        }
+        
+        /* 구글 폼 컨테이너 스타일 */
+        .form-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding-top: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .cta-guarantee {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 16px;
+        }
+
+        /* 랜딩 페이지 경고 박스 (컴팩트) */
+        .warning-box-compact {
+            text-align: left;
+            background: #fff8e1;
+            border-left: 4px solid var(--warning-color);
+            padding: 16px 20px;
+            border-radius: 12px;
+        }
+
+        .warning-box-compact p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .warning-box-compact strong {
+            color: #E65100;
+            font-weight: 700;
+        }
+
+        /* 사회적 증거 */
+        .social-proof-section {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .social-proof-section h4 {
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        .review-card {
+            background: var(--bg-white);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        .review-card blockquote {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin: 0;
+            padding-left: 12px;
+            border-left: 3px solid var(--primary-color);
+            font-style: italic;
+        }
+        .review-card footer {
+            text-align: right;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 8px;
+        }
+        .final-cta-text {
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 16px;
+        }
+        
+        /* 선택 유도 섹션 */
+        .final-choice-section {
+            margin-top: 24px;
+        }
+        .final-choice-section .warning-box {
+            display: flex;
+            align-items: center;
+            background: #fff8e1;
+            border: 1px solid #ffecb3;
+            border-left: 4px solid var(--warning-color);
+            padding: 16px;
+            border-radius: 8px;
+        }
+        .final-choice-section .warning-box .icon {
+            font-size: 28px;
+            margin-right: 16px;
+        }
+        .final-choice-section .warning-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4f4327;
+            font-weight: 500;
+        }
+        .final-choice-section .warning-box p strong {
+            font-weight: 700;
+            color: #E65100;
+        }
+        
+        .choice-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 24px 0;
+        }
+        
+        .choice-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .choice-box {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .choice-box.danger {
+            background: var(--danger-bg);
+            border: 2px solid #ffcdd2;
+        }
+        .choice-box.success {
+            background: var(--success-bg);
+            border: 2px solid #c8e6c9;
+        }
+        
+        .choice-box .icon {
+            font-size: 32px;
+            font-weight: 900;
+        }
+        .choice-box.danger .icon { color: var(--primary-dark); }
+        .choice-box.success .icon { color: var(--success-color); }
+
+        .choice-box h4 {
+            font-size: 16px;
+            font-weight: 900;
+            margin: 12px 0 8px 0;
+            border: none;
+            padding: 0;
+        }
+        .choice-box.danger h4 { color: var(--primary-dark); }
+        .choice-box.success h4 { color: var(--success-color); }
+        
+        .choice-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+        
+        .final-cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 59, 59, 0.3);
+        }
+        .final-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 59, 59, 0.4);
+        }
+        .final-cta-button .icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+        .final-cta-button .text-main {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .final-cta-button .text-sub {
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 0.9;
+            display: block;
+            margin-top: 2px;
+        }
+
+
+        /* 반응형 디자인 */
         @media (max-width: 768px) {
-            .mobile-notice {
-                display: block; /* 모바일에서만 보이게 함 */
-                padding-top: 75px;    /* 🔥 상단 고정 nav 높이(약 60px) + 여유(15px) */
+            .container {
+                padding: 16px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            /* 결과 페이지는 모바일에서도 흰색 카드 유지 */
+            .result-container {
+                padding: 24px 16px 40px 16px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            /* CTA 섹션은 모바일에서 패딩 줄이고 그림자 제거 */
+            .cta-section {
+                padding: 16px;
+                box-shadow: none;
+            }
+            
+            .page {
+                padding: 0;
+            }
+            
+            .landing-compact {
+                padding: 24px 16px;
+            }
+            
+            .start-btn-large {
+                padding: 20px 24px;
+                font-size: 20px;
+            }
+            
+            .question-container {
+                padding: 40px 16px 20px 16px;
+            }
+            
+            .option-btn {
+                padding: 16px 20px;
+            }
+            
+            .choice-container {
+                grid-template-columns: 1fr; /* 모바일에서 세로 1줄로 */
             }
         }
+        /* style.css 내용 끝 */
+
+        /* empathy-objection.css 내용 시작 */
+        .empathy-section {
+            background: #FFFFFF;
+            padding: 24px;
+            border-radius: 8px;
+            /* margin: 24px 0; */ /* 상위 div의 margin-bottom으로 대체 */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #666666;
+        }
+
+        .empathy-icon {
+            display: none;
+        }
+
+        .empathy-text {
+            font-size: clamp(15px, 2.8vw, 17px);
+            line-height: 1.8;
+            color: #333333;
+        }
+
+        .empathy-text strong {
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        /* 사용하지 않는 클래스는 제거 */
+        .objection-section {
+            display: none;
+        }
+        /* empathy-objection.css 내용 끝 */
     </style>
 </head>
 <body>
-    <div class="mobile-notice">
-    <p style="margin: 0;">📱 현재 모바일 환경에서는 페이지 가독성이 다소 떨어질 수 있습니다.<br>
-    <strong>PC 화면</strong>으로 접속하시면 모든 정보를 더 편하게 보실 수 있습니다.</p>
-</div>
-    
-    <!-- 상단 고정 네비게이션 -->
-    <nav class="top-nav">
-        <div class="container">
-            <div class="nav-inner">
-                <h1 class="brand-logo">박준 코치</h1>
-                <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="nav-links" id="navLinks">
-                    <a href="#details">상세정보</a>
-                    <a href="#benefits">얼리버드 혜택</a>
-                    <a href="#qa">Q&A</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div id="progress-bar" class="progress-bar hidden">
+        <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-text" id="progress-text">1 / 5</div>
+    </div>
 
-    <!-- 메인 히어로 섹션 -->
-    <section class="main-hero">
-        <div class="container-narrow">
-            <!-- 상품 헤더 -->
-            <div class="product-header">
-                <div class="badges">
-                    <span class="badge badge-preorder">얼리버드 알림</span>
-                    <span class="badge badge-sale">한정 특가</span>
-                </div>
-                <h1 class="product-title">[마스터북] 프레임 설계자</h1>
-                <p class="product-subtitle">착한 남자 프레임에서 벗어나 관계의 주도권을 잡는 근본적인 변화</p>
-            </div>
+    <div id="landing-page" class="page active">
+        <div class="container landing-compact">
+            <header class="header-compact">
+                <h1 class="main-title-compact">
+                    당신은 그녀의 <strong>'1순위'</strong>일까,<br>
+                    심심할 때 찾는 <strong>'보험'</strong>일까?
+                </h1>
+                <p class="sub-title-compact">
+                    매번 썸만 타다가 흐지부지 끝난다면,<br>
+                    당신의 <strong>'관계 서열'</strong>을 의심해야 합니다.<br>
+                    <!-- "그녀의 무의식 속에..." 문구 삭제됨 -->
+                </p>
+            </header>
 
-            <!-- 전자책 표지 이미지 -->
-            <div style="display: flex; justify-content: center; align-items: center; margin: 40px 0;">
-                <img src="images/book-cover.jpg" alt="프레임 설계자 전자책 표지" loading="lazy" style="max-width: 400px; width: 100%; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-            </div>
-
-            <!-- 헤드라인 -->
-            <div class="headline-section">
-                <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 16px 24px; border-radius: 12px; margin-bottom: 24px; text-align: center; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(255,107,107,0.3);">
-                    🔥 1차 판매 3일 만에 완판! 아무에게나 판매하지 않습니다.
-                </div>
-                <h2 class="main-headline">
-                    『프레임 설계자』 2차 판매,<br>
-                    <span class="highlight-text">마지막 얼리버드 혜택을 놓치지 마세요</span>
-                </h2>
-                <p class="sub-headline" style="font-size: 1.15rem; margin-top: 20px; line-height: 1.7;">
-                    <strong style="color: #ff6b6b;">왜 당신의 진심은 그녀에게 '만만함'이 될 뿐일까요?</strong><br>
-                    당신이 아직도 '프렌드존'에서 벗어나지 못하는 단 하나의 이유
+            <div class="warning-box-compact" style="background-color: #f8f9fa; border-left: 4px solid #FF3B3B; margin-bottom: 20px;">
+                <p>
+                    <strong>[진단 전 필수 체크]</strong><br>
+                    현재 마음에 둔 그녀가 없다면, <strong>가장 최근에 아쉽게 놓친 그녀</strong>를 떠올리고 답해 주세요. 그때의 반복된 패턴이 당신의 진짜 실력입니다.
                 </p>
             </div>
 
-            <!-- 특징 -->
-            <div class="key-features">
-                <div class="kf-item">
-                    <i class="fas fa-check-circle"></i>
-                    <span>단순 기술이 아닌 근본 원리</span>
-                </div>
-                <div class="kf-item">
-                    <i class="fas fa-check-circle"></i>
-                    <span>관계의 주도권 확보</span>
-                </div>
-                <div class="kf-item">
-                    <i class="fas fa-check-circle"></i>
-                    <span>10년 검증된 시스템</span>
-                </div>
-            </div>
-
-            <!-- 가격 정보 -->
-            <div class="price-section">
-                <div class="price-label">2차 판매 얼리버드 특가 (선착순 한정)</div>
-                <div class="price-comparison">
-                    <div class="price-original">정가 59,000원</div>
-                    <div class="price-arrow">→</div>
-                    <div class="price-sale-box">
-                        <span class="price-number">39,000원</span>
-                        <span class="price-discount">33% 할인</span>
-                    </div>
-                </div>
-                <div class="price-save">지금 신청하면 <strong>20,000원</strong> 절약!</div>
-            </div>
-
-            <!-- 사전예약 버튼 -->
-            <div class="purchase-buttons">
-                <a href="https://forms.gle/NV48UJr26LYYtDJL8" target="_blank" class="btn-purchase">
-                    <span>🔥 얼리버드 할인 알림 신청하기 (무료)</span>
-                    <span class="btn-sub">지금은 결제 없음 · 2차 판매 우선권 · 33% 할인 · 💎 5만원 상당 1:1 컨설팅</span>
-                </a>
-
-            </div>
-
-            <!-- 사회적 증거 -->
-            <div class="social-proof">
-                <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; border-radius: 8px; margin-bottom: 16px;">
-                    <p style="font-weight: 700; font-size: 1.1rem; margin-bottom: 12px; color: #856404;">⚡ 1차 판매 3일 만에 조기 마감!</p>
-                    <p style="color: #856404; line-height: 1.6;">수많은 '착한 남자'들이 이미 프레임 설계자의 세계로 진입했습니다. 2차 판매는 <strong>선착순 한정 수량</strong>으로만 진행됩니다.</p>
-                </div>
-                <p style="font-weight: 600; margin-bottom: 8px;">💬 축하합니다!</p>
-                <p>수많은 정보 속에서 진짜 가치를 알아보고 이곳까지 오신 당신의 안목에 경의를 표합니다.</p>
-            </div>
-            
-            <!-- 한정 판매 이유 설명 (NEW) -->
-            <div style="background: linear-gradient(135deg, #fff9e6 0%, #ffe6e6 100%); border: 2px solid #ffd93d; border-radius: 16px; padding: 40px 32px; margin-top: 32px; box-shadow: 0 4px 16px rgba(255, 217, 61, 0.2);">
-                <div style="text-align: center; margin-bottom: 32px;">
-                    <div style="display: inline-block; background: #ff6b6b; color: white; padding: 8px 20px; border-radius: 24px; font-weight: 700; font-size: 0.938rem; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);">
-                        🤔 디지털 전자책인데 왜 한정 판매일까요?
-                    </div>
-                </div>
-                
-                <div style="background: white; padding: 32px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 24px;">
-                    <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px;">
-                        <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-                            💌
-                        </div>
-                        <div style="flex: 1;">
-                            <h4 style="font-size: 1.25rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px;">
-                                1:1 맞춤형 이메일 가이드가 제공되기 때문입니다
-                            </h4>
-                            <p style="font-size: 1rem; line-height: 1.8; color: #495057; margin-bottom: 16px;">
-                                단순히 전자책만 판매하고 끝이 아닙니다. <strong style="color: #667eea;">모든 구매자에게 개인 맞춤형 1:1 이메일 상담</strong>을 제공하기 때문에, 
-                                저자가 <strong style="color: #ff6b6b;">물리적으로 대응 가능한 인원</strong>만 받을 수 있습니다.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 24px; border-radius: 12px; border-left: 4px solid #667eea;">
-                        <p style="font-size: 0.938rem; line-height: 1.7; color: #2c3e50; margin-bottom: 12px;">
-                            <strong style="color: #667eea;">📌 이것은 단순 판매가 아닌 '맞춤형 코칭 서비스'입니다</strong>
-                        </p>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="padding: 8px 0; color: #495057; font-size: 0.938rem;">
-                                ✅ 각 구매자의 상황을 파악하고 분석
-                            </li>
-                            <li style="padding: 8px 0; color: #495057; font-size: 0.938rem;">
-                                ✅ 개인별 맞춤 솔루션과 실전 가이드 제공
-                            </li>
-                            <li style="padding: 8px 0; color: #495057; font-size: 0.938rem;">
-                                ✅ 책 내용을 실제 상황에 적용하도록 지원
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; padding: 24px; background: white; border-radius: 12px; border: 2px dashed #ffd93d;">
-                    <p style="font-size: 1.1rem; font-weight: 700; color: #2c3e50; margin-bottom: 8px;">
-                        ⚡ 그래서 선착순 한정 수량으로만 진행됩니다
-                    </p>
-                    <p style="font-size: 0.938rem; color: #6c757d; line-height: 1.7;">
-                        1차 판매가 3일 만에 조기 마감된 이유도 바로 이것입니다.<br>
-                        <strong style="color: #ff6b6b;">저자의 시간과 에너지를 온전히 투자받을 수 있는 마지막 기회</strong>입니다.
-                    </p>
-                </div>
-                
-                <div style="margin-top: 24px; padding: 28px; background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%); border-radius: 12px; border-left: 4px solid #9b59b6; text-align: center;">
-                    <p style="font-size: 1.1rem; font-weight: 700; color: #9b59b6; margin-bottom: 12px;">
-                        💎 그래서 2차 판매 얼리버드 알림 신청자에게만<br>이 특별한 1:1 컨설팅 혜택을 드립니다
-                    </p>
-                    <p style="font-size: 0.938rem; color: #6c757d; line-height: 1.7;">
-                        단순히 책만 판매하고 끝이 아닙니다.<br>
-                        <strong style="color: #9b59b6;">당신의 변화를 위해 저자가 직접 함께합니다.</strong>
-                    </p>
-                </div>
-
-                <!-- 프리미엄 이메일 컨설팅 실제 후기 증명 -->
-                <div style="margin-top: 40px; padding: 32px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
-                    <h4 style="font-size: 1.4rem; font-weight: 800; color: #2c3e50; text-align: center; margin-bottom: 8px;">💬 실제 프리미엄 이메일 컨설팅 후기</h4>
-                    <p style="text-align: center; font-size: 0.938rem; color: #6c757d; margin-bottom: 32px;">이미 많은 분들이 1:1 컨설팅을 통해 변화를 경험하고 있습니다</p>
-
-                    <!-- 프리미엄 혜택 증명 1: 답변의 질 - review-7.png -->
-                    <div style="margin-bottom: 24px; padding: 24px 28px; background: linear-gradient(135deg, #f8f4ff 0%, #fff8f0 100%); border-radius: 16px; border-left: 5px solid #9b59b6; box-shadow: 0 4px 16px rgba(155,89,182,0.15);">
-                        <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-                            <div style="flex-shrink: 0; width: 50px; height: 50px; background: linear-gradient(135deg, #9b59b6 0%, #667eea 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(155,89,182,0.3);">
-                                💎
-                            </div>
-                            <div>
-                                <p style="font-size: 0.875rem; color: #9b59b6; font-weight: 700; margin-bottom: 8px;">실제 프리미엄 이메일 컨설팅 후기</p>
-                                <p style="font-size: 1rem; font-weight: 700; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">
-                                    "답변의 질이 너무 좋아서 내공의 깊이가 다르시다는 게 느껴집니다"
-                                </p>
-                                <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.8; margin-bottom: 8px;">
-                                    답변 너무 감사드립니다. 내공이 깊이가 다르시다는 게 느껴집니다. 이런 만을 해야 한다는 것에 너무 놀랐습니다. <strong style="color: #9b59b6;">많이 경험을 해야할 거 같습니다.</strong>
-                                </p>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
-                                    <p style="font-size: 0.813rem; color: #6c757d; font-style: italic;">- 실제 이메일 컨설팅 수강생</p>
-                                    <span style="padding: 4px 10px; background: rgba(155,89,182,0.1); color: #9b59b6; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">인증 완료</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 16px; padding: 16px; background: white; border-radius: 12px;">
-                            <img src="images/review-7.png" alt="프리미엄 이메일 컨설팅 실제 후기" loading="lazy" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div style="display: none; height: 200px; background: linear-gradient(135deg, #f8f4ff 0%, #fff0f8 100%); border-radius: 8px; align-items: center; justify-content: center; border: 2px dashed #9b59b6;">
-                                <p style="color: #9b59b6; font-weight: 600; text-align: center; padding: 20px;">후기 이미지 로딩 중...</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 프리미엄 혜택 증명 2: 또 상담 신청 - review-3.jpg -->
-                    <div style="padding: 24px 28px; background: linear-gradient(135deg, #fff8f0 0%, #f8f4ff 100%); border-radius: 16px; border-left: 5px solid #667eea; box-shadow: 0 4px 16px rgba(102,126,234,0.15);">
-                        <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-                            <div style="flex-shrink: 0; width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(102,126,234,0.3);">
-                                ✨
-                            </div>
-                            <div>
-                                <p style="font-size: 0.875rem; color: #667eea; font-weight: 700; margin-bottom: 8px;">실제 프리미엄 이메일 컨설팅 후기</p>
-                                <p style="font-size: 1rem; font-weight: 700; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">
-                                    "내공이 깊으십니다... 조만간 또 상담 신청 드리겠습니다"
-                                </p>
-                                <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.8; margin-bottom: 8px;">
-                                    정말 감사합니다. 진짜 항상 내공이 깊으십니다. <strong style="color: #667eea;">조만간 또 상담 신청 드리겠습니다.</strong>
-                                </p>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
-                                    <p style="font-size: 0.813rem; color: #6c757d; font-style: italic;">- 실제 이메일 컨설팅 수강생</p>
-                                    <span style="padding: 4px 10px; background: rgba(102,126,234,0.1); color: #667eea; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">인증 완료</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 16px; padding: 16px; background: white; border-radius: 12px;">
-                            <img src="images/review-3.jpg" alt="프리미엄 이메일 컨설팅 재신청 후기" loading="lazy" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div style="display: none; height: 200px; background: linear-gradient(135deg, #fff8f0 0%, #f8f4ff 100%); border-radius: 8px; align-items: center; justify-content: center; border: 2px dashed #667eea;">
-                                <p style="color: #667eea; font-weight: 600; text-align: center; padding: 20px;">후기 이미지 로딩 중...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 혜택 정보 -->
-            <div class="benefits-box" id="benefits">
-                <div style="text-align: center; margin-bottom: 32px;">
-                    <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 16px; color: #2c3e50;">왜 지금 '얼리버드 알림'을 신청해야 하는가?</h2>
-                    <p style="font-size: 1.1rem; color: #6c757d; line-height: 1.7;">2차 판매는 <strong style="color: #ff6b6b;">선착순 한정</strong>으로만 진행되며,<br>알림 신청자에게만 특별한 기회가 주어집니다.</p>
-                </div>
-                <h3>🎁 오직 얼리버드 알림 신청자에게만 주어지는 3가지 독점 혜택</h3>
-                <ul class="benefits-list">
-                    <li><i class="fas fa-check"></i> <strong>혜택 1 (우선권): 한정 판매 기간을 놓치지 않는 우선 구매 기회</strong><br><span style="font-size: 0.875rem; color: #6c757d; display: block; margin-top: 8px;">2차 판매는 단기간만 진행됩니다. 얼리버드 알림 신청자에게만 <strong style="color: #667eea;">판매 시작 즉시 알림</strong>이 발송되며, 일반 공개 전 <strong>우선 구매 기회</strong>가 제공됩니다.</span></li>
-                    <li><i class="fas fa-check"></i> <strong>혜택 2 (가격): 얼리버드 알림 신청자에게만 제공되는 33% 할인</strong><br><span style="font-size: 0.875rem; color: #6c757d; display: block; margin-top: 8px;">정가 59,000원 → <strong style="color: #ff6b6b;">얼리버드가 39,000원</strong>. 마지막 3만 원대 가격으로 구매할 수 있는 기회입니다. 3차 판매부터 가격이 인상되며, 이 혜택은 다시 돌아오지 않습니다.</span></li>
-                    <li><i class="fas fa-check"></i> <strong>혜택 3 (프리미엄): 💎 5만 원 상당 1:1 맞춤형 이메일 컨설팅</strong><br><span style="font-size: 0.875rem; color: #6c757d; display: block; margin-top: 8px;"><strong style="color: #9b59b6;">책을 읽고 궁금한 점, 당신의 상황에 맞는 적용법을 저자에게 직접 물어보세요!</strong> 구매 후 이메일 질의응답권 제공. 얼리버드 알림 신청자에게만 제공되는 특별 혜택입니다.</span></li>
-                </ul>
-
-                
-                <div class="benefits-note" style="margin-top: 24px; line-height: 1.7;">
-                    <p style="margin-bottom: 12px;">※ 『프레임 설계자』는 일반 서점이나 온라인에서 상시 판매되지 않으며, 오직 정해진 판매 기간을 통해서만 합류할 수 있습니다.</p>
-                    <p>※ 이 모든 혜택과 기회는 2차 판매가 종료되면 완전히 닫힙니다.</p>
-                </div>
-
-                <!-- 가격 비교 인포그래픽 -->
-                <div class="infographic-box">
-                    <h3 class="infographic-title">💰 혜택 가치 계산</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 32px;">
-                        <div style="padding: 32px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
-                            <div style="font-size: 1rem; color: #6c757d; margin-bottom: 8px; font-weight: 600;">전자책 정가</div>
-                            <div style="font-size: 2.5rem; font-weight: 900; color: #667eea; margin-bottom: 8px;">59,000원</div>
-                            <div style="font-size: 0.875rem; color: #6c757d;">체계적인 매력 설계 시스템</div>
-                        </div>
-                        
-                        <div style="padding: 32px; background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%); border: 2px solid #9b59b6; border-radius: 16px; box-shadow: 0 4px 20px rgba(155, 89, 182, 0.15); text-align: center; position: relative;">
-                            <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #9b59b6; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">특별 혜택</div>
-                            <div style="font-size: 1rem; color: #6c757d; margin-bottom: 8px; font-weight: 600;">1:1 이메일 컨설팅</div>
-                            <div style="font-size: 2.5rem; font-weight: 900; color: #9b59b6; margin-bottom: 8px;">50,000원</div>
-                            <div style="font-size: 0.875rem; color: #6c757d;">맞춤형 전략 및 피드백</div>
-                        </div>
-                        
-                        <div style="padding: 32px; background: linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(238, 90, 111, 0.15) 100%); border: 3px solid #ff6b6b; border-radius: 16px; box-shadow: 0 6px 24px rgba(255, 107, 107, 0.25); text-align: center; position: relative; transform: scale(1.05);">
-                            <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 6px 20px; border-radius: 20px; font-size: 0.875rem; font-weight: 700; box-shadow: 0 4px 12px rgba(255,107,107,0.4);">🔥 얼리버드 알림</div>
-                            <div style="font-size: 1rem; color: #6c757d; margin-bottom: 8px; font-weight: 600;">실제 결제 금액</div>
-                            <div style="font-size: 3rem; font-weight: 900; color: #ff6b6b; margin-bottom: 4px;">39,000원</div>
-                            <div style="font-size: 1.25rem; font-weight: 700; color: #27ae60; margin-bottom: 8px;">70,000원 절약!</div>
-                            <div style="font-size: 0.938rem; color: #6c757d; font-weight: 600;">전자책 + 컨설팅 모두 포함</div>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 40px; padding: 32px; background: linear-gradient(135deg, rgba(255,193,7,0.1) 0%, rgba(255,107,107,0.1) 100%); border-radius: 16px; border: 2px dashed #ffc107;">
-                        <p style="font-size: 1.5rem; font-weight: 800; color: #2c3e50; margin-bottom: 12px;">
-                            총 가치 109,000원 → 39,000원
-                        </p>
-                        <p style="font-size: 1.1rem; color: #6c757d;">
-                            <strong style="color: #ff6b6b;">64% 할인</strong> + 프리미엄 혜택 포함
-                        </p>
-                    </div>
-                </div>
+            <div class="cta-container-compact">
+                <button id="start-btn" class="start-btn-large primary-btn">
+                    1분 만에 내 '관계 서열' 확인하기 ▷
+                </button>
+                <p class="guarantee-text-compact">
+                    <span class="icon">🔒</span> 100% 익명 보장, 1분 소요
+                </p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- 상세정보 섹션 -->
-    <section class="section-details" id="details">
-        <div class="container-narrow">
-            <div class="section-tab">
-                <h2>상세정보</h2>
+    <div id="question-1" class="page hidden">
+        <div class="container question-container">
+            <div class="question-header">
+                <span class="q-number">Q1.</span>
+                <h2>[투자 균형] 연락의 주도권은<br>누구에게 있습니까?</h2>
+            </div>
+            <div class="options">
+                <button class="option-btn" data-qa="Q1-A" data-score="0" data-answer="내가 먼저 보내지 않으면 대화가 이어지지 않는다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">A. 내가 먼저 보내지 않으면 대화가 이어지지 않는다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q1-B" data-score="3" data-answer="서로 주고받지만, 평균적으로 내가 더 자주 먼저 연락한다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">B. 서로 주고받지만, 평균적으로 내가 더 자주 먼저 연락한다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q1-C" data-score="5" data-answer="내가 답이 느리면 그녀가 확인/재촉 메시지를 보낸다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">C. 내가 답이 느리면 그녀가 확인/재촉 메시지를 보낸다.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="question-2" class="page hidden">
+        <div class="container question-container">
+            <div class="question-header">
+                <span class="q-number">Q2.</span>
+                <h2>[대체 가능성] 약속이 취소되었을 때<br>그녀의 반응은 어떻습니까?</h2>
+            </div>
+            <div class="options">
+                <button class="option-btn" data-qa="Q2-A" data-score="0" data-answer="취소 후 별도 제안 없이 대화가 느슨해진다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">A. 취소 후 별도 제안 없이 대화가 느슨해진다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q2-B" data-score="3" data-answer="미안하다고 하며 &quot;다음에 보자&quot;고 하지만, 구체적 날짜 제안은 없다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">B. 미안하다고 하며 "다음에 보자"고 하지만, 구체적 날짜 제안은 없다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q2-C" data-score="5" data-answer="대체 날짜·시간을 먼저 제안하며 일정을 맞추려 한다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">C. 대체 날짜·시간을 먼저 제안하며 일정을 맞추려 한다.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="question-3" class="page hidden">
+        <div class="container question-container">
+            <div class="question-header">
+                <span class="q-number">Q3.</span>
+                <h2>[우선순위] 그녀는 당신을 만나기 위해<br>시간과 노력을 투자합니까?</h2>
+            </div>
+            <div class="options">
+                <button class="option-btn" data-qa="Q3-A" data-score="0" data-answer="주로 내가 그녀 근처로 이동하고, 그녀 일정에 맞춘다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">A. 주로 내가 그녀 근처로 이동하고, 그녀 일정에 맞춘다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q3-B" data-score="3" data-answer="장소·시간을 서로 번갈아가며 조정한다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">B. 장소·시간을 서로 번갈아가며 조정한다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q3-C" data-score="5" data-answer="그녀가 먼저 내 일정을 물어보고, 자기 스케줄을 조정한다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">C. 그녀가 먼저 내 일정을 물어보고, 자기 스케줄을 조정한다.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="question-4" class="page hidden">
+        <div class="container question-container">
+            <div class="question-header">
+                <span class="q-number">Q4.</span>
+                <h2>[경계선 테스트] 그녀가 약속을 가볍게 대할 때<br>(지각, 답장 늦음 등) 당신은?</h2>
+            </div>
+            <div class="options">
+                <button class="option-btn" data-qa="Q4-A" data-score="0" data-answer="지각이나 답장 무시가 반복돼도 별 말 없이 넘어간다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">A. 지각이나 답장 무시가 반복돼도 별 말 없이 넘어간다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q4-B" data-score="2" data-answer="불편함을 표현하지만, 그 이후 실질적 변화는 없다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">B. 불편함을 표현하지만, 그 이후 실질적 변화는 없다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q4-C" data-score="5" data-answer="명확한 기준을 전달하고, 개선 안 되면 만남 빈도를 조정한다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">C. 명확한 기준을 전달하고, 개선 안 되면 만남 빈도를 조정한다.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="question-5" class="page hidden">
+        <div class="container question-container">
+            <div class="question-header">
+                <span class="q-number">Q5.</span>
+                <h2>[관심 방향] 그녀는 당신에게<br>주로 어떤 이야기를 합니까?</h2>
+            </div>
+            <div class="options">
+                <button class="option-btn" data-qa="Q5-A" data-score="0" data-answer="주로 자기 고민 이야기/하소연이 잦고, 나는 듣고 위로하는 역할이다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">A. 주로 자기 고민 이야기/하소연이 잦고, 나는 듣고 위로하는 역할이다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q5-B" data-score="3" data-answer="일상 고민을 나누지만, '우리 사이' 대화는 드물다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">B. 일상 고민을 나누지만, '우리 사이' 대화는 드물다.</span>
+                </button>
+                <button class="option-btn" data-qa="Q5-C" data-score="5" data-answer="나에 대한 질문이나 다음 만남 계획이 자주 오간다">
+                    <span class="check-icon"></span>
+                    <span class="option-text">C. 나에 대한 질문이나 다음 만남 계획이 자주 오간다.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-page" class="page hidden">
+        <div class="container loading-container">
+            <div class="loader">
+                <div class="spinner"></div>
+            </div>
+            <h2 class="loading-text">관계 패턴 분석 중...</h2>
+            <p class="loading-sub-text">당신의 무의식적 서열을 계산하고 있습니다.</p>
+        </div>
+    </div>
+
+    <div id="result-page" class="page hidden">
+        <div class="container result-container">
+            <div class="result-header">
+                <span class="result-label">DIAGNOSIS RESULT</span>
+                <h1 id="result-type-name" class="result-title">분석 결과</h1>
+                <div id="result-level-badge" class="level-badge">LEVEL --</div>
             </div>
 
-            <!-- 문제 제기 -->
-            <div class="content-block">
-                <h3 class="block-title">혹시... 당신의 이야기인가요?</h3>
-                <p class="block-subtitle">반복되는 연애 실패, 그 패턴에는 이유가 있습니다</p>
-                
-                <div class="problem-cards">
-                    <div class="pcard">
-                        <div class="pcard-emoji">😔</div>
-                        <h4>"착하다는 말만 들어요"</h4>
-                        <p>진심을 다해 잘해주지만 "착한데 매력은 없어"라는 말만 듣습니다. 대체 뭐가 문제일까요?</p>
-                    </div>
-                    <div class="pcard">
-                        <div class="pcard-emoji">😰</div>
-                        <h4>"마음에 드는 여자 앞에서 작아져요"</h4>
-                        <p>평소엔 괜찮은데 좋아하는 여성 앞에서는 어떻게 행동해야 할지 모르겠고 자신감이 사라집니다.</p>
-                    </div>
-                    <div class="pcard">
-                        <div class="pcard-emoji">😤</div>
-                        <h4>"어장관리에 당하는 것 같아요"</h4>
-                        <p>애매한 태도에 감정 소모가 심합니다. 나만 진심인 것 같고, 관계가 불안정합니다.</p>
-                    </div>
-                    <div class="pcard">
-                        <div class="pcard-emoji">😞</div>
-                        <h4>"친구로만 남아요"</h4>
-                        <p>좋은 사람, 편한 사람이라는 말만 듣고 관계가 진전되지 않습니다. 연애로 이어지지 않아요.</p>
-                    </div>
-                    <div class="pcard">
-                        <div class="pcard-emoji">😣</div>
-                        <h4>"주도권을 잡지 못해요"</h4>
-                        <p>연애가 시작되어도 끌려다니기만 합니다. 내가 원하는 관계를 만들지 못해요.</p>
-                    </div>
-                    <div class="pcard">
-                        <div class="pcard-emoji">🤔</div>
-                        <h4>"근본 원인을 모르겠어요"</h4>
-                        <p>왜 계속 실패하는지, 뭘 바꿔야 하는지 방향을 잡을 수가 없습니다.</p>
-                    </div>
+            <div class="score-container">
+                <div class="score-circle">
+                    <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true">
+                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="3"/>
+                        <path id="score-path" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#FF3B3B" stroke-width="3"/>
+                    </svg>
+                    <div id="total-score" class="score-value" aria-live="polite">0점</div>
                 </div>
+                <p class="score-label">관계 주도권 점수 (총 25점)</p>
             </div>
 
-            <!-- 문제 심화 -->
-            <div class="content-block agitation-block">
-                <h3 class="block-title-white">이대로 괜찮으신가요?</h3>
-                <p class="block-subtitle-white">이 문제를 해결하지 못하면...</p>
-                
-                <div class="consequence-list">
-                    <div class="consequence-item">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>계속되는 연애 실패</h4>
-                            <p>같은 패턴이 반복되고, 좋은 기회를 계속 놓치게 됩니다</p>
-                        </div>
-                    </div>
-                    <div class="consequence-item">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>시간과 감정의 낭비</h4>
-                            <p>의미 없는 관계에 에너지를 소진하고 자존감이 낮아집니다</p>
-                        </div>
-                    </div>
-                    <div class="consequence-item">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>진짜 원하는 여자와의 기회 상실</h4>
-                            <p>준비되지 않은 상태에서 좋은 사람을 만나도 관계를 만들 수 없습니다</p>
-                        </div>
-                    </div>
-                    <div class="consequence-item">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>자신감 상실과 회의감</h4>
-                            <p>"나는 안 되나봐"라는 생각에 도전조차 하지 않게 됩니다</p>
-                        </div>
-                    </div>
+            <div class="diagnosis-content">
+                <div class="core-problem-section">
+                    <h3>🚨 핵심 진단</h3>
+                    <p id="core-problem-text" class="highlight-text">
+                        </p>
                 </div>
 
-                <div class="urgency-message">
-                    <p class="urgent-text">지금 바꾸지 않으면, 1년 후에도 같은 자리에 있을 것입니다.</p>
-                    <p class="solution-teaser">하지만 <strong>근본적인 해결책</strong>이 있습니다.</p>
-                </div>
-            </div>
-
-            <!-- 해결책: 무료 전자책 vs 프레임 설계자 -->
-            <div class="content-block book-comparison-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 40px; color: white;">
-                <h3 class="block-title" style="color: white; font-size: 2rem; margin-bottom: 24px; text-align: center;">
-                    무료 전자책 『프레임 전쟁』이 <strong>'지도'</strong>라면,<br>
-                    <span style="background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 8px; display: inline-block; margin-top: 16px;">『프레임 설계자』는 <strong>'네비게이션'</strong>입니다</span>
-                </h3>
-                
-                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 40px; border-radius: 16px; margin-top: 32px;">
-                    <div class="book-comparison-grid" style="gap: 32px; margin-bottom: 32px;">
-                        <div style="background: rgba(0,0,0,0.2); padding: 32px; border-radius: 12px;">
-                            <h4 style="font-size: 1.5rem; margin-bottom: 16px; color: #ffd700;">📘 무료 전자책 『프레임 전쟁』</h4>
-                            <ul style="line-height: 2; color: rgba(255,255,255,0.9); list-style: none; padding: 0;">
-                                <li>✓ 착한 남자 프레임의 문제점 진단</li>
-                                <li>✓ 관계에서 지는 이유 깨닫기</li>
-                                <li>✓ 프레임의 개념과 중요성 이해</li>
-                                <li style="margin-top: 16px; color: #ffd700; font-weight: 600;">→ "목적지를 보여주는 지도"</li>
-                            </ul>
+                <div class="evidence-section">
+                    <h4>결정적 증거</h4>
+                    <div id="worst-answers-list" class="answer-list">
                         </div>
-                        
-                        <div style="background: linear-gradient(135deg, rgba(255,215,0,0.3) 0%, rgba(255,193,7,0.3) 100%); padding: 32px; border-radius: 12px; border: 3px solid #ffd700; position: relative;">
-                            <div style="position: absolute; top: -12px; right: 20px; background: #ff6b6b; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.9rem;">지금 여기!</div>
-                            <h4 style="font-size: 1.5rem; margin-bottom: 16px; color: #ffd700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">📕 마스터북 『프레임 설계자』</h4>
-                            <ul style="line-height: 2; color: white; font-weight: 600; list-style: none; padding: 0;">
-                                <li>✓ 구체적인 프레임 설계 시스템</li>
-                                <li>✓ 관계 주도권 확보 전략</li>
-                                <li>✓ 단계별 실전 적용 가이드</li>
-                                <li>✓ 내면 기준 확립 프로세스</li>
-                                <li style="margin-top: 16px; color: #ffd700; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">→ "당신을 목적지까지 안내하는 네비게이션"</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 24px; background: rgba(0,0,0,0.3); border-radius: 12px; line-height: 1.8;">
-                        <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px;">💡 지도만으로는 길을 찾기 어렵습니다</p>
-                        <p style="font-size: 1.3rem; color: #ffd700; font-weight: 800;">『프레임 설계자』는 당신을 정확한 목적지까지 안내하는 네비게이션입니다</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 해결책 제시 -->
-            <div class="content-block bg-light">
-                <h3 class="block-title">단순한 연애 기술이 아닌,<br>매력의 본질을 설계하십시오</h3>
-                <p class="block-subtitle">'프레임 설계자'는 피상적인 픽업 기술서가 아닙니다.<br>관계의 주도권을 잡고, 여자가 당신의 세계로 들어오게 만드는 근본 원리와 시스템적 이론을 다룹니다.</p>
-                
-                <div class="quote-box">
-                    <div class="quote-mark">"</div>
-                    <p class="quote-text">매력은 기술이 아니라 증거입니다.</p>
-                    <p class="quote-text">당신이 어떤 삶을 살고 있는가, 어떤 기준을 가지고 있는가가 여성의 무의식을 움직입니다.</p>
-                    <cite>- 박준 코치</cite>
                 </div>
 
-                <div class="framework-section">
-                    <h4 class="framework-title">매력 설계 프레임워크™</h4>
-                    <div class="framework-steps">
-                        <div class="fstep">
-                            <div class="fstep-number">STEP 01</div>
-                            <h5>내면 기준 확립</h5>
-                            <p>당신만의 확고한 앵커(기준)를 세워 흔들리지 않는 프레임을 만듭니다</p>
-                        </div>
-                        <div class="fstep">
-                            <div class="fstep-number">STEP 02</div>
-                            <h5>가치 증명</h5>
-                            <p>말이 아닌 삶으로 증명하는 매력의 실체를 구축합니다</p>
-                        </div>
-                        <div class="fstep">
-                            <div class="fstep-number">STEP 03</div>
-                            <h5>관계 프레임 설계</h5>
-                            <p>관계의 판을 당신이 직접 설계하고 주도하는 방법을 배웁니다</p>
-                        </div>
-                    </div>
+                <div class="empathy-section">
+                   <p class="empathy-text" id="empathy-message">
+                       </p>
                 </div>
-            </div>
 
-            <!-- 통계 섹션 추가 -->
-            <div class="content-block">
-                <h3 class="block-title">숫자로 증명된 변화</h3>
-                <p class="block-subtitle">데이터가 말하는 프레임 설계자의 힘</p>
-                
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-number" data-counter="10">10</div>
-                        <div class="stat-label">년 이상<br>검증된 시스템</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" data-counter="500">500</div>
-                        <div class="stat-label">명 이상<br>코칭 데이터</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" data-counter="82">82</div>
-                        <div class="stat-label">페이지<br>압축된 핵심</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" data-counter="3">3</div>
-                        <div class="stat-label">일 만에<br>1차 완판</div>
-                    </div>
+                <div class="future-section warning-box">
+                       <h4>⚠️ 이대로 시간이 흐르면...</h4>
+                       <p id="future-prediction">
+                           </p>
                 </div>
-            </div>
 
-            <!-- 전자책 내용 -->
-            <div class="content-block">
-                <h3 class="block-title">프레임 설계자, 무엇을 다루는가?</h3>
-                <p class="block-subtitle">10년 이상의 실전 경험과 수백 명의 코칭 데이터로 검증된 시스템</p>
+                <div class="solution-section">
+                    <!-- NEW "하지만 괜찮습니다" 멘트 -->
+                    <div id="pre-strategy-box">
+                        <span class="icon">✨</span>
+                        <h3>하지만 괜찮습니다.</h3>
+                        <p>다행히, 당신이 진단받은 이 문제는<br>전자책 『프레임 전쟁』에서 다루는</p>
+                        <span class="highlight">'관계 설계법' 3단계 훈련으로 100% 해결 가능합니다.</span>
+                    </div>
 
-                <div class="content-features">
-                    <div class="feature-box">
-                        <!-- 모바일: 접기/펼치기 -->
-                        <div class="mobile-collapsible">
-                            <div class="collapsible-header">
-                                <h4><i class="fas fa-book-open"></i> 핵심 이론 구성</h4>
-                                <i class="fas fa-chevron-down collapsible-icon"></i>
-                            </div>
-                            <div class="mobile-summary">
-                                <strong>5가지 핵심 시스템</strong>
-                                의도적 인식 모델, 프레임 전쟁, 길고양이 원리, 앵커 확립, 가치 증명
-                            </div>
-                        </div>
-                        
-                        <!-- 데스크톱: 항상 표시 -->
-                        <h4 class="mobile-hide-default" style="display: block;"><i class="fas fa-book-open"></i> 핵심 이론 구성</h4>
-                        
-                        <ul class="feature-list collapsible-content">
-                            <li><strong>의도적 인식 모델 3단계</strong><br>여성의 무의식을 움직이는 인식 설계의 3단계 메커니즘</li>
-                            <li><strong>프레임 전쟁의 이해</strong><br>모든 관계는 프레임 싸움입니다. 주도권을 잡는 프레임 설계 원리</li>
-                            <li><strong>길고양이 원리</strong><br>추격하지 않고 매력적으로 끌어당기는 근본 메커니즘</li>
-                            <li><strong>내면 기준(앵커) 확립법</strong><br>흔들리지 않는 남자가 되는 내면 시스템 구축</li>
-                            <li><strong>가치 증명 시스템</strong><br>말이 아닌 삶으로 증명하는 실전 매력 설계</li>
+                    <!-- 💡 맞춤 해결 전략 (이 영역은 JS에 의해 동적으로 채워집니다) -->
+                    <div id="custom-strategy-section">
+                        <!-- <h3>💡 맞춤 해결 전략</h3>
+                        <ul class="strategy-list">
+                            ...
+                        </ul> -->
+                    </div>
+
+                    <h3 class="prescription-title">당신을 위한 긴급 처방 (『프레임 전쟁』)</h3>
+                    <p class="prescription-intro">"당신의 "주도권 주저" 문제를 해결하기 위해 처방한 맞춤형 솔루션입니다. 이 챕터들이 당신을 상위 10%로 도약시킬 것입니다."</p>
+
+                    <div class="prescription-card">
+                        <div class="card-title">PART 1 - Chapter 2: 여자는 남자의 무엇에 끌리는가?</div>
+                        <div class="card-subtitle">가치 증명과 본능적 끌림</div>
+                        <div class="card-reason-title">이것이 왜 당신의 처방전인가?</div>
+                        <p class="card-reason-text">당신은 지금 "자기가치 인식"을 높이는 것이 가장 중요합니다. 이 챕터는 여자가 본능적으로 끌리는 남자의 5가지 특징을 과학적으로 분석하고, 당신이 "편한 친구"에서 "매력적인 남자"로 도약하는 구체적인 일상 습관을 알려줍니다.</p>
+                        <ul class="card-bullets">
+                            <li>여자가 본능적으로 끌리는 5가지 남자의 특징</li>
+                            <li>자기가치를 높이는 구체적인 일상 습관</li>
+                            <li>"좋은 사람"이 아닌 "특별한 사람"이 되는 법</li>
+                            <li>매력 포인트를 자연스럽게 드러내는 대화 기술</li>
+                            <li>가치 증명의 심리학: 왜 노력이 역효과를 낼까?</li>
                         </ul>
                     </div>
 
-                    <div class="comparison-box">
-                        <h4><i class="fas fa-exchange-alt"></i> Before & After</h4>
-                        <div class="comparison-grid">
-                            <div class="comp-before">
-                                <h5>현재 당신</h5>
-                                <ul>
-                                    <li>여성의 반응에 일희일비</li>
-                                    <li>착하지만 매력 없는 남자</li>
-                                    <li>관계에서 끌려다님</li>
-                                    <li>자신감 부족</li>
-                                    <li>반복되는 실패 패턴</li>
-                                </ul>
-                            </div>
-                            <div class="comp-arrow">→</div>
-                            <div class="comp-after">
-                                <h5>프레임 설계자 이후</h5>
-                                <ul>
-                                    <li>관계의 주도권을 쥔 남자</li>
-                                    <li>자신감 있고 매력적인 존재</li>
-                                    <li>흔들리지 않는 내면 기준</li>
-                                    <li>여성이 다가오는 프레임</li>
-                                    <li>원하는 관계를 설계하는 능력</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="toc-box">
-                    <!-- 모바일: 접기/펼치기 헤더 -->
-                    <div class="mobile-collapsible">
-                        <div class="collapsible-header">
-                            <h4>📖 주요 목차 미리보기</h4>
-                            <i class="fas fa-chevron-down collapsible-icon"></i>
-                        </div>
-                        <div class="mobile-summary">
-                            <strong>6개 파트, 18개 챕터</strong>
-                            매력의 본질부터 실전 적용까지, 체계적인 단계별 가이드
-                        </div>
-                    </div>
-                    
-                    <!-- 데스크톱: 항상 표시 -->
-                    <h4 class="mobile-hide-default" style="display: block;">📖 주요 목차 미리보기</h4>
-                    
-                    <div class="toc-list collapsible-content">
-                        <div class="toc-item"><strong>Prologue:</strong> 왜 당신의 '진심'은 그녀에게 '부담'이 될 뿐인가?</div>
-                        <div class="toc-item" style="opacity: 0.7; font-size: 0.9em; padding-left: 16px;">Case Study: 착하기만 했던 남자의 고백, 그리고 눈물</div>
-                        
-                        <div class="toc-item" style="margin-top: 16px;"><strong>Part 1. The Value:</strong> 모든 것은 가치에서 시작된다</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 1. 매력의 본질, 가치란 무엇인가?</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 2. 당신의 가치를 구성하는 3가지 기둥: Anchor, Proof, Frame</div>
-                        
-                        <div class="toc-item" style="margin-top: 16px;"><strong>Part 2. The Signal:</strong> 그녀의 진짜 속마음, 정확히 파악하는 법</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 3. 모든 전략의 시작점: 왜 그녀의 신호를 읽어야 하는가?</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 4. 그녀의 웃음 뒤에 숨겨진 진실: '가짜 호감'과 '진짜 호감' 구별법</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 5. 혹시 나만 진심인가? 15개 질문으로 끝내는 관계 진단 체크리스트</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 6. 골든타임의 법칙: 더 이상 관계가 발전하지 않는 이유</div>
-                        
-                        <div class="toc-item" style="margin-top: 16px;"><strong>Part 3. The Anchor:</strong> 모든 매력은 '나'로부터 시작된다</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 7. 주관의 역설 이론: 왜 '정답'을 따라 할수록 매력은 사라지는가?</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 8. 전략적 바운더리: 'NO'라고 말하는 남자가 더 매력적인 이유</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 9. 자기 개방의 힘: 어색한 연기를 끝내고 진정한 나를 드러내는 법</div>
-                        
-                        <div class="toc-item" style="margin-top: 16px;"><strong>Part 4. The Proof:</strong> 그녀는 당신의 말이 아닌, 당신의 '삶'을 본다</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 10. 길고양이 원리: 왜 노력할 수록 관계는 망가지는가?</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 11. 고비용 신호(High-Cost Signal) 전략: 당신의 '과정'이 매력이 되는 법</div>
-                        
-                        <div class="toc-item" style="margin-top: 16px;"><strong>Part 5. The Frame:</strong> 관계를 지배하는 3-Step 설계도</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 12. 고수와 초보를 가르는 결정적 차이, 프레임이란 무엇인가?</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 13. 1단계: 편안함 형성: 경계심의 벽을 허무는 편안함 설계</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 14. 2단계: 텐션극대화: '친구'를 넘어 '남자'로 새겨지는 3가지 기술</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 15. 3단계: 감정의 현실화: 고백 없이 관계를 안정화시키는 마지막 한 수</div>
-                        
-                        <div class="toc-item" style="margin-top: 16px;"><strong>Part 6. 프레임 마스터리:</strong> 지속 가능한 관계를 설계하는 기술</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 16. 궁극의 마인드셋: '유혹자'를 넘어서</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 17. 프레임의 진화: 신뢰와 존중의 새로운 균형</div>
-                        <div class="toc-item" style="padding-left: 16px;">Chapter 18. 최후의 설계자: 갈등을 지배하는 선택적 포커싱</div>
-                        
-                        <div class="toc-item" style="margin-top: 16px;"><strong>Epilogue:</strong> 이제 '게임의 설계자'가 되어라</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 저자 소개 -->
-            <div class="content-block bg-light">
-                <h3 class="block-title">누가 이걸 알려주는가?</h3>
-                <p class="block-subtitle">10년 이상의 시행착오와 검증, 그리고 진정성</p>
-                
-                <div class="author-box">
-                    <div class="author-avatar">
-                        <img src="images/coach-profile.jpg" alt="박준 코치 프로필" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                    </div>
-                    <div class="author-info">
-                        <h4>박준 코치</h4>
-                        <p class="author-role">연애 프레임 전문 코치 · 매력 설계 프레임워크™ 개발자</p>
-                        <ul class="author-credentials">
-                            <li><i class="fas fa-check-circle"></i> 10년 이상 실전 경험 및 연구</li>
-                            <li><i class="fas fa-check-circle"></i> 수백 명 1:1 코칭 진행</li>
-                            <li><i class="fas fa-check-circle"></i> 호스트바 경험을 통한 여성 심리 심층 분석</li>
-                            <li><i class="fas fa-check-circle"></i> 유튜브 채널 운영</li>
+                    <div class="prescription-card">
+                        <div class="card-title">PART 3 - Chapter 8: 당신의 세상에 여자를 초대하라</div>
+                        <div class="card-subtitle">대체 불가능한 남자의 태도</div>
+                        <div class="card-reason-title">이것이 왜 당신의 처방전인가?</div>
+                        <p class="card-reason-text">관계에서 주도권을 잡는 가장 강력한 방법은 "당신의 세계"를 먼저 만드는 것입니다. 이 챕터는 여자를 당신의 세계로 초대하는 풍요로운 마인드셋을 알려줍니다.</p>
+                        <ul class="card-bullets">
+                            <li>풍요로운 마인드셋(Abundance Mindset)의 핵심 원리</li>
+                            <li>"이 사람이 아니어도 괜찮다"는 여유의 힘</li>
+                            <li>당신의 세계를 만드는 5가지 실천 방법</li>
+                            <li>관계에서 주도권을 잡는 초대의 기술</li>
+                            <li>다양한 관계를 유지하며 매력을 배가시키는 전략</li>
                         </ul>
-                        <div class="author-story">
-                            <h5>저도 한때 '착한 남자'였습니다</h5>
-                            <p>10년 전, 저 역시 여성 앞에서 작아지고 관계에서 주도권을 잡지 못하는 남자였습니다. 수없이 실패하고, 감정을 소진하면서 깨달았습니다. <strong>"기술이 아니라 본질을 바꿔야 한다"</strong>는 것을요.</p>
-                            <p>그 후 10년간의 시행착오, 호스트바에서의 경험과 검증, 수백 명과의 상담을 통해 <strong>매력의 근본 원리</strong>를 발견했습니다. 이제 그 검증된 시스템을 여러분과 나누고자 합니다.</p>
-                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- 변화 프로세스 타임라인 -->
-            <div class="content-block">
-                <h3 class="block-title">당신의 변화 여정</h3>
-                <p class="block-subtitle">프레임 설계자와 함께하는 4단계 변화 프로세스</p>
-                
-                <div class="process-timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-icon">📖</div>
-                        <div class="timeline-content">
-                            <h4>1단계: 인식의 전환</h4>
-                            <p>착한 남자 프레임의 문제점을 정확히 진단하고, 왜 지금까지 실패했는지 근본 원인을 이해합니다. 단순한 기술이 아닌 본질적 변화의 필요성을 깨닫습니다.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-icon">🎯</div>
-                        <div class="timeline-content">
-                            <h4>2단계: 내면 기준 확립</h4>
-                            <p>흔들리지 않는 당신만의 앵커(기준)를 세웁니다. 여성의 반응에 일희일비하지 않고, 자신만의 확고한 프레임을 구축하는 단계입니다.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-icon">⚡</div>
-                        <div class="timeline-content">
-                            <h4>3단계: 실전 적용</h4>
-                            <p>매력 설계 프레임워크™를 실제 관계에 적용합니다. 의도적 인식 모델, 길고양이 원리 등 검증된 시스템을 단계별로 실천합니다.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-icon">👑</div>
-                        <div class="timeline-content">
-                            <h4>4단계: 프레임 마스터</h4>
-                            <p>관계의 주도권을 완전히 장악하고, 여성이 당신의 세계로 들어오게 만듭니다. 원하는 관계를 스스로 설계하는 진정한 '설계자'가 됩니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 실제 구매자 후기 (1차 판매) -->
-            <div class="content-block" style="background: #faf8f3; padding: 60px 40px;">
-                <!-- 가치 전이 브릿지 블록 (NEW) -->
-                <div style="background: linear-gradient(135deg, #f8f4ff 0%, #fff8f0 100%); border: 3px solid #9b59b6; border-radius: 20px; padding: 48px 40px; margin-bottom: 56px; box-shadow: 0 8px 32px rgba(155, 89, 182, 0.2);">
-                    <div style="text-align: center; margin-bottom: 32px;">
-                        <div style="display: inline-block; background: linear-gradient(135deg, #9b59b6 0%, #667eea 100%); color: white; padding: 8px 24px; border-radius: 24px; font-weight: 700; font-size: 0.938rem; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);">
-                            💎 가치의 증명
-                        </div>
-                        <h3 style="font-size: 2rem; font-weight: 800; color: #2c3e50; line-height: 1.4; margin-bottom: 24px;">
-                            극소수만 받는 <span style="color: #9b59b6;">'1:1 유료상담 및 프리미엄 코칭'</span>,<br>
-                            그 핵심 이론을 그대로 담았습니다
-                        </h3>
-                    </div>
-                    
-                    <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 32px;">
-                        <p style="font-size: 1.15rem; line-height: 1.9; color: #2c3e50; margin-bottom: 20px; text-align: center;">
-                            『프레임 설계자』는 단순히 오늘 만들어진 책이 아닙니다.<br>
-                            이미 <strong style="color: #9b59b6;">수백 명의 유료 상담자들</strong>이 관계의 주도권을 되찾도록 도왔던<br>
-                            <strong style="color: #667eea;">'박준 연애 이론'의 결정체</strong>입니다.
-                        </p>
-                    </div>
-                    
-                    <div class="coaching-comparison-grid" style="gap: 24px; align-items: center; max-width: 900px; margin: 0 auto 32px;">
-                        <div style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); color: white; padding: 32px 24px; border-radius: 16px; text-align: center; box-shadow: 0 6px 20px rgba(155, 89, 182, 0.3);">
-                            <div style="font-size: 2.5rem; margin-bottom: 12px;">💎</div>
-                            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">1:1 프리미엄 코칭</h4>
-                            <p style="font-size: 0.938rem; opacity: 0.95; line-height: 1.6;">개인 맞춤형<br><strong>'처방'</strong></p>
-                        </div>
-                        
-                        <div style="font-size: 2rem; color: #9b59b6; font-weight: 700;">=</div>
-                        
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 32px 24px; border-radius: 16px; text-align: center; box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);">
-                            <div style="font-size: 2.5rem; margin-bottom: 12px;">📕</div>
-                            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">프레임 설계자</h4>
-                            <p style="font-size: 0.938rem; opacity: 0.95; line-height: 1.6;">모든 처방의 기본<br><strong>'핵심 원리와 공식'</strong></p>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 28px; background: rgba(155, 89, 182, 0.08); border-radius: 12px; border: 2px dashed #9b59b6;">
-                        <p style="font-size: 1.15rem; font-weight: 700; color: #2c3e50; margin-bottom: 8px;">
-                            💡 이 검증된 이론을 먼저 경험한 분들의 실제 변화를 아래에서 확인하십시오.
-                        </p>
-                        <p style="font-size: 0.938rem; color: #6c757d; line-height: 1.7;">
-                            1차 구매자 후기 + 실제 프리미엄 코칭 성공 사례까지,<br>
-                            모든 증거를 생생하게 공개합니다.
-                        </p>
+                    <div class="prescription-card">
+                        <div class="card-title">PART 1 - Chapter 3: 어장 관리의 진실과 탈출법</div>
+                        <div class="card-subtitle">주도권을 되찾는 두 가지 전략</div>
+                        <div class="card-reason-title">이것이 왜 당신의 처방전인가?</div>
+                        <p class="card-reason-text">"나만 기다리고 있는 건 아닐까?" 이 불안감이 당신을 지배하고 있다면, 이 챕터가 해답입니다. 어장 관리에 당하지 않고 주도권을 되찾는 구체적인 전략을 제시합니다.</p>
+                        <ul class="card-bullets">
+                            <li>어장 관리의 심리학: 왜 당하게 되는가?</li>
+                            <li>불안과 집착에서 벗어나는 2가지 핵심 전략</li>
+                            <li>"답장 기다림"을 끝내는 마인드 전환법</li>
+                            <li>관계의 균형을 되찾는 구체적 행동 지침</li>
+                            <li>상대방이 오히려 당신을 궁금해하게 만드는 역전 기술</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- 실제 코칭/상담 후기 섹션 -->
-                <div style="margin-top: 56px;">
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #2c3e50; text-align: center; margin-bottom: 48px; line-height: 1.5;">
-                        💬 이론의 효과: 실제 코칭/상담 결과로 증명합니다
-                    </h3>
-
-                    <!-- 메인 후기 2x2 그리드 -->
-                    <div class="review-grid" style="gap: 32px; max-width: 1100px; margin: 0 auto 48px;">
-                        
-                        <!-- 후기 1: 즉각적 변화 -->
-                        <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                            <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(255,107,107,0.4);">
-                                🔥 즉각적 변화
-                            </div>
-                            <div style="margin-top: 20px; margin-bottom: 16px;">
-                                <img src="images/main-review-1.jpg" alt="즉각적 변화 후기" loading="lazy" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            </div>
-                            <div style="background: #fff5f5; padding: 20px; border-radius: 12px; border-left: 4px solid #ff6b6b;">
-                                <p style="font-size: 1.05rem; font-weight: 700; color: #ff6b6b; margin-bottom: 12px; line-height: 1.6;">
-                                    "형님한테 배운대로 했는데 너무 자연스럽게 번호도 받고!"
-                                </p>
-                                <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                    어제 형님한테 배운대로 했는데 <strong style="color: #ff6b6b;">너무 자연스럽게 번호도 받고</strong> 즐거운 시간 보냈어요. 와와와 감사합니다!
-                                </p>
-                                <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                    - 실제 코칭 수강생
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- 후기 2: 전문성/가치 인정 -->
-                        <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                            <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(155,89,182,0.4);">
-                                💎 압도적 가치
-                            </div>
-                            <div style="margin-top: 20px; margin-bottom: 16px;">
-                                <img src="images/main-review-2.jpg" alt="압도적 가치 인정 후기" loading="lazy" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            </div>
-                            <div style="background: #f8f4ff; padding: 20px; border-radius: 12px; border-left: 4px solid #9b59b6;">
-                                <p style="font-size: 1.05rem; font-weight: 700; color: #9b59b6; margin-bottom: 12px; line-height: 1.6;">
-                                    "정말 값어치의 몇십배 이상을 해주시는 것을 잘 알고있습니다"
-                                </p>
-                                <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                    시간에 비해 드리는 것은 정말 얼마되지도 않지만, <strong style="color: #9b59b6;">정말 값어치의 몇십배 이상을 해주시는 것을</strong> 잘 알고있습니다. 진심으로 깊이있게 대해주셔서 감사합니다.
-                                </p>
-                                <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                    - 실제 코칭 수강생
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- 후기 3: 내면 기준 확립 -->
-                        <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                            <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #27ae60 0%, #229954 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(39,174,96,0.4);">
-                                💡 내면 기준 확립
-                            </div>
-                            <div style="margin-top: 20px; margin-bottom: 16px;">
-                                <img src="images/main-review-3.jpg" alt="내면 기준 확립 후기" loading="lazy" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            </div>
-                            <div style="background: #f0fff4; padding: 20px; border-radius: 12px; border-left: 4px solid #27ae60;">
-                                <p style="font-size: 1.05rem; font-weight: 700; color: #27ae60; margin-bottom: 12px; line-height: 1.6;">
-                                    "기준이 점점 잡혀가네요... 진짜 답변 너무 감사합니다"
-                                </p>
-                                <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                    와...진짜 답변 너무 감사합니다ㅠㅠ <strong style="color: #27ae60;">기준이 점점 잡혀가네요..</strong> 흔들리지 않는 내면의 기준이 생기고 있습니다.
-                                </p>
-                                <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                    - 실제 코칭 수강생
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- 후기 4: 깊은 깨달음과 성장 -->
-                        <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                            <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(102,126,234,0.4);">
-                                ✨ 깊은 깨달음
-                            </div>
-                            <div style="margin-top: 20px; margin-bottom: 16px;">
-                                <img src="images/main-review-4.jpg" alt="깊은 깨달음 후기" loading="lazy" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            </div>
-                            <div style="background: #f8f4ff; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea;">
-                                <p style="font-size: 1.05rem; font-weight: 700; color: #667eea; margin-bottom: 12px; line-height: 1.6;">
-                                    "어떤 사람이 되어야겠구나 까지 생각하게 되는 유익한 시간"
-                                </p>
-                                <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                    코칭받으면서 <strong style="color: #667eea;">연애에 대해 새로운 시각을 얻게되면서</strong> '어떤 사람이 되어야겠구나' 까지 생각하게 되는 유익한 시간이었습니다. 자신감도 생긴것 같네요!
-                                </p>
-                                <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                    - 실제 코칭 수강생
-                                </p>
-                            </div>
-                        </div>
-
+                 <div id="cta-section" class="cta-section">
+                    <div class="urgency-message">
+                        <strong>이 지긋지긋한 서열 패턴을 끊을 유일한 기회</strong>
+                        <p>아래에 이름과 전화번호를 입력하시면,<br>『프레임 전쟁』 PDF를 문자로 즉시 보내드립니다.</p>
                     </div>
+                    
+                    <div class="form-container">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdCFid_aCtKhPB9sbErZLOl6f_VRm91zwdnVXxv2UpnPA-O-w/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">로드 중…</iframe>
+                    </div>
+                    
+                    <!-- NEW SOCIAL PROOF SECTION -->
+                    <div class="social-proof-section">
+                        <h4>"이걸 왜 무료로...?" 1,300+명이 극찬한 이유</h4>
+                        <div class="review-card">
+                            <blockquote>"솔직히 유료 강의 3개 듣는 것보다 나았습니다. 제가 왜 항상 '좋은 사람'으로만 끝났는지, 5분 만에 머리를 한 대 맞은 것 같네요."</blockquote>
+                            <footer>- 32세 정**님 (직장인)</footer>
+                        </div>
+                        <div class="review-card">
+                            <blockquote>"어장관리 당하던 이유를 알았습니다. '착한 남자' 프레임... 진짜 소름 돋았어요. 알려주신 대로 했더니 어제 그녀에게 먼저 연락 왔습니다."</blockquote>
+                            <footer>- 27세 이**님 (대학원생)</footer>
+                        </div>
+                        <p class="final-cta-text">
+                            당신도 1분 만에 '서열 역전'의 기회를 잡으세요.
+                        </p>
+                    </div>
+                    <!-- END OF NEW SOCIAL PROOF SECTION -->
 
-                    <!-- 펼치기 형식 더보기 섹션 -->
-                    <div style="text-align: center; margin-top: 24px; padding-bottom: 40px;">
-                        <button id="toggleReviewsBtn" onclick="toggleReviews()" style="display: inline-block; padding: 16px 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(102,126,234,0.3);">
-                            <span style="font-size: 1.3rem; margin-right: 8px;">🔥</span>
-                            더 많은 코칭/상담 실제 후기 확인하기 (4개)
-                            <span id="toggleIcon" style="margin-left: 8px; font-size: 0.9rem;">▼</span>
+                    <!-- NEW FINAL CHOICE SECTION -->
+                    <div class="final-choice-section">
+                        <div class="warning-box">
+                            <span class="icon">⚠️</span>
+                            <p><strong>지금 행동하지 않으면 같은 패턴이 반복됩니다</strong><br>
+                            이 진단 결과를 보고도 아무것도 하지 않는다면, 당신의 연애는 앞으로도 바뀌지 않습니다.</p>
+                        </div>
+                        
+                        <h3 class="choice-title">이 순간, 당신은 두 가지 선택을 할 수 있습니다.</h3>
+                        
+                        <div class="choice-container">
+                            <div class="choice-box danger">
+                                <span class="icon">✕</span>
+                                <h4>이대로 계속 살기</h4>
+                                <p>내일도, 모레도<br>똑같은 패턴 반복<br>또 다시 프렌드존</p>
+                            </div>
+                            <div class="choice-box success">
+                                <span class="icon">✓</span>
+                                <h4>지금 바로 바꾸기</h4>
+                                <p>3단계 시스템으로<br>완전히 다른 사람 되기<br>주도권 있는 매력남</p>
+                            </div>
+                        </div>
+
+                        <button class="final-cta-button" onclick="document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });">
+                            <span class="icon">📱</span>
+                            <div>
+                                <span class="text-main">지금 신청하고 무료 전자책 받기</span>
+                                <span class="text-sub">『프레임 전쟁』 PDF 다운로드 링크 문자 발송</span>
+                            </div>
                         </button>
                     </div>
+                    <!-- END OF FINAL CHOICE SECTION -->
 
-                    <!-- 펼쳐지는 후기 컨테이너 -->
-                    <div id="moreReviewsContainer" style="display: none; overflow: hidden; transition: all 0.4s ease; margin-top: 32px;">
-                        <div class="review-grid" style="gap: 32px; max-width: 1100px; margin: 0 auto; padding: 24px 0;">
-                            
-                            <!-- 추가 후기 1: 깊은 신뢰와 의지 -->
-                            <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                                <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(52,152,219,0.4);">
-                                    💙 깊은 신뢰
-                                </div>
-                                <div style="margin-top: 20px; margin-bottom: 16px;">
-                                    <img src="images/more-review-1.jpg" alt="깊은 신뢰 후기" loading="lazy" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                                </div>
-                                <div style="background: #ebf5fb; padding: 20px; border-radius: 12px; border-left: 4px solid #3498db;">
-                                    <p style="font-size: 1.05rem; font-weight: 700; color: #3498db; margin-bottom: 12px; line-height: 1.6;">
-                                        "박준님 없었으면 어떻게 버텼을까 상상도 안됩니다"
-                                    </p>
-                                    <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                        감사합니다 더운날 늦게까지 상담 해주셔서 ^^ <strong style="color: #3498db;">항상 진심어린 상담에 진짜 힘이 됩니다.</strong> 박준님 없었으면 어떻게 버텼을까 상상도 안됩니다..
-                                    </p>
-                                    <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                        - 실제 상담 수강생
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 추가 후기 2: 점진적 성장과 희망 -->
-                            <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                                <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(243,156,18,0.4);">
-                                    🌱 희망 발견
-                                </div>
-                                <div style="margin-top: 20px; margin-bottom: 16px;">
-                                    <img src="images/more-review-2.jpg" alt="희망 발견 후기" loading="lazy" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                                </div>
-                                <div style="background: #fef5e7; padding: 20px; border-radius: 12px; border-left: 4px solid #f39c12;">
-                                    <p style="font-size: 1.05rem; font-weight: 700; color: #f39c12; margin-bottom: 12px; line-height: 1.6;">
-                                        "막막함속에 희망도 생기고 발전하는거같습니다"
-                                    </p>
-                                    <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                        항상 너무 감사드립니다.. 긍정적인 것은 상담 통해서 조금씩조금씩 감을 잡으며 교정해나가는거 같습니다. <strong style="color: #f39c12;">그래서 이런 막막함속에 희망도 생기고</strong> 발전하는거같습니다.
-                                    </p>
-                                    <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                        - 실제 상담 수강생
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 추가 후기 3: 실전 적용 성공 -->
-                            <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                                <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(231,76,60,0.4);">
-                                    🎯 실전 적용
-                                </div>
-                                <div style="margin-top: 20px; margin-bottom: 16px;">
-                                    <img src="images/more-review-3.jpg" alt="실전 적용 성공 후기" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                                </div>
-                                <div style="background: #fadbd8; padding: 20px; border-radius: 12px; border-left: 4px solid #e74c3c;">
-                                    <p style="font-size: 1.05rem; font-weight: 700; color: #e74c3c; margin-bottom: 12px; line-height: 1.6;">
-                                        "형님말대로 했더니 오늘 경험했어요 ㅎㅎ"
-                                    </p>
-                                    <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                        형님말대로 대화할때 가하지 않고, 상대가 말할 수 있도록 알아가려 하가보니, <strong style="color: #e74c3c;">오늘 경험했어요 ㅎㅎ</strong> 감사합니다.
-                                    </p>
-                                    <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                        - 실제 코칭 수강생
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 추가 후기 4: 진심 어린 감사 -->
-                            <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; position: relative;">
-                                <div style="position: absolute; top: -12px; left: 24px; background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 0.875rem; box-shadow: 0 4px 12px rgba(233,30,99,0.4);">
-                                    💝 진심 어린 감사
-                                </div>
-                                <div style="margin-top: 20px; margin-bottom: 16px;">
-                                    <img src="images/more-review-4.jpg" alt="진심 어린 감사 후기" style="width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                                </div>
-                                <div style="background: #fce4ec; padding: 20px; border-radius: 12px; border-left: 4px solid #e91e63;">
-                                    <p style="font-size: 1.05rem; font-weight: 700; color: #e91e63; margin-bottom: 12px; line-height: 1.6;">
-                                        "감사합니다 :) 굿밤되세요 ❤️"
-                                    </p>
-                                    <p style="font-size: 0.938rem; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">
-                                        코칭에 대한 감사의 마음을 담아 <strong style="color: #e91e63;">직접 선물까지 보내주신 수강생</strong>. 단순한 만족을 넘어 진심으로 감사하는 마음이 전해집니다.
-                                    </p>
-                                    <p style="font-size: 0.875rem; color: #6c757d; font-style: italic;">
-                                        - 실제 코칭 수강생
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 왜 지금 신청해야 하는가 -->
-            <div class="content-block">
-                <h3 class="block-title">왜 지금 얼리버드 알림을 신청해야 하는가?</h3>
-                
-                <div class="reason-cards">
-                    <div class="reason-card">
-                        <div class="reason-icon">💰</div>
-                        <h4>마지막 3만 원대 가격</h4>
-                        <p>39,000원은 2차 판매 얼리버드 특가입니다. 3차 판매부터 가격이 인상되며, 이 가격은 다시 돌아오지 않습니다.</p>
-                    </div>
-                    <div class="reason-card">
-                        <div class="reason-icon">🎁</div>
-                        <h4>5만 원 1:1 컨설팅</h4>
-                        <p>당신의 가장 절실한 고민을 저자가 직접 진단하고 답해드리는 맞춤형 컨설팅. 2차 판매 기간에만 무료 제공됩니다.</p>
-                    </div>
-                    <div class="reason-card">
-                        <div class="reason-icon">⏰</div>
-                        <h4>한정 기회</h4>
-                        <p>2차 판매는 단기간만 진행됩니다. 이 기회를 놓치면 모든 혜택이 완전히 닫힙니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 최종 사전예약 섹션 -->
-    <section class="section-order" id="order">
-        <div class="container-narrow">
-            <div class="order-box">
-                <h2 class="order-title">당신 앞에는 두 갈래의 길이 있습니다</h2>
-                <p class="order-subtitle">이곳에 머물 것인가, 아니면 가치를 알아본 소수만이 들어설 수 있는<br>'설계자'의 세계로 진입할 것인가.</p>
-
-                <div class="order-comparison">
-                    <div class="order-col order-no">
-                        <h3>❌ 이곳에 머무르면...</h3>
-                        <ul>
-                            <li>1년 후에도 같은 실패 패턴 반복</li>
-                            <li>3차 판매부터 가격 인상 (더 비싼 가격)</li>
-                            <li>5만 원 상당 1:1 맞춤형 컨설팅 기회 상실</li>
-                            <li>특별 혜택 3가지 모두 놓침</li>
-                            <li>자존감은 더 낮아지고 회의감만 커짐</li>
-                        </ul>
-                    </div>
-                    <div class="order-col order-yes">
-                        <h3>✅ '설계자'의 세계로 진입하면...</h3>
-                        <ul>
-                            <li>오늘부터 근본적인 변화 시작</li>
-                            <li>마지막 3만 원대 가격 39,000원에 확정</li>
-                            <li>5만 원 상당 1:1 컨설팅 무료 획득</li>
-                            <li>누구보다 먼저 '설계자' 되기</li>
-                            <li>관계의 주도권을 잡는 시스템 획득</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="order-final-price">
-                    <div class="fp-label">2차 판매 얼리버드 특가 (선착순 한정)</div>
-                    <div class="fp-comparison">
-                        <div class="fp-original">정가 59,000원</div>
-                        <div class="fp-arrow">→</div>
-                        <div class="fp-sale">
-                            <span class="fp-number">39,000원</span>
-                            <span class="fp-badge">33% 할인</span>
-                        </div>
-                    </div>
-                    <div style="text-align: center; margin-top: 20px; padding: 16px; background: rgba(255,107,107,0.1); border-radius: 12px; border: 2px dashed #ff6b6b;">
-                        <p style="font-size: 1rem; font-weight: 700; color: #ff6b6b; margin: 0;">
-                            🔥 이 가격과 혜택은 2차 판매 기간에만 유효합니다
-                        </p>
-                    </div>
-                </div>
-
-                <a href="https://forms.gle/NV48UJr26LYYtDJL8" target="_blank" class="btn-final-purchase">
-                    [ 얼리버드 할인 알림 신청하기 (무료) ]
-                </a>
-                
-                <!-- 사전예약 프로세스 설명 (NEW) -->
-                <div style="margin-top: 24px; padding: 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);">
-                    <div style="text-align: center; margin-bottom: 24px;">
-                        <div style="display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 24px; font-weight: 700; font-size: 0.938rem; margin-bottom: 16px; color: white;">
-                            📢 사전예약이란?
-                        </div>
-                        <h4 style="color: white; font-size: 1.4rem; font-weight: 800; margin: 0 0 12px 0; line-height: 1.4;">
-                            지금은 <strong style="border-bottom: 2px solid white;">결제가 아닌 알림 신청</strong>만 하시면 됩니다
-                        </h4>
-                        <p style="color: rgba(255,255,255,0.95); font-size: 1rem; line-height: 1.7;">
-                            2차 판매는 <strong style="color: #ffd93d;">단 5일간만</strong> 진행됩니다. (날짜 미정)<br>
-                            알림을 받지 못하거나, 완판되어 놓치는 것을 방지하기 위해 <strong>지금 사전예약</strong>을 하셔야 합니다.
-                        </p>
-                    </div>
-                    
-                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 24px; border-radius: 12px; margin-bottom: 20px;">
-                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #667eea;">
-                                1
-                            </div>
-                            <div style="flex: 1;">
-                                <h5 style="color: white; font-size: 1.1rem; font-weight: 700; margin: 0 0 4px 0;">지금: 사전예약 신청 (무료)</h5>
-                                <p style="color: rgba(255,255,255,0.9); font-size: 0.938rem; margin: 0; line-height: 1.6;">결제 없이 30초만에 예약 완료. 부담 제로.</p>
-                            </div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #667eea;">
-                                2
-                            </div>
-                            <div style="flex: 1;">
-                                <h5 style="color: white; font-size: 1.1rem; font-weight: 700; margin: 0 0 4px 0;">2차 판매 시작: 우선 구매 안내</h5>
-                                <p style="color: rgba(255,255,255,0.9); font-size: 0.938rem; margin: 0; line-height: 1.6;">예약자에게만 가장 먼저 구매 링크 발송. 선착순 확정.</p>
-                            </div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 16px;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #667eea;">
-                                3
-                            </div>
-                            <div style="flex: 1;">
-                                <h5 style="color: white; font-size: 1.1rem; font-weight: 700; margin: 0 0 4px 0;">그때 결정: 구매 또는 취소</h5>
-                                <p style="color: rgba(255,255,255,0.9); font-size: 0.938rem; margin: 0; line-height: 1.6;">안내받고 그때 구매 여부 결정. 부담 없이 취소 가능.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 20px; background: rgba(255,215,0,0.2); border-radius: 12px; border: 2px dashed rgba(255,215,0,0.5);">
-                        <p style="color: white; font-size: 1.05rem; font-weight: 700; margin: 0; line-height: 1.7;">
-                            ⚡ 지금 예약하셔도 <strong style="color: #ffd93d;">결제는 하지 않습니다</strong><br>
-                            <span style="font-size: 0.938rem; opacity: 0.95;">단지 5일간의 판매 기간을 놓치지 않기 위한 알림 신청일 뿐입니다.</span>
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- 환불 보장 - 위험 제거 장치 -->
-                <div style="margin-top: 16px; padding: 24px; background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); border-radius: 16px; box-shadow: 0 4px 16px rgba(39,174,96,0.2);">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 12px;">
-                        <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: white;"></i>
-                        <div>
-                            <h4 style="color: white; font-size: 1.5rem; font-weight: 800; margin: 0;">100% 환불 보장</h4>
-                            <p style="color: rgba(255,255,255,0.9); font-size: 1rem; margin: 4px 0 0 0;">묻지도 따지지도 않습니다</p>
-                        </div>
-                    </div>
-                    <p style="color: white; text-align: center; font-size: 1.05rem; line-height: 1.7; font-weight: 500;">
-                        구매 후 <strong style="font-size: 1.2rem; border-bottom: 2px solid white;">24시간 이내</strong>에는 <strong>어떤 사유로든 100% 환불</strong>이 가능합니다.<br>
-                        환불 요청 시 별도의 사유 설명 없이 <strong>즉시 처리</strong>됩니다.<br>
-                        <span style="font-size: 0.938rem; opacity: 0.9;">※ 당신이 책임질 것은 오직 "30초의 결정"뿐입니다.</span>
+                    <p class="cta-guarantee">
+                        ✓ 100% 무료 제공 &nbsp;&nbsp; ✓ 개인정보 보호
                     </p>
-                </div>
-                
-                <p style="text-align: center; margin-top: 16px; font-size: 0.938rem; color: #6c757d;">
-                    ※ 선착순 한정 수량 · 얼리버드 33% 할인 혜택
-                </p>
-
-                <div class="order-special-note" style="background: #f8f9fa; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
-                    <p style="font-size: 0.938rem; line-height: 1.8; color: #6c757d; margin-bottom: 16px; text-align: center;">
-                        ※ 보내주신 소중한 정보는 사전예약 안내 목적으로만 사용됩니다.
-                    </p>
-                    <p style="font-size: 1rem; font-weight: 600; color: #2c3e50; text-align: center; line-height: 1.8; margin-bottom: 12px;">
-                        단 30초만 투자하여 아래 정보를 남기고,<br>
-                        인생의 주도권을 가져올 압도적인 혜택을 선점하세요.
-                    </p>
-                    <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); padding: 16px; border-radius: 8px; border-left: 4px solid #667eea;">
-                        <p style="font-size: 0.938rem; font-weight: 700; color: #667eea; text-align: center; margin: 0; line-height: 1.6;">
-                            💎 지금은 결제가 아닌 <strong>예약 신청만</strong> 하시면 됩니다<br>
-                            <span style="font-size: 0.875rem; color: #6c757d; font-weight: 500;">2차 판매 시작 시 우선 구매 안내 발송</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="order-info">
-                    <p><i class="fas fa-fire"></i> 1차 판매는 3일 만에 전량 완판되었습니다</p>
-                    <p><i class="fas fa-lock"></i> 지금은 결제 없는 알림 신청 · 개인정보 보호</p>
-                    <p><i class="fas fa-bell"></i> 2차 판맨 시작 시 우선 알림 발송</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ 섹션 -->
-    <section class="section-faq" id="qa">
-        <div class="container-narrow">
-            <div class="section-tab">
-                <h2>자주 묻는 질문</h2>
-            </div>
-
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>전자책 분량은 어느 정도인가요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <p>총 82페이지의 압축된 핵심 내용으로 구성되어 있으며, 10년 이상의 경험과 수백 명의 코칭 데이터를 바탕으로 한 실전 이론서입니다. 군더더기 없이 오직 실전에 필요한 원리와 적용법만 담았습니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>전자책은 어떤 형태로 제공되나요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <p>PDF 파일 형태로 제공되며, 사전예약 완료 시 이메일로 다운로드 링크가 발송됩니다. 스마트폰, 태블릿, PC 등 모든 기기에서 열람 가능합니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>업데이트는 얼마나 자주 이루어지나요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <p>지속적으로 콘텐츠가 추가 및 개선됩니다. 새로운 케이스 스터디, 심화 이론, 실전 적용 사례 등이 업데이트되며, 사전예약 구매자는 모든 업데이트를 평생 무료로 받으실 수 있습니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>얼리버드 알림 신청은 지금 결제하는 건가요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <p><strong>아닙니다. 지금은 결제가 전혀 이루어지지 않습니다.</strong> 얼리버드 알림 신청은 2차 판매가 시작될 때 가장 먼저 구매 안내를 받기 위한 것입니다. 2차 판매는 단기간만 진행되기 때문에, 알림을 받지 못하거나 완판되어 구매하지 못하는 것을 방지하기 위한 것입니다. 알림 신청을 하시면 판매 시작 시 우선 구매 링크를 받으시고, 그때 구매 여부를 결정하시면 됩니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>환불 정책은 어떻게 되나요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <p>구매 후 <strong>24시간 이내</strong>에는 어떤 사유로든 100% 환불이 가능합니다. 환불 요청 시 별도의 사유 설명 없이 즉시 처리됩니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>어떤 사람에게 가장 도움이 되나요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <div>
-                                <p><strong>이런 분들에게 강력히 추천합니다:</strong></p>
-                                <ul style="margin-top: 12px; line-height: 1.8;">
-                                    <li>• "착하다"는 소리만 듣고 매력이 없다고 느끼시는 분</li>
-                                    <li>• 좋아하는 여성 앞에서 자신감을 잃는 분</li>
-                                    <li>• 어장 관리나 애매한 관계에 감정 소모가 심한 분</li>
-                                    <li>• 관계에서 주도권을 잡지 못하고 끌려다니는 분</li>
-                                    <li>• 단순 기술이 아닌 근본적인 변화를 원하는 분</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>다른 연애 교육과 뭐가 다른가요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <p>대부분의 연애 콘텐츠는 피상적인 멘트나 기술만 알려줍니다. '프레임 설계자'는 <strong>왜 그런지, 여성의 무의식이 어떻게 작동하는지</strong>를 근본부터 이해시켜 어떤 상황에서도 응용 가능한 원리를 제공합니다. 10년 이상의 실전 경험과 호스트바 경험, 수백 명 코칭 데이터로 검증된 시스템입니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">
-                        <span class="faq-icon">Q</span>
-                        <h3>2차 판매는 언제 시작되나요?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-a">
-                        <div class="faq-a-content">
-                            <span class="faq-icon">A</span>
-                            <p>2차 판매는 날짜 미정이며, 시작되면 <strong>단기간만</strong> 진행됩니다. 얼리버드 알림 신청자에게는 판매 시작 즉시 알림이 발송되며 우선 구매 기회가 제공됩니다. 얼리버드 특가 39,000원은 2차 판매 기간에만 적용되며, 3차 판매부터는 정가 59,000원으로 판매됩니다. 1차 판매는 이미 전량 완판되었고, 지금이 마지막 3만 원대 가격으로 구매할 수 있는 기회입니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 푸터 -->
-    <footer class="footer">
-        <div class="container-narrow">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>프레임 설계자</h3>
-                    <p>관계의 주도권을 잡는 근본적인 변화</p>
-                </div>
-                <div class="footer-links">
-                    <h4>고객 지원</h4>
-                    <ul>
-                        <li><a href="mailto:support@example.com">이메일 문의</a></li>
-                        <li><a href="#">환불 정책</a></li>
-                        <li><a href="#">개인정보처리방침</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h4>소셜 미디어</h4>
-                    <div class="social-icons">
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Blog"><i class="fas fa-blog"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 박준 코치. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- 하단 고정 사전예약 바 -->
-    <div class="sticky-purchase-bar" id="stickyBar">
-        <div class="container">
-            <div class="sticky-inner">
-                <div class="sticky-left">
-                    <div class="sticky-product">[2차 얼리버드] 프레임 설계자</div>
-                    <div class="sticky-price">
-                        <span class="sticky-original">59,000원</span>
-                        <span class="sticky-sale">39,000원</span>
-                    </div>
-                </div>
-                <div class="sticky-right">
-                    <div class="sticky-timer" style="color: #ff6b6b; font-weight: 700; font-size: 0.875rem;">🔥 얼리버드 할인 + 1:1 컨설팅</div>
-                    <a href="https://forms.gle/NV48UJr26LYYtDJL8" target="_blank" class="sticky-btn">알림 신청 (무료)</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/script.js?v=1.5.4&t=202501020900"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // =========================================
+            // 1. 진단 상태 관리 (State Management)
+            // =========================================
+            const state = {
+                currentQuestion: 0,
+                totalQuestions: 5,
+                answers: [], // { questionId, score, answerText } 저장
+                totalScore: 0,
+                hasZeroPointAnswer: false // 치명적 약점(0점) 체크용 플래그
+            };
+
+            // =========================================
+            // 2. 진단 결과 데이터 (Diagnosis Data)
+            // =========================================
+            const diagnosticResults = {
+                // 🥉 LEVEL 3: 보험 (0~9점)
+                level3: {
+                    level: 'LEVEL 3',
+                    name: '🥉 보험 (The Insurance)',
+                    badgeColor: '#FF3B3B', // 위험 레드
+                    coreProblem: '당신은 <strong>\'🥉 보험 (The Insurance)\'</strong>으로 진단되었습니다. 핵심 이유는 그녀에게 \'가장 쉬운 남자\'로 인식되어, 당신의 진심과 헌신이 당연하게 여겨지기 때문입니다. 이 패턴은 당신의 가치를 스스로 깎아내리고 있습니다.',
+                    empathy: '이 결과가 불편하실 수 있습니다. 하지만 이것은 당신의 인격이 아닌, <strong>반복되는 \'패턴\'</strong>을 진단한 것입니다. 당신의 순수한 진심이 잘못된 전략을 만나, 늘 \'가장 쉬운 남자\'로 인식되게 만들고 있습니다.',
+                    prediction: '<strong>(단기)</strong> 지금처럼 헌신하면 그녀는 당신을 \'편한 사람\'으로만 남겨둘 것입니다. <strong>(장기)</strong> 이 패턴이 고착화되면, 앞으로 만날 모든 관계에서 \'헌신하다 헌신짝\' 되는 비극적인 역사가 반복될 확률이 매우 높습니다.',
+                    customStrategy: `
+                        <h3>💡 맞춤 해결 전략 (Level 3: 보험)</h3>
+                        <p class="strategy-intro">당신은 '헌신'과 '희생'이 사랑이라 믿었지만, 그녀는 그것을 <strong>'당연함'</strong>으로 받아들였습니다. 이 패턴을 깨기 위해선, <strong>'친절한 거절'</strong>과 <strong>'자기중심적 시간표'</strong>가 시급합니다.</p>
+                        <ul class="strategy-list">
+                            <li><strong>'즉시 답장' 금지:</strong> 그녀의 연락에 1시간 뒤, 3시간 뒤로 답장 시간을 의도적으로 늦춰 '당신도 바쁜 사람'임을 각인시키세요.</li>
+                            <li><strong>'선약' 만들기:</strong> 그녀가 갑자기 불러도 "미안, 오늘은 선약이 있어."라고 말하는 연습이 필요합니다. 당신의 시간을 되찾아야 합니다.</li>
+                            <li><strong>'감정 쓰레기통' 거부:</strong> 그녀의 하소연을 10분 이상 들어주지 마세요. "그건 네가 현명하게 잘 해결할 거야."라고 말하고 화제를 돌리세요.</li>
+                        </ul>`
+                },
+                // 🥈 LEVEL 2: 후보 선수 (10~19점 or 강등된 20점 이상)
+                level2: {
+                    level: 'LEVEL 2',
+                    name: '🥈 후보 선수 (The Candidate)',
+                    badgeColor: '#FF9800', // 경고 오렌지
+                    coreProblem: '당신은 <strong>\'🥈 후보 선수 (The Candidate)\'</strong>로 진단되었습니다. 핵심 이유는 관계를 주도할 \'결정적인 임팩트\'가 부족하기 때문입니다. \'좋은 사람\'에서 멈추어, 그녀의 무의식에 \'이 남자를 놓치면 안 된다\'는 위기감을 심어주지 못하고 있습니다.',
+                    empathy: '당신은 충분히 매력적입니다. 하지만 상대 무의식에 “지금 놓치면 손해”라는 강력한 신호를 주지 못하고 있습니다.',
+                    prediction: '<strong>(단기)</strong> 그녀는 당신을 \'괜찮은 옵션\' 정도로만 생각하며 계속 다른 대안을 탐색할 것입니다. <strong>(장기)</strong> 결정적인 순간에 항상 당신보다 더 매력적이거나 적극적인 경쟁자에게 밀려, 연애의 \'결정권\'을 평생 상대에게 넘겨주게 될 수 있습니다.',
+                    customStrategy: `
+                        <h3>💡 맞춤 해결 전략 (Level 2: 후보)</h3>
+                        <p class="strategy-intro">'좋은 사람'이지만 '매력적인 남자'는 아니었습니다. 그녀는 당신을 '안전'하다고 느끼지만 '설렌다'고 느끼진 않습니다. <strong>'예측 불가능성'</strong>과 <strong>'감정의 낙차'</strong>가 필요합니다.</p>
+                        <ul class="strategy-list">
+                            <li><strong>'착한 남자' 가면 벗기:</strong> 그녀의 의견에 무조건 동의하지 마세요. "난 그 생각 좀 달라."라고 당신의 주관을 뚜렷이 밝혀야 '남자'로 보입니다.</li>
+                            <li><strong>'감정의 낙차' 만들기:</strong> 한없이 다정하다가도, 한 번은 일에 집중하느라 무심한 모습을 보여주세요. 이 '낙차'가 그녀를 혼란스럽고 매달리게 만듭니다.</li>
+                            <li><strong>'경쟁자' 암시:</strong> "주말에 재밌는 일이 있었다" 정도로만 말하고 구체적으로 설명하지 마세요. 그녀가 "혹시 다른 여자?"라고 상상하게 만드는 것이 핵심입니다.</li>
+                        </ul>`
+                },
+                // 🥇 LEVEL 1: 1순위 (20~25점 & 0점 답변 없음)
+                level1: {
+                    level: 'LEVEL 1',
+                    name: '🥇 1순위 (The Priority)',
+                    badgeColor: '#4CAF50', // 안전 그린
+                    coreProblem: '당신은 <strong>\'🥇 1순위 (The Priority)\'</strong>로 진단되었습니다. 핵심 이유는 그녀가 당신의 가치를 높게 평가하고, 관계의 주도권을 당신이 쥐고 있기 때문입니다. 당신은 \'놓치면 안 될 남자\'로 명확히 인식되고 있습니다.',
+                    empathy: '축하합니다. 이 흐름을 유지·확장하면 더 높은 기준의 매칭에도 통합니다.',
+                    prediction: '<strong>(단기)</strong> 현재의 안정적인 주도권을 즐기며 관계를 더 깊게 발전시킬 수 있습니다. <strong>(장기)</strong> 이 성공 패턴을 \'프레임 전쟁\'의 원리로 체계화한다면, 앞으로 어떤 상대를 만나든 관계의 질과 당신의 선택권이 함께 상승하는 선순환을 만들 수 있습니다.',
+                    customStrategy: `
+                        <h3>💡 맞춤 해결 전략 (Level 1: 1순위)</h3>
+                        <p class="strategy-intro">당신은 이미 주도권을 가졌습니다. 하지만 '1순위'는 영원하지 않습니다. 그녀는 당신을 <strong>'테스트'</strong>하며 이 서열을 뒤집으려 할 것입니다. <strong>'유지'</strong>와 <strong>'관계 리드'</strong>가 당신의 과제입니다.</p>
+                        <ul class="strategy-list">
+                            <li><strong>'유지'가 아닌 '확장':</strong> 현재에 안주하면 그녀는 금방 지루해합니다. 함께 새로운 것을 배우거나, 당신의 더 큰 목표를 공유하며 '존경심'을 유지시켜야 합니다.</li>
+                            <li><strong>'그녀의 테스트' 통과하기:</strong> 그녀가 갑자기 짜증을 내거나 트집을 잡는다면, 그것은 당신의 '경계선'을 시험하는 것입니다. 감정적으로 반응하지 말고, "네가 화난 건 알겠지만, 그렇게 말하는 건 아니지."라고 '프레임'을 유지하세요.</li>
+                            <li><strong>'당신의 세상'으로 초대:</strong> 그녀에게 맞추는 데이트가 아닌, 당신의 취미, 일, 친구들을 '당신의 세상'으로 초대하세요. 그녀가 당신의 세계에 물들게 해야 합니다.</li>
+                        </ul>`
+                }
+            };
+
+            // =========================================
+            // 3. 핵심 로직 함수 (Core Logic)
+            // =========================================
+
+            // 3-1. 답변 처리 및 다음 질문 이동
+            window.handleAnswer = function(score, answerText) {
+                const currentQ = state.currentQuestion; // 0-indexed
+                score = parseInt(score);
+
+                // 상태 업데이트
+                state.answers.push({ questionId: currentQ + 1, score: score, answerText: answerText });
+                state.totalScore += score;
+                if (score === 0) state.hasZeroPointAnswer = true; // 0점 답변 체크
+
+                // 다음 단계로
+                if (currentQ < state.totalQuestions - 1) {
+                    showQuestion(currentQ + 1);
+                } else {
+                    showLoadingAndResult();
+                }
+            };
+
+            // 3-2. 질문 페이지 표시
+            function showQuestion(questionIndex) { // 0-indexed
+                hideAllPages();
+                const nextPage = document.getElementById(`question-${questionIndex + 1}`);
+                if (nextPage) {
+                    nextPage.classList.remove('hidden');
+                    nextPage.classList.add('active');
+                    state.currentQuestion = questionIndex;
+                    updateProgressBar(questionIndex + 1);
+                }
+            }
+
+            // 3-3. 로딩 후 결과 계산 및 표시
+            function showLoadingAndResult() {
+                hideAllPages();
+                document.getElementById('loading-page').classList.remove('hidden');
+                document.getElementById('progress-bar').classList.add('hidden');
+
+                setTimeout(() => {
+                    calculateAndRenderResult();
+                    document.getElementById('loading-page').classList.add('hidden');
+                    document.getElementById('result-page').classList.remove('hidden');
+                    document.getElementById('result-page').classList.add('active'); // active 추가
+                }, 2500); // 2.5초 로딩 연출
+            }
+
+            // 3-4. 결과 계산 및 렌더링 (핵심!)
+            function calculateAndRenderResult() {
+                let resultData;
+                const score = state.totalScore;
+                
+                // 원본 데이터를 복제하여 수정 (강등 메시지 등)
+                let level3Data = { ...diagnosticResults.level3 };
+                let level2Data = { ...diagnosticResults.level2 };
+                let level1Data = { ...diagnosticResults.level1 };
+
+
+                // 레벨 판정 로직 (최종 확정안 반영: 0~9 / 10~19 / 20~25)
+                if (score <= 9) {
+                    resultData = level3Data; // 보험 (0~9)
+                } else if (score <= 19) {
+                    resultData = level2Data; // 후보 (10~19)
+                } else {
+                    // 20점 이상이지만 0점 답변이 있는 경우 -> 강등
+                    if (state.hasZeroPointAnswer) {
+                        resultData = level2Data; // 강등된 후보
+                        // 강등 안내 메시지 추가
+                        resultData.coreProblem = '총점은 높지만, <strong>치명적인 약점(0점 답변)</strong> 때문에 \'후보\'로 강등되었습니다. ' + resultData.coreProblem;
+                    } else {
+                        resultData = level1Data; // 1순위 (20~25 & No 0점)
+                    }
+                }
+
+                // DOM 렌더링
+                renderResultPage(resultData, score);
+            }
+
+            // 3-5. 결과 페이지 DOM 업데이트
+            function renderResultPage(data, score) {
+                // 기본 정보
+                document.getElementById('result-type-name').innerHTML = data.name;
+                document.getElementById('result-level-badge').textContent = data.level;
+                document.getElementById('result-level-badge').style.backgroundColor = data.badgeColor;
+                document.getElementById('total-score').textContent = `${score}점`;
+
+                // 원형 차트 애니메이션
+                const percentage = (score / 25) * 100;
+                const scorePath = document.getElementById('score-path');
+                scorePath.style.stroke = data.badgeColor; // 차트 색상도 레벨에 맞춤
+                setTimeout(() => {
+                    scorePath.style.strokeDasharray = `${percentage}, 100`;
+                }, 100);
+
+                // 텍스트 콘텐츠 삽입
+                document.getElementById('core-problem-text').innerHTML = data.coreProblem;
+                document.getElementById('empathy-message').innerHTML = data.empathy;
+                document.getElementById('future-prediction').innerHTML = data.prediction;
+                
+                // NEW: Render custom strategy
+                document.getElementById('custom-strategy-section').innerHTML = data.customStrategy;
+
+                // 증거(답변 인용) 렌더링
+                renderEvidence(data.level);
+            }
+
+            // 3-6. 증거(답변 인용) 렌더링 로직
+            function renderEvidence(level) {
+                const listContainer = document.getElementById('worst-answers-list');
+                listContainer.innerHTML = '';
+                
+                let evidenceAnswers = [];
+
+                if (level === 'LEVEL 1') {
+                    // Level 1은 잘한 답변(5점) 위주로 칭찬
+                    evidenceAnswers = state.answers.filter(a => a.score === 5).slice(0, 2);
+                    if (evidenceAnswers.length > 0) {
+                        listContainer.innerHTML = '<p>당신이 주도권을 쥐고 있다는 신호입니다:</p>';
+                    }
+                } else {
+                     // Level 2, 3은 못한 답변(0~3점) 위주로 지적
+                     // 0점 우선 추출 후 3점 추출
+                     const zeroPoints = state.answers.filter(a => a.score === 0);
+                     const lowPoints = state.answers.filter(a => a.score <= 3 && a.score > 0);
+                     evidenceAnswers = [...zeroPoints, ...lowPoints].slice(0, 2);
+
+                     if (evidenceAnswers.length > 0) {
+                         listContainer.innerHTML = '<p>이 답변들이 당신의 서열을 낮추는 결정적 증거입니다:</p>';
+                     }
+                }
+
+                // 인용구 생성
+                evidenceAnswers.forEach(item => {
+                    const p = document.createElement('p');
+                    p.className = 'quoted-answer';
+                    p.innerHTML = `Q${item.questionId}. "<strong>${item.answerText}</strong>"`;
+                    listContainer.appendChild(p);
+                });
+            }
+
+            // =========================================
+            // 4. 유틸리티 및 이벤트 리스너
+            // =========================================
+
+            function hideAllPages() {
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                    page.classList.add('hidden');
+                });
+            }
+
+            function updateProgressBar(current) { // 1-indexed
+                const progressBar = document.getElementById('progress-bar');
+                const progressFill = document.getElementById('progress-fill');
+                const progressText = document.getElementById('progress-text');
+
+                if (current > 0 && current <= state.totalQuestions) {
+                    progressBar.classList.remove('hidden');
+                    progressFill.style.width = `${(current / state.totalQuestions) * 100}%`;
+                    progressText.textContent = `${current} / ${state.totalQuestions}`;
+                }
+            }
+
+            // 시작 버튼 이벤트
+            const startBtn = document.getElementById('start-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', () => showQuestion(0)); // 0-indexed로 첫 질문 시작
+            }
+
+            // 옵션 버튼 이벤트 바인딩
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const score = this.getAttribute('data-score');
+                    const answer = this.getAttribute('data-answer');
+                    handleAnswer(score, answer);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
