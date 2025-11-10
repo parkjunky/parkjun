@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관계 서열(Hierarchy) 패턴 무료 진단 | 프레임 전쟁</title>
-    <meta name="description" content="나는 그녀의 '1순위'일까, 심심할 때 찾는 '보험'일까? 1분 만에 당신의 무의식적 관계 서열을 정확히 진단합니다.">
+    <meta name="description" content="나는는 그녀의 '1순위'일까, 심심할 때 찾는 '보험'일까? 1분 만에 당신의 무의식적 관계 서열을 정확히 진단합니다.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -427,19 +427,32 @@
             margin-bottom: 12px;
         }
         
+        /* 핵심 진단 (공감 섹션 통합) */
         .core-problem-section .highlight-text {
-            font-size: 18px;
-            line-height: 1.7;
+            font-size: 17px; /* 텍스트가 길어져서 폰트 조정 */
+            line-height: 1.8; /* 가독성 확보 */
             font-weight: 500;
             background-color: #fff8f8;
-            padding: 16px;
+            padding: 20px; /* 패딩 증가 */
             border-radius: 8px;
             border: 1px solid #ffeaea;
         }
-
+        .core-problem-section .highlight-text p {
+            margin-bottom: 16px;
+        }
+        .core-problem-section .highlight-text p:last-child {
+            margin-bottom: 0;
+        }
         .core-problem-section .highlight-text strong {
             font-weight: 700;
             color: var(--primary-color);
+        }
+        .core-problem-section .highlight-text .diagnosis-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 12px;
         }
 
         .evidence-section {
@@ -970,36 +983,7 @@
         }
         /* style.css 내용 끝 */
 
-        /* empathy-objection.css 내용 시작 */
-        .empathy-section {
-            background: #FFFFFF;
-            padding: 24px;
-            border-radius: 8px;
-            /* margin: 24px 0; */ /* 상위 div의 margin-bottom으로 대체 */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid #666666;
-        }
-
-        .empathy-icon {
-            display: none;
-        }
-
-        .empathy-text {
-            font-size: clamp(15px, 2.8vw, 17px);
-            line-height: 1.8;
-            color: #333333;
-        }
-
-        .empathy-text strong {
-            font-weight: 700;
-            color: #1A1A1A;
-        }
-
-        /* 사용하지 않는 클래스는 제거 */
-        .objection-section {
-            display: none;
-        }
-        /* empathy-objection.css 내용 끝 */
+        /* empathy-objection.css 제거됨 (핵심 진단에 통합) */
     </style>
 </head>
 <body>
@@ -1126,9 +1110,9 @@
                     <span class="check-icon"></span>
                     <span class="option-text">B. 불편함을 표현하지만, 그 이후 실질적 변화는 없다.</span>
                 </button>
-                <button class="option-btn" data-qa="Q4-C" data-score="5" data-answer="명확한 기준을 전달하고, 개선되지 않으면 만남 빈도를 조정한다">
+                <button class="option-btn" data-qa="Q4-C" data-score="5" data-answer="명확한 기준을 전달하고, 개선 안 되면 만남 빈도를 조정한다">
                     <span class="check-icon"></span>
-                    <span class="option-text">C. 명확한 기준을 전달하고, 개선 안 되면 만남 빈도를 조정한다.</span>
+                    <span class="option-text">C. 명확한 기준을 전달하고, 개선되지 않으면 만남 빈도를 조정한다.</span>
                 </button>
             </div>
         </div>
@@ -1189,21 +1173,21 @@
             </div>
 
             <div class="diagnosis-content">
+                <!-- 핵심 진단 (공감 섹션이 여기에 통합됨) -->
                 <div class="core-problem-section">
                     <h3>🚨 핵심 진단</h3>
-                    <p id="core-problem-text" class="highlight-text">
-                        </p>
+                    <div id="core-problem-text" class="highlight-text">
+                        <!-- JS가 이 영역을 채웁니다 -->
+                    </div>
                 </div>
+
+                <!-- 공감 섹션은 핵심 진단에 통합되어 삭제됨 -->
+                <!-- <div class="empathy-section"> ... </div> -->
 
                 <div class="evidence-section">
                     <h4>결정적 증거</h4>
                     <div id="worst-answers-list" class="answer-list">
                         </div>
-                </div>
-
-                <div class="empathy-section">
-                   <p class="empathy-text" id="empathy-message">
-                       </p>
                 </div>
 
                 <div class="future-section warning-box">
@@ -1227,7 +1211,7 @@
                     </div>
 
                     <h3 class="prescription-title">당신을 위한 긴급 처방 (『프레임 전쟁』)</h3>
-                    <p class="prescription-intro">"당신의 "주도권 주저" 문제를 해결하기 위해 처방한 맞춤형 솔루션입니다. 이 챕터들이 당신을 상위 10%로 도약시킬 것입니다."</p>
+                    <p class="prescription-intro">당신의 "주도권 주저" 문제를 해결하기 위해 처방한 맞춤형 솔루션입니다. 이 챕터들이 당신을 상위 10%로 도약시킬 것입니다.</p>
 
                     <div class="prescription-card">
                         <div class="card-title">PART 1 - Chapter 2: 여자는 남자의 무엇에 끌리는가?</div>
@@ -1370,9 +1354,15 @@
                     level: 'LEVEL 3',
                     name: '🥉 보험 (The Insurance)',
                     badgeColor: '#FF3B3B', // 위험 레드
-                    coreProblem: '당신은 <strong>\'🥉 보험 (The Insurance)\'</strong>으로 진단되었습니다. 핵심 이유는 그녀에게 \'가장 쉬운 남자\'로 인식되어, 당신의 진심과 헌신이 당연하게 여겨지기 때문입니다. 이 패턴은 당신의 가치를 스스로 깎아내리고 있습니다.',
-                    empathy: '이 결과가 불편하실 수 있습니다. 하지만 이것은 당신의 인격이 아닌, <strong>반복되는 \'패턴\'</strong>을 진단한 것입니다. 당신의 순수한 진심이 잘못된 전략을 만나, 늘 \'가장 쉬운 남자\'로 인식되게 만들고 있습니다.',
-                    prediction: '<strong>(단기)</strong> 지금처럼 헌신하면 그녀는 당신을 \'편한 사람\'으로만 남겨둘 것입니다. <strong>(장기)</strong> 이 패턴이 고착화되면, 앞으로 만날 모든 관계에서 \'헌신하다 헌신짝\' 되는 비극적인 역사가 반복될 확률이 매우 높습니다.',
+                    // [수정됨] 핵심 진단 (자의식 보호 로직 적용)
+                    coreProblem: `
+                        <p class="diagnosis-title">당신은 <strong>'🥉 보험 (The Insurance)'</strong>으로 진단되었습니다.</p>
+                        <p>이 결과가 당신의 헌신이나 진심이 틀렸다는 뜻은 절대 아닙니다. 당신은 누구보다 순수하고 진지하게 관계에 임했을 확률이 높습니다. 문제는, 당신의 그 헌신이 <strong>'가장 쉬운 선택지'</strong>가 되어버렸다는 점입니다.</p>
+                        <p>그녀는 당신을 '필요할 때 언제든 나를 도와줄 사람'으로 인식하지만, '쟁취하고 싶은 남자'로 인식하지 않습니다. 당신의 배려가 그녀의 무의식에 <strong>"나는 노력하지 않아도 이 사람을 가질 수 있다"</strong>는 잘못된 신호를 주었기 때문입니다.</p>
+                        <p>이것은 가치 문제가 아닙니다. 단지 당신이 선택해온 '희생적' 행동 패턴이, 상대방에게 "나는 당신의 2순위여도 괜찮다"는 착각을 주고 있다는 것입니다.</p>
+                    `,
+                    // [제거됨] empathy: '...'. 핵심 진단에 통합됨.
+                    prediction: '<strong>단기적으로:</strong> 지금처럼 헌신하면 그녀는 당신을 \'편한 사람\'으로만 남겨둘 것입니다.<br><strong>장기적으로:</strong> 이 패턴이 고착화되면, 앞으로 만날 모든 관계에서 \'헌신하다 헌신짝\' 되는 비극적인 역사가 반복될 확률이 매우 높습니다.',
                     customStrategy: `
                         <h3>💡 맞춤 해결 전략 (Level 3: 보험)</h3>
                         <p class="strategy-intro">당신은 '헌신'과 '희생'이 사랑이라 믿었지만, 그녀는 그것을 <strong>'당연함'</strong>으로 받아들였습니다. 이 패턴을 깨기 위해선, <strong>'친절한 거절'</strong>과 <strong>'자기중심적 시간표'</strong>가 시급합니다.</p>
@@ -1387,9 +1377,15 @@
                     level: 'LEVEL 2',
                     name: '🥈 후보 선수 (The Candidate)',
                     badgeColor: '#FF9800', // 경고 오렌지
-                    coreProblem: '당신은 <strong>\'🥈 후보 선수 (The Candidate)\'</strong>로 진단되었습니다. 핵심 이유는 관계를 주도할 \'결정적인 임팩트\'가 부족하기 때문입니다. \'좋은 사람\'에서 멈추어, 그녀의 무의식에 \'이 남자를 놓치면 안 된다\'는 위기감을 심어주지 못하고 있습니다.',
-                    empathy: '당신은 충분히 매력적입니다. 하지만 상대 무의식에 “지금 놓치면 손해”라는 강력한 신호를 주지 못하고 있습니다.',
-                    prediction: '<strong>(단기)</strong> 그녀는 당신을 \'괜찮은 옵션\' 정도로만 생각하며 계속 다른 대안을 탐색할 것입니다. <strong>(장기)</strong> 결정적인 순간에 항상 당신보다 더 매력적이거나 적극적인 경쟁자에게 밀려, 연애의 \'결정권\'을 평생 상대에게 넘겨주게 될 수 있습니다.',
+                    // [수정됨] 핵심 진단 (자의식 보호 로직 적용) - 요청하신 예시
+                    coreProblem: `
+                        <p class="diagnosis-title">당신은 <strong>'🥈 후보 선수 (The Candidate)'</strong>로 진단되었습니다.</p>
+                        <p>이 결과는 당신의 매력이 부족하다는 뜻이 절대 아닙니다. 오히려 당신은 충분히 매력적인 사람일 확률이 높습니다. 문제는 매력의 부족이 아니라, 그 매력이 상대방의 무의식에 <strong>'강력하게'</strong> 각인되지 않고 있다는 점입니다.</p>
+                        <p>그 결과 상대방은 당신과 함께 있을 때 편안함을 느끼지만, 동시에 "지금 당장 결정하지 않아도 괜찮다"는 여유를 갖게 됩니다. 그녀의 무의식에 <strong>"이 남자를 놓치면 안 된다"</strong>는 위기감을 심어주지 못하고 있는 것이죠.</p>
+                        <p>이것은 가치 문제가 아닙니다. 단지 당신이 선택해온 '안정적인' 행동 패턴이, 상대방에게 "언제든 내 곁에 있을 것"이라는 착각을 주고 있다는 것입니다.</p>
+                    `,
+                    // [제거됨] empathy: '...'. 핵심 진단에 통합됨.
+                    prediction: '<strong>단기적으로:</strong> 그녀는 당신을 \'괜찮은 옵션\' 정도로만 생각하며 계속 다른 대안을 탐색할 것입니다.<br><strong>장기적으로:</strong> 결정적인 순간에 항상 당신보다 더 매력적이거나 적극적인 경쟁자에게 밀려, 연애의 \'결정권\'을 평생 상대에게 넘겨주게 될 수 있습니다.',
                     customStrategy: `
                         <h3>💡 맞춤 해결 전략 (Level 2: 후보)</h3>
                         <p class="strategy-intro">'좋은 사람'이지만 '매력적인 남자'는 아니었습니다. 그녀는 당신을 '안전'하다고 느끼지만 '설렌다'고 느끼진 않습니다. <strong>'예측 불가능성'</strong>과 <strong>'감정의 낙차'</strong>가 필요합니다.</p>
@@ -1404,9 +1400,15 @@
                     level: 'LEVEL 1',
                     name: '🥇 1순위 (The Priority)',
                     badgeColor: '#4CAF50', // 안전 그린
-                    coreProblem: '당신은 <strong>\'🥇 1순위 (The Priority)\'</strong>로 진단되었습니다. 핵심 이유는 그녀가 당신의 가치를 높게 평가하고, 관계의 주도권을 당신이 쥐고 있기 때문입니다. 당신은 \'놓치면 안 될 남자\'로 명확히 인식되고 있습니다.',
-                    empathy: '축하합니다. 이 흐름을 유지·확장하면 더 높은 기준의 매칭에도 통합니다.',
-                    prediction: '<strong>(단기)</strong> 현재의 안정적인 주도권을 즐기며 관계를 더 깊게 발전시킬 수 있습니다. <strong>(장기)</strong> 이 성공 패턴을 \'프레임 전쟁\'의 원리로 체계화한다면, 앞으로 어떤 상대를 만나든 관계의 질과 당신의 선택권이 함께 상승하는 선순환을 만들 수 있습니다.',
+                    // [수정됨] 핵심 진단 (자의식 보호 로직 적용)
+                    coreProblem: `
+                        <p class="diagnosis-title">당신은 <strong>'🥇 1순위 (The Priority)'</strong>로 진단되었습니다.</p>
+                        <p>축하합니다. 이 결과는 당신이 이미 관계의 주도권을 잡는 법을 본능적으로 알고 있음을 의미합니다. 그녀는 당신의 가치를 높게 평가하며, 당신을 <strong>'놓치면 안 될 남자'</strong>로 명확히 인식하고 있습니다.</p>
+                        <p>당신은 이미 그녀에게 '설렘'과 '안정감'을 동시에 주고 있으며, 그녀는 당신의 반응을 살피며 관계를 발전시키고 싶어 합니다. 당신의 현재 행동 패턴은 매우 긍정적인 신호를 보내고 있습니다.</p>
+                        <p>이제 당신의 과제는 이 '1순위'의 자리를 <strong>'유지'</strong>하고 <strong>'확장'</strong>하는 것입니다. 안주하는 순간, 주도권은 언제든 넘어갈 수 있습니다.</p>
+                    `,
+                    // [제거됨] empathy: '...'. 핵심 진단에 통합됨.
+                    prediction: '<strong>단기적으로:</strong> 현재의 안정적인 주도권을 즐기며 관계를 더 깊게 발전시킬 수 있습니다.<br><strong>장기적으로:</strong> 이 성공 패턴을 \'프레임 전쟁\'의 원리로 체계화한다면, 앞으로 어떤 상대를 만나든 관계의 질과 당신의 선택권이 함께 상승하는 선순환을 만들 수 있습니다.',
                     customStrategy: `
                         <h3>💡 맞춤 해결 전략 (Level 1: 1순위)</h3>
                         <p class="strategy-intro">당신은 이미 주도권을 가졌습니다. 하지만 '1순위'는 영원하지 않습니다. 그녀는 당신을 <strong>'테스트'</strong>하며 이 서열을 뒤집으려 할 것입니다. <strong>'유지'</strong>와 <strong>'관계 리드'</strong>가 당신의 과제입니다.</p>
@@ -1499,11 +1501,31 @@
                     if (state.hasZeroPointAnswer) {
                         resultData = level2Data; // 강등된 후보
                         // 강등 안내 메시지 추가
-                        resultData.coreProblem = '총점은 높지만, <strong>치명적인 약점(0점 답변)</strong> 때문에 \'후보\'로 강등되었습니다. ' + resultData.coreProblem;
+                        resultData.coreProblem = `
+                            <p class="diagnosis-title"><strong>[강등 판정] '🥈 후보 선수'</strong>로 진단되었습니다.</p>
+                            <p>총점은 높지만, <strong>치명적인 약점(0점 답변)</strong>이 발견되어 '1순위'에서 강등되었습니다. 이 약점은 당신의 높은 가치에도 불구하고, 상대방에게 '이 사람은 나를 떠나지 못할 것'이라는 확신을 심어줍니다.</p>
+                            <p>그 결과, 그녀는 당신의 헌신을 당연하게 여기며 관계의 주도권을 쉽게 가져갑니다. 당신의 '결정적 실수' 하나가 전체 관계의 균형을 무너뜨리고 있는 것입니다.</p>
+                        ` + resultData.coreProblem; // 원래의 후보 진단 내용 추가 (옵션)
+                        // 강등 시에는 위의 메시지만 표시하거나, 아래처럼 원래 후보 진단 내용을 붙일 수 있습니다.
+                        // 여기서는 강등 메시지가 더 중요하므로, 원래 내용을 덮어쓰는 대신, 위처럼 새로 작성합니다.
+                        // 만약 Level 2의 원래 진단을 붙이려면, `coreProblem`을 재정의해야 합니다.
+                        // 여기서는 Level 2의 '후보' 진단이 아닌, '강등'에 초점을 맞춘 위 텍스트로 대체합니다.
                     } else {
                         resultData = level1Data; // 1순위 (20~25 & No 0점)
                     }
                 }
+                
+                // [강등 로직 수정] 만약 20점 이상 + 0점 답변이 있다면, level2Data를 사용하되 coreProblem을 덮어씁니다.
+                if (score >= 20 && state.hasZeroPointAnswer) {
+                     resultData = level2Data; // Level 2의 전략/예측을 사용
+                     resultData.coreProblem = `
+                        <p class="diagnosis-title"><strong>[강등 판정] '🥈 후보 선수'</strong>로 진단되었습니다.</p>
+                        <p>총점은 높지만, <strong>치명적인 약점(0점 답변)</strong>이 발견되어 '1순위'에서 강등되었습니다. 이 약점은 당신의 높은 가치에도 불구하고, 상대방에게 '이 사람은 나를 떠나지 못할 것'이라는 확신을 심어줍니다.</p>
+                        <p>그 결과, 그녀는 당신의 헌신을 당연하게 여기며 관계의 주도권을 쉽게 가져갑니다. 당신의 '결정적 실수' 하나가 전체 관계의 균형을 무너뜨리고 있는 것입니다.</p>
+                        <p>이것은 당신이 '좋은 사람'이기 때문에 발생하는 문제입니다. '좋은 사람'을 넘어 '매력적인 남자'가 되는 법을 배우지 않으면, 이 패턴은 반복됩니다.</p>
+                    `;
+                }
+
 
                 // DOM 렌더링
                 renderResultPage(resultData, score);
@@ -1527,7 +1549,7 @@
 
                 // 텍스트 콘텐츠 삽입
                 document.getElementById('core-problem-text').innerHTML = data.coreProblem;
-                document.getElementById('empathy-message').innerHTML = data.empathy;
+                // document.getElementById('empathy-message').innerHTML = data.empathy; // [제거됨]
                 document.getElementById('future-prediction').innerHTML = data.prediction;
                 
                 // NEW: Render custom strategy
@@ -1544,14 +1566,14 @@
                 
                 let evidenceAnswers = [];
 
-                if (level === 'LEVEL 1') {
+                if (level === 'LEVEL 1' && !state.hasZeroPointAnswer) { // 1순위일 때만 (강등 아님)
                     // Level 1은 잘한 답변(5점) 위주로 칭찬
                     evidenceAnswers = state.answers.filter(a => a.score === 5).slice(0, 2);
                     if (evidenceAnswers.length > 0) {
                         listContainer.innerHTML = '<p>당신이 주도권을 쥐고 있다는 신호입니다:</p>';
                     }
                 } else {
-                     // Level 2, 3은 못한 답변(0~3점) 위주로 지적
+                     // Level 2, 3, 강등된 Level 1은 못한 답변(0~3점) 위주로 지적
                      // 0점 우선 추출 후 3점 추출
                      const zeroPoints = state.answers.filter(a => a.score === 0);
                      const lowPoints = state.answers.filter(a => a.score <= 3 && a.score > 0);
@@ -1588,7 +1610,7 @@
 
                 if (current > 0 && current <= state.totalQuestions) {
                     progressBar.classList.remove('hidden');
-                    progressFill.style.width = `${(current / state.totalQuestions) * 100}%`;
+                    progressFill.style.width = `${(current / state.Tota) * 100}%`;
                     progressText.textContent = `${current} / ${state.totalQuestions}`;
                 }
             }
