@@ -3,1589 +3,417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관계 서열(Hierarchy) 패턴 무료 진단 | 프레임 전쟁</title>
-    <meta name="description" content="나는 그녀의 '1순위'일까, 심심할 때 찾는 '보험'일까? 1분 만에 당신의 무의식적 관계 서열을 정확히 진단합니다.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
+    <title>내성적 유혹자 - 연애 지능 진단</title>
     <style>
-        /* style.css 내용 시작 */
-        /* 전역 스타일 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* [Design System] Dark Theme & Red Accent */
         :root {
-            /* 색상 시스템 */
-            --primary-color: #FF3B3B;
-            --primary-dark: #D32F2F;
-            --secondary-color: #FEE500;
-            --text-dark: #1A1A1A;
-            --text-gray: #666666;
-            --text-light: #999999;
-            --bg-light: #F8F9FA;
-            --bg-white: #FFFFFF;
-            --border-color: #E0E0E0;
-            --success-color: #4CAF50;
-            --warning-color: #FF9800;
-            --success-bg: #e8f5e9;
-            --danger-bg: #ffebee;
-            
-            /* 그라데이션 */
-            --gradient-primary: linear-gradient(135deg, #FF3B3B 0%, #FF6B6B 100%);
-            --gradient-dark: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
-            --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            
-            /* 그림자 */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
+            --bg-color: #121212;
+            --card-color: #1e1e1e;
+            --text-main: #ffffff;
+            --text-sub: #b0b0b0;
+            --accent: #ff4757; /* Warning Red */
+            --point: #2ed573;  /* Success Green */
+            --gold: #ffa502;   /* VIP Gold */
         }
 
         body {
-            overflow-x: hidden;
-        }
-
-        /* 페이지 컨테이너 */
-        .page {
-            width: 100%;
-            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 24px 16px;
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-
-        .page.hidden {
-            display: none;
-            opacity: 0;
-            position: absolute;
-            transform: scale(0.98);
-        }
-
-        .page.active {
-            display: flex;
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* 결과 페이지는 상단 정렬 */
-        #result-page {
-            justify-content: flex-start;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 24px;
-            background-color: var(--bg-white);
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-        }
-        
-        /* 결과 페이지의 컨테이너는 위아래 마진 추가 */
-        #result-page .result-container {
-            margin-top: 24px;
-            margin-bottom: 40px;
-        }
-
-
-        /* 프로그레스 바 */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 12px;
-            background-color: #eee;
-            z-index: 100;
-            transition: opacity 0.3s;
-        }
-
-        .progress-bar.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: var(--gradient-primary);
-            transition: width 0.4s ease-out;
-            border-radius: 0 2px 2px 0;
-        }
-
-        .progress-text {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-
-        /* 1. 랜딩 페이지 (컴팩트) */
-        .landing-compact {
-            text-align: center;
-            padding: 32px 24px;
-        }
-
-        .header-compact .main-title-compact {
-            font-size: clamp(26px, 7vw, 32px);
-            font-weight: 900;
-            line-height: 1.4;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-        }
-
-        .header-compact .main-title-compact strong {
-            color: var(--primary-color);
-        }
-
-        .header-compact .sub-title-compact {
-            font-size: clamp(15px, 4vw, 17px);
-            color: var(--text-gray);
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .cta-container-compact {
-            margin-top: 32px;
-        }
-
-        .start-btn-large {
-            width: 100%;
-            padding: 18px 24px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-        }
-
-        .primary-btn {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255, 59, 59, 0.3);
-        }
-
-        .primary-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 59, 59, 0.4);
-        }
-        
-        .secondary-btn {
-            background: var(--secondary-color);
-            color: var(--text-dark);
-            box-shadow: 0 4px 12px rgba(254, 229, 0, 0.3);
-        }
-        
-        .secondary-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(254, 229, 0, 0.4);
-        }
-
-        .guarantee-text-compact {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-top: 16px;
-        }
-
-        .guarantee-text-compact .icon {
-            display: inline-block;
-            margin-right: 4px;
-        }
-
-
-        /* 2. 질문 페이지 */
-        .question-container {
-            padding-top: 48px; /* 프로그레스바 공간 확보 */
-        }
-
-        .question-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .question-header .q-number {
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .question-header h2 {
-            font-size: clamp(20px, 5.5vw, 24px);
-            font-weight: 700;
-            line-height: 1.5;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .option-btn {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            padding: 14px 20px;
-            background: var(--bg-white);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            font-size: 16px;
-            font-family: 'Noto Sans KR', sans-serif;
-            color: var(--text-dark);
-        }
-
-        .option-btn .check-icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            margin-right: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary-color);
-            background: #fff8f8;
-        }
-
-        .option-btn:hover .check-icon {
-            border-color: var(--primary-color);
-            background-color: #ffeaea;
-        }
-        
-        .option-btn .option-text {
-            flex: 1;
+            min-height: 100vh;
             line-height: 1.6;
         }
 
-
-        /* 3. 로딩 페이지 */
-        .loading-container {
+        .container {
+            background-color: var(--card-color);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             text-align: center;
-        }
-
-        .loader {
             position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 24px auto;
+            overflow: hidden;
         }
 
+        h1 { font-size: 24px; margin-bottom: 10px; color: var(--accent); }
+        h2 { font-size: 20px; margin-bottom: 20px; }
+        p { color: var(--text-sub); margin-bottom: 30px; font-size: 15px; }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #2c2c2c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: left;
+        }
+        .btn:hover { background: #3d3d3d; border-color: var(--accent); }
+        .btn-primary {
+            background: var(--accent);
+            border: none;
+            text-align: center;
+            font-weight: bold;
+        }
+        .btn-primary:hover { background: #ff6b81; }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: #333;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            display: none; /* 초기에는 숨김 */
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Screens */
+        .screen { display: none; animation: fadeIn 0.5s; }
+        .active { display: block; }
+
+        /* Loading Animation */
+        .loading-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
         .spinner {
-            width: 80px;
-            height: 80px;
-            border: 5px solid rgba(255, 59, 59, 0.1);
-            border-top-color: var(--primary-color);
+            margin: 20px auto;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--accent);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .loading-sub-text {
-            font-size: 16px;
-            color: var(--text-gray);
-        }
-
-
-        /* 4. 결과 페이지 */
-        .result-container {
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-
-        .result-header {
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 24px;
-            margin-bottom: 24px;
-        }
-
-        .result-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-light);
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .result-title {
-            font-size: clamp(24px, 6.5vw, 30px);
-            font-weight: 900;
-            line-height: 1.4;
-            margin-bottom: 16px;
-        }
-
-        .level-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            font-size: 14px;
-            font-weight: 700;
+        /* Inputs */
+        input[type="email"] {
+            width: 90%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #252525;
             color: white;
-            background-color: var(--text-gray);
-            border-radius: 20px;
-        }
-        
-        .score-container {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        
-        .score-circle {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 16px auto;
-            position: relative; /* 중앙 숫자 겹침 방지용 */
-        }
-        
-        .circular-chart {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .circle {
-            transition: stroke-dasharray 0.8s ease-out;
-            stroke-linecap: round;
-        }
-        
-        .score-text {
-            display: none; /* SVG text 비활성화 (겹침 방지) */
-        }
-        .score-value {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--text-dark);
-            line-height: 1;
-            pointer-events: none;
-        }
-        
-        .score-label {
-            font-size: 14px;
-            color: var(--text-gray);
-        }
-
-        .diagnosis-content {
-            /* 각 섹션별 상하 여백 추가 */
-        }
-
-        .diagnosis-content > div:not(:last-child) {
-            margin-bottom: 32px; /* 섹션 간 여백 */
-        }
-
-        .diagnosis-content h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--text-dark);
-        }
-        
-        .diagnosis-content h4 {
             font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 12px;
         }
-        
-        /* 핵심 진단 (공감 섹션 통합) */
-        .core-problem-section .highlight-text {
-            font-size: 17px; /* 텍스트가 길어져서 폰트 조정 */
-            line-height: 1.8; /* 가독성 확보 */
-            font-weight: 500;
-            background-color: #fff8f8;
-            padding: 20px; /* 패딩 증가 */
+
+        /* Result Section */
+        .score-box {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+        .result-desc {
+            background: #252525;
+            padding: 20px;
             border-radius: 8px;
-            border: 1px solid #ffeaea;
-        }
-        .core-problem-section .highlight-text p {
-            margin-bottom: 16px;
-        }
-        .core-problem-section .highlight-text p:last-child {
-            margin-bottom: 0;
-        }
-        .core-problem-section .highlight-text strong {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        .core-problem-section .highlight-text .diagnosis-title {
-            font-size: 18px;
-            font-weight: 900;
-            color: var(--text-dark);
-            display: block;
-            margin-bottom: 12px;
-        }
-
-        .evidence-section {
-            /* margin-top: 24px; */ /* 상위 div의 margin-bottom으로 대체 */
-        }
-        
-        .answer-list p {
-            font-size: 15px;
-            color: var(--text-gray);
-            margin-bottom: 8px;
-        }
-
-        .quoted-answer {
-            background: #f9f9f9;
-            border: 1px solid #eee;
-            padding: 12px;
-            border-radius: 8px;
-            font-style: italic;
-        }
-        
-        .quoted-answer strong {
-            font-style: normal;
-            font-weight: 700;
-            color: var(--primary-dark);
-        }
-
-        .future-section {
-            /* margin-top: 24px; */
-        }
-        
-        .warning-box {
-            background: #fff8e1;
-            border: 1px solid #ffecb3;
-            border-left: 4px solid var(--warning-color);
-            padding: 16px 20px;
-            border-radius: 8px;
-        }
-        
-        .warning-box p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #4f4327;
-        }
-
-        .solution-section {
-            /* margin-top: 24px; */
-        }
-        
-        /* 맞춤 해결 전략 스타일 */
-        #pre-strategy-box {
-            background-color: var(--success-bg);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        #pre-strategy-box .icon {
-            font-size: 24px;
-            display: block;
-            margin-bottom: 8px;
-        }
-        #pre-strategy-box h3 {
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--success-color);
-            border: none;
-            padding: 0;
-            margin-bottom: 12px;
-        }
-        #pre-strategy-box p {
-            font-size: 16px;
-            color: #388e3c;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-        #pre-strategy-box .highlight {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-
-        .strategy-intro {
-            font-size: 15px;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            padding: 16px;
-            border-radius: 8px;
-            line-height: 1.7;
-        }
-        .strategy-intro strong {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .strategy-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .strategy-list li {
-            /* New box styles */
-            background: #f8f9fa;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-color);
-            border-radius: 8px;
-            padding: 16px;
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 12px;
-            box-shadow: var(--shadow-sm);
-        }
-        .strategy-list li::before {
-            content: '';
-        }
-        .strategy-list li strong {
-            font-weight: 900; /* Bolder */
-            color: var(--primary-dark); /* Darker red */
-        }
-
-        /* 긴급 처방전 스타일 (보완) */
-        .prescription-title {
-            font-size: 20px;
-            font-weight: 900;
-            margin-top: 40px; /* 여백 추가 */
-            margin-bottom: 16px;
-            padding-bottom: 0;
-            border-bottom: none; /* Removed border */
-            position: relative;
-            padding-left: 20px; /* Space for bullet */
-        }
-
-        .prescription-title::before {
-            content: '🔴'; /* Bullet icon */
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 16px;
-            color: var(--primary-color);
-        }
-
-        .prescription-intro {
-            font-size: 15px;
-            color: var(--text-dark); /* 강조를 위해 색상 변경 */
-            font-weight: 500; /* 강조를 위해 굵기 변경 */
-            margin-bottom: 24px;
-            background: #f8f9fa; /* Light gray box */
-            border: 1px solid #eee;
-            border-left: 4px solid var(--primary-color); /* 강조 테두리 */
-            padding: 16px;
-            border-radius: 8px;
-            line-height: 1.7;
-        }
-
-        .prescription-card {
-            background: var(--bg-white);
-            border: none; /* Removed border */
-            border-radius: 0; /* Removed radius */
-            padding: 0; /* Removed padding */
-            margin-bottom: 24px; /* Space between cards */
-            box-shadow: none; /* Removed shadow */
-        }
-        .card-title {
-            font-size: 18px;
-            font-weight: 900;
-            color: var(--text-dark); /* Darker color */
-            margin-bottom: 4px;
-            position: relative;
-            padding-left: 24px; /* Space for bullet */
-        }
-        .card-title::before {
-            content: '■'; /* Blue square bullet */
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 16px;
-            color: #1565C0;
-        }
-
-        .card-subtitle {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            padding-left: 24px; /* Align with title */
-        }
-        .card-reason-title {
-            font-size: 15px; /* Updated size */
-            font-weight: 700;
-            color: var(--text-dark); /* Changed color */
-            margin-bottom: 8px;
-            padding-left: 24px; /* Align with title */
-        }
-        .card-reason-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--text-gray);
-            margin-bottom: 16px;
-            padding-left: 24px; /* Align with title */
-        }
-        .card-bullets {
-            list-style: none;
-            padding-left: 24px; /* Align with title */
-            background: none; /* Removed background */
-            border-radius: 0;
-            padding: 0;
-            padding-left: 24px;
-        }
-        .card-bullets li {
-            font-size: 15px; /* Updated size */
-            line-height: 1.7; /* Updated line height */
-            color: var(--text-gray);
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 8px;
-        }
-        .card-bullets li:last-child {
-            margin-bottom: 0;
-        }
-        .card-bullets li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            font-weight: 700;
-            color: var(--text-gray); /* Changed color */
-        }
-
-        /*
-         * NEW: 다크 폼 컨테이너 스타일 (내부에 흰색 박스)
-         */
-        .cta-section {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px dashed var(--border-color);
-            text-align: center;
-        }
-
-        .form-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            background: var(--text-dark); /* DARK BACKGROUND */
-            border-radius: 16px; /* Bigger radius */
-            padding: 24px; /* Dark box padding */
-        }
-        
-        /* The NEW inner white box */
-        .form-inner-white-box {
-            background: var(--bg-white);
-            border-radius: 12px;
-            padding: 24px; /* White box padding */
-            overflow: hidden; /* Ensure radius clips content */
-        }
-        
-        .form-inner-white-box .urgency-message {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .form-inner-white-box .urgency-message strong {
-            color: var(--text-dark); /* Dark text on white bg */
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .form-inner-white-box .urgency-message p {
-            color: var(--text-gray); /* Dark text on white bg */
-            font-size: 15px;
-            margin-top: 4px;
-        }
-
-        /* Style the iframe to be inside the white box */
-        .form-inner-white-box iframe {
-            border-radius: 8px; /* Slightly smaller radius */
-            display: block;
-            width: 100%;
-            height: 600px;
-            border: 1px solid var(--border-color); /* Add border to iframe */
-        }
-
-        .cta-guarantee {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-top: 16px;
-        }
-
-        /* 랜딩 페이지 경고 박스 (컴팩트) */
-        .warning-box-compact {
             text-align: left;
-            background: #fff8e1;
-            border-left: 4px solid var(--warning-color);
-            padding: 16px 20px;
-            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 14px;
         }
-
-        .warning-box-compact p {
-            font-size: 13px;
-            line-height: 1.7;
-            color: var(--text-dark);
-            margin: 0;
-        }
-
-        .warning-box-compact strong {
-            color: #E65100;
-            font-weight: 700;
-        }
-
-        /* 사회적 증거 */
-        .social-proof-section {
-            margin-top: 24px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-        .social-proof-section h4 {
-            font-size: 16px;
-            font-weight: 700;
-            text-align: center;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-        }
-        .review-card {
-            background: var(--bg-white);
-            border-radius: 8px;
-            padding: 16px;
+        
+        /* 3-Tier Pricing Buttons */
+        .cta-box { margin-top: 30px; }
+        .cta-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
             margin-bottom: 12px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-        }
-        .review-card blockquote {
-            font-size: 14px;
-            line-height: 1.7;
-            color: var(--text-gray);
-            margin: 0;
-            padding-left: 12px;
-            border-left: 3px solid var(--primary-color);
-            font-style: italic;
-        }
-        .review-card footer {
-            text-align: right;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-top: 8px;
-        }
-        .final-cta-text {
-            text-align: center;
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-top: 16px;
-        }
-        
-        /* 선택 유도 섹션 */
-        .final-choice-section {
-            margin-top: 24px;
-        }
-        .final-choice-section .warning-box {
-            display: flex;
-            align-items: center;
-            background: #fff8e1;
-            border: 1px solid #ffecb3;
-            border-left: 4px solid var(--warning-color);
-            padding: 16px;
             border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s;
         }
-        .final-choice-section .warning-box .icon {
-            font-size: 28px;
-            margin-right: 16px;
-        }
-        .final-choice-section .warning-box p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #4f4327;
-            font-weight: 500;
-        }
-        .final-choice-section .warning-box p strong {
-            font-weight: 700;
-            color: #E65100;
-        }
+        .cta-btn:active { transform: scale(0.98); }
         
-        .choice-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin: 24px 0;
+        .cta-basic { background: #333; color: #bbb; border: 1px solid #444; font-size: 14px; }
+        .cta-best { 
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%); 
+            color: white; 
+            border: none; 
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
         }
-        
-        .choice-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        
-        .choice-box {
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .choice-box.danger {
-            background: var(--danger-bg);
-            border: 2px solid #ffcdd2;
-        }
-        .choice-box.success {
-            background: var(--success-bg);
-            border: 2px solid #c8e6c9;
-        }
-        
-        .choice-box .icon {
-            font-size: 32px;
-            font-weight: 900;
-        }
-        .choice-box.danger .icon { color: var(--primary-dark); }
-        .choice-box.success .icon { color: var(--success-color); }
-
-        .choice-box h4 {
-            font-size: 16px;
-            font-weight: 900;
-            margin: 12px 0 8px 0;
-            border: none;
-            padding: 0;
-        }
-        .choice-box.danger h4 { color: var(--primary-dark); }
-        .choice-box.success h4 { color: var(--success-color); }
-        
-        .choice-box p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text-gray);
-        }
-        
-        .final-cta-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 18px 24px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255, 59, 59, 0.3);
-        }
-        .final-cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 59, 59, 0.4);
-        }
-        .final-cta-button .icon {
-            font-size: 24px;
-            margin-right: 12px;
-        }
-        .final-cta-button .text-main {
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .final-cta-button .text-sub {
-            font-size: 13px;
-            font-weight: 400;
-            opacity: 0.9;
-            display: block;
-            margin-top: 2px;
+        .cta-vip { 
+            background: linear-gradient(135deg, #ffa502 0%, #e17055 100%); 
+            color: white; 
+            font-weight: bold;
         }
 
+        .tag { font-size: 12px; padding: 2px 6px; border-radius: 4px; margin-bottom: 4px; }
+        .tag-best { background: rgba(0,0,0,0.3); color: #fff; }
 
-        /* 반응형 디자인 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 16px;
-                box-shadow: none;
-                border-radius: 0;
-            }
-            
-            #result-page .result-container {
-                margin-top: 0;
-                margin-bottom: 0;
-            }
-            
-            .page {
-                padding: 0;
-            }
-            
-            #result-page {
-                padding: 0; /* 모바일에서는 결과 페이지 패딩 0 */
-            }
-            
-            .landing-compact {
-                padding: 24px 16px;
-            }
-            
-            .start-btn-large {
-                padding: 20px 24px;
-                font-size: 20px;
-            }
-            
-            .question-container {
-                padding: 40px 16px 20px 16px;
-            }
-            
-            .option-btn {
-                padding: 16px 20px;
-            }
-            
-            .result-container {
-                padding: 24px 16px 40px 16px;
-            }
-
-            .choice-container {
-                grid-template-columns: 1fr; /* 모바일에서 세로 1줄로 */
-            }
-
-            .form-container {
-                padding: 16px; /* 모바일에서 패딩 줄임 */
-            }
-            
-            .form-inner-white-box {
-                padding: 16px; /* 모바일에서 패딩 줄임 */
-            }
-        }
-        /* style.css 내용 끝 */
-
-        /* empathy-objection.css 제거됨 (핵심 진단에 통합) */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div id="progress-bar" class="progress-bar hidden">
-        <div class="progress-fill" id="progress-fill"></div>
-        <div class="progress-text" id="progress-text">1 / 5</div>
+
+<div class="container">
+    
+    <div id="intro" class="screen active">
+        <h1>착한 남자 딜레마 진단</h1>
+        <p>"왜 당신의 진심만 거절당할까?"<br>감정을 배제하고 논리적으로 분석합니다.</p>
+        <div style="font-size: 13px; color: #666; margin-bottom: 30px;">
+            소요 시간: 3분 | 문항 수: 7개 | 익명 보장
+        </div>
+        <button class="btn btn-primary" onclick="startQuiz()">진단 시작하기</button>
     </div>
 
-    <div id="landing-page" class="page active">
-        <div class="container landing-compact">
-            <header class="header-compact">
-                <h1 class="main-title-compact">
-                    나는 여자들의 <strong>'1순위'</strong>일까,<br>
-                    심심할 때 찾는 <strong>'보험'</strong>일까?
-                </h1>
-                <p class="sub-title-compact">
-                    '좋은 사람'인데.. 친구 이상 가까워지지 않는다면,<br>
-                    당신의 <strong>'관계 서열'</strong>을 의심해야 합니다.<br>
-                    </p>
-            </header>
-
-            <div class="warning-box-compact" style="background-color: #f8f9fa; border-left: 4px solid #FF3B3B; margin-bottom: 20px;">
-                <p>
-                    <strong>[진단 전 필수 체크]</strong><br>
-                    현재 마음에 둔 그녀가 없다면, <strong>가장 최근에 아쉽게 놓친 그녀</strong>를 떠올리고 답해 주세요. 그때의 반복된 패턴이 당신의 진짜 실력입니다.
-                </p>
-            </div>
-
-            <div class="cta-container-compact">
-                <button id="start-btn" class="start-btn-large primary-btn">
-                    지금 바로 내 '관계 서열' 확인하기 ▷
-                </button>
-                <p class="guarantee-text-compact">
-                    <span class="icon">🔒</span> 100% 익명 보장, 1분 소요
-                </p>
-            </div>
+    <div id="quiz" class="screen">
+        <div class="progress-container" style="display:block;">
+            <div class="progress-bar" id="progress"></div>
         </div>
+        <h2 id="question-text">질문 내용</h2>
+        <div id="options-container">
+            </div>
     </div>
 
-    <div id="question-1" class="page hidden">
-        <div class="container question-container">
-            <div class="question-header">
-                <span class="q-number">Q1.</span>
-                <h2>연락의 주도권은<br>누구에게 있습니까?</h2>
-            </div>
-            <div class="options">
-                <button class="option-btn" data-qa="Q1-A" data-score="0" data-answer="내가 먼저 보내지 않으면 대화가 이어지지 않는다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">A. 내가 먼저 보내지 않으면 대화가 이어지지 않는다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q1-B" data-score="3" data-answer="서로 주고받지만, 평균적으로 내가 더 자주 먼저 연락한다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">B. 서로 주고받지만, 평균적으로 내가 더 자주 먼저 연락한다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q1-C" data-score="5" data-answer="내가 답이 느리면 그녀가 확인/재촉 메시지를 보낸다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">C. 내가 답이 느리면 그녀가 확인/재촉 메시지를 보낸다.</span>
-                </button>
-            </div>
-        </div>
+    <div id="loading" class="screen">
+        <div class="spinner"></div>
+        <div class="loading-text" id="loading-msg">데이터 분석 중...</div>
+        <p>착한 남자 바이러스 탐지 중</p>
     </div>
 
-    <div id="question-2" class="page hidden">
-        <div class="container question-container">
-            <div class="question-header">
-                <span class="q-number">Q2.</span>
-                <h2>약속이 취소되었을 때<br>그녀의 반응은 어떻습니까?</h2>
-            </div>
-            <div class="options">
-                <button class="option-btn" data-qa="Q2-A" data-score="0" data-answer="취소 후 별도 제안 없이 대화가 느슨해진다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">A. 취소 후 별도 제안 없이 대화가 느슨해진다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q2-B" data-score="3" data-answer="미안하다고 하며 &quot;다음에 보자&quot;고 하지만, 구체적 날짜 제안은 없다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">B. 미안하다고 하며 "다음에 보자"고 하지만, 구체적 날짜 제안은 없다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q2-C" data-score="5" data-answer="대체 날짜·시간을 먼저 제안하며 일정을 맞추려 한다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">C. 대체 날짜·시간을 먼저 제안하며 일정을 맞추려 한다.</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="question-3" class="page hidden">
-        <div class="container question-container">
-            <div class="question-header">
-                <span class="q-number">Q3.</span>
-                <h2>그녀는 당신을 만나기 위해<br>시간과 노력을 투자합니까?</h2>
-            </div>
-            <div class="options">
-                <button class="option-btn" data-qa="Q3-A" data-score="0" data-answer="주로 내가 그녀 근처로 이동하고, 그녀 일정에 맞춘다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">A. 주로 내가 그녀 근처로 이동하고, 그녀 일정에 맞춘다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q3-B" data-score="3" data-answer="장소·시간을 서로 번갈아가며 조정한다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">B. 장소·시간을 서로 번갈아가며 조정한다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q3-C" data-score="5" data-answer="그녀가 먼저 내 일정을 물어보고, 자기 스케줄을 조정한다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">C. 그녀가 먼저 내 일정을 물어보고, 자기 스케줄을 조정한다.</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="question-4" class="page hidden">
-        <div class="container question-container">
-            <div class="question-header">
-                <span class="q-number">Q4.</span>
-                <h2>그녀가 약속을 가볍게 대할 때<br>(지각, 답장 늦음 등) 당신은?</h2>
-            </div>
-            <div class="options">
-                <button class="option-btn" data-qa="Q4-A" data-score="0" data-answer="지각이나 답장 무시가 반복돼도 별 말 없이 넘어간다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">A. 지각이나 답장 무시가 반복돼도 별 말 없이 넘어간다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q4-B" data-score="2" data-answer="불편함을 표현하지만, 그 이후 실질적 변화는 없다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">B. 불편함을 표현하지만, 그 이후 실질적 변화는 없다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q4-C" data-score="5" data-answer="명확한 기준을 전달하고, 개선 안 되면 만남 빈도를 조정한다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">C. 명확한 기준을 전달하고, 개선되지 않으면 만남 빈도를 조정한다.</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="question-5" class="page hidden">
-        <div class="container question-container">
-            <div class="question-header">
-                <span class="q-number">Q5.</span>
-                <h2>그녀는 당신에게<br>주로 어떤 이야기를 합니까?</h2>
-            </div>
-            <div class="options">
-                <button class="option-btn" data-qa="Q5-A" data-score="0" data-answer="주로 자기 고민 이야기/하소연이 잦고, 나는 듣고 위로하는 역할이다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">A. 주로 자기 고민 이야기/하소연이 잦고, 나는 듣고 위로하는 역할이다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q5-B" data-score="3" data-answer="일상 고민을 나누지만, '우리 사이' 대화는 드물다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">B. 일상 고민을 나누지만, '우리 사이' 대화는 드물다.</span>
-                </button>
-                <button class="option-btn" data-qa="Q5-C" data-score="5" data-answer="나에 대한 질문이나 다음 만남 계획이 자주 오간다">
-                    <span class="check-icon"></span>
-                    <span class="option-text">C. 나에 대한 질문이나 다음 만남 계획이 자주 오간다.</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="loading-page" class="page hidden">
-        <div class="container loading-container">
-            <div class="loader">
-                <div class="spinner"></div>
-            </div>
-            <h2 class="loading-text">관계 패턴 분석 중...</h2>
-            <p class="loading-sub-text">당신의 무의식적 서열을 계산하고 있습니다.</p>
-        </div>
-    </div>
-
-    <div id="result-page" class="page hidden">
-        <div class="container result-container">
-            <div class="result-header">
-                <span class="result-label">DIAGNOSIS RESULT</span>
-                <h1 id="result-type-name" class="result-title">분석 결과</h1>
-                <div id="result-level-badge" class="level-badge">LEVEL --</div>
-            </div>
-
-            <div class="score-container">
-                <div class="score-circle">
-                    <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true">
-                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="3"/>
-                        <path id="score-path" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#FF3B3B" stroke-width="3"/>
-                    </svg>
-                    <div id="total-score" class="score-value" aria-live="polite">0점</div>
-                </div>
-                <p class="score-label">관계 주도권 점수 (총 25점)</p>
-            </div>
-
-            <div class="diagnosis-content">
-                <div class="core-problem-section">
-                    <h3>🚨 핵심 진단</h3>
-                    <div id="core-problem-text" class="highlight-text">
-                        </div>
-                </div>
-
-                <div class="evidence-section">
-                    <h4>결정적 증거</h4>
-                    <div id="worst-answers-list" class="answer-list">
-                    </div>
-                </div>
-
-                <div class="future-section warning-box">
-                    <h4>⚠️ 이대로 시간이 흐르면...</h4>
-                    <p id="future-prediction">
-                    </p>
-                </div>
-
-                <div class="solution-section">
-                    <div id="pre-strategy-box">
-                        <span class="icon">✨</span>
-                        <h3>하지만 괜찮습니다.</h3>
-                        <p>다행히, 당신이 진단받은 이 문제는<br>전자책 『프레임 전쟁』에서 다루는</p>
-                        <span class="highlight">'관계 설계법' 3단계 훈련으로 100% 해결 가능합니다.</span>
-                    </div>
-
-                    <div id="custom-strategy-section">
-                        </div>
-
-                    <h3 class="prescription-title">당신을 위한 긴급 처방 (『프레임 전쟁』)</h3>
-                    <p class="prescription-intro">당신의 "주도권 주저" 문제를 해결하기 위해 처방한 맞춤형 솔루션입니다. 이 챕터들이 당신을 상위 10%로 도약시킬 것입니다.</p>
-
-                    <div class="prescription-card">
-                        <div class="card-title">PART 1 - Chapter 2: 여자는 남자의 무엇에 끌리는가?</div>
-                        <div class="card-subtitle">가치 증명과 본능적 끌림</div>
-                        <div class="card-reason-title">이것이 왜 당신의 처방전인가?</div>
-                        <p class="card-reason-text">당신은 지금 "자기가치 인식"을 높이는 것이 가장 중요합니다. 이 챕터는 여자가 본능적으로 끌리는 남자의 5가지 특징을 과학적으로 분석하고, 당신이 "편한 친구"에서 "매력적인 남자"로 도약하는 구체적인 일상 습관을 알려줍니다.</p>
-                        <ul class="card-bullets">
-                            <li>여자가 본능적으로 끌리는 5가지 남자의 특징</li>
-                            <li>자기가치를 높이는 구체적인 일상 습관</li>
-                            <li>"좋은 사람"이 아닌 "특별한 사람"이 되는 법</li>
-                            <li>매력 포인트를 자연스럽게 드러내는 대화 기술</li>
-                            <li>가치 증명의 심리학: 왜 노력이 역효과를 낼까?</li>
-                        </ul>
-                    </div>
-
-                    <div class="prescription-card">
-                        <div class="card-title">PART 3 - Chapter 8: 당신의 세상에 여자를 초대하라</div>
-                        <div class="card-subtitle">대체 불가능한 남자의 태도</div>
-                        <div class="card-reason-title">이것이 왜 당신의 처방전인가?</div>
-                        <p class="card-reason-text">관계에서 주도권을 잡는 가장 강력한 방법은 "당신의 세계"를 먼저 만드는 것입니다. 이 챕터는 여자를 당신의 세계로 초대하는 풍요로운 마인드셋을 알려줍니다.</p>
-                        <ul class="card-bullets">
-                            <li>풍요로운 마인드셋(Abundance Mindset)의 핵심 원리</li>
-                            <li>"이 사람이 아니어도 괜찮다"는 여유의 힘</li>
-                            <li>당신의 세계를 만드는 5가지 실천 방법</li>
-                            <li>관계에서 주도권을 잡는 초대의 기술</li>
-                            <li>다양한 관계를 유지하며 매력을 배가시키는 전략</li>
-                        </ul>
-                    </div>
-
-                    <div class="prescription-card">
-                        <div class="card-title">PART 1 - Chapter 3: 어장 관리의 진실과 탈출법</div>
-                        <div class="card-subtitle">주도권을 되찾는 두 가지 전략</div>
-                        <div class="card-reason-title">이것이 왜 당신의 처방전인가?</div>
-                        <p class="card-reason-text">"나만 기다리고 있는 건 아닐까?" 이 불안감이 당신을 지배하고 있다면, 이 챕터가 해답입니다. 어장 관리에 당하지 않고 주도권을 되찾는 구체적인 전략을 제시합니다.</p>
-                        <ul class="card-bullets">
-                            <li>어장 관리의 심리학: 왜 당하게 되는가?</li>
-                            <li>불안과 집착에서 벗어나는 2가지 핵심 전략</li>
-                            <li>"답장 기다림"을 끝내는 마인드 전환법</li>
-                            <li>관계의 균형을 되찾는 구체적 행동 지침</li>
-                            <li>상대방이 오히려 당신을 궁금해하게 만드는 역전 기술</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="cta-section" class="cta-section">
-                    
-                    <div class="form-container">
-                        <div class="form-inner-white-box">
-                            <div class="urgency-message">
-                                <strong>이 지긋지긋한 서열 패턴을 끊을 유일한 기회</strong>
-                                <p>아래에 이름과 전화번호를 입력하시면,<br>『프레임 전쟁』 PDF를 문자로 즉시 보내드립니다.</p>
-                            </div>
-                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdCFid_aCtKhPB9sbErZLOl6f_VRm91zwdnVXxv2UpnPA-O-w/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">로드 중…</iframe>
-                        </div>
-                    </div>
-                    <div class="social-proof-section">
-                        <h4>"이걸 왜 무료로...?" 1,300+명이 극찬한 이유</h4>
-                        <div class="review-card">
-                            <blockquote>"솔직히 왠만한 유료 강의보다 나았습니다. 제가 왜 항상 '좋은 사람'으로만 끝났는지, 5분 만에 머리를 한 대 맞은 것 같네요."</blockquote>
-                            <footer>- 32세 정**님 (직장인)</footer>
-                        </div>
-                        <div class="review-card">
-                            <blockquote>"어장관리 당하던 이유를 알았습니다. '착한 남자' 프레임... 진짜 소름 돋았어요. 알려주신 대로 했더니 어제 그녀에게 먼저 연락 왔습니다."</blockquote>
-                            <footer>- 27세 이**님 (대학원생)</footer>
-                        </div>
-                        <p class="final-cta-text">
-                            당신도 1분 만에 '서열 역전'의 기회를 잡으세요.
-                        </p>
-                    </div>
-                    <div class="final-choice-section">
-                        <div class="warning-box">
-                            <span class="icon" style="font-size: 28px; margin-right: 16px;">⚠️</span>
-                            <p><strong>지금 행동하지 않으면 같은 패턴이 반복됩니다</strong><br>
-                            이 진단 결과를 보고도 아무것도 하지 않는다면, 당신의 연애는 앞으로도 바뀌지 않습니다.</p>
-                        </div>
-                        
-                        <h3 class="choice-title">이 순간, 당신은 두 가지 선택을 할 수 있습니다.</h3>
-                        
-                        <div class="choice-container">
-                            <div class="choice-box danger">
-                                <span class="icon">✕</span>
-                                <h4>이대로 계속 살기</h4>
-                                <p>내일도, 모레도<br>똑같은 패턴 반복<br>또 다시 프렌드존</p>
-                            </div>
-                            <div class="choice-box success">
-                                <span class="icon">✓</span>
-                                <h4>지금 바로 바꾸기</h4>
-                                <p>3단계 시스템으로<br>완전히 다른 사람 되기<br>주도권 있는 매력남</p>
-                            </div>
-                        </div>
-
-                        <button class="final-cta-button" onclick="document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });">
-                            <span class="icon" style="font-size: 24px; margin-right: 12px;">📱</span>
-                            <div>
-                                <span class="text-main">지금 신청하고 무료 전자책 받기</span>
-                                <span class="text-sub">『프레임 전쟁』 PDF 다운로드 링크 문자 발송</span>
-                            </div>
-                        </button>
-                    </div>
-                    <p class="cta-guarantee">
-                        ✓ 100% 무료 제공 &nbsp;&nbsp; ✓ 개인정보 보호
-                    </p>
-                </div>
-                </div>
-        </div>
-    </div> <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // =========================================
-            // 1. 진단 상태 관리 (State Management)
-            // =========================================
-            const state = {
-                currentQuestion: 0,
-                totalQuestions: 5,
-                answers: [], // { questionId, score, answerText } 저장
-                totalScore: 0,
-                hasZeroPointAnswer: false // 치명적 약점(0점) 체크용 플래그
-            };
-
-            // =========================================
-            // 2. 진단 결과 데이터 (Diagnosis Data)
-            // =========================================
-            const diagnosticResults = {
-                // 🥉 LEVEL 3: 보험 (0~9점)
-                level3: {
-                    level: 'LEVEL 3',
-                    name: '🥉 보험 (The Insurance)',
-                    badgeColor: '#FF3B3B', // 위험 레드
-                    coreProblem: `
-                        <p class="diagnosis-title">당신은 <strong>'🥉 보험 (The Insurance)'</strong>으로 진단되었습니다.</p>
-                        <p>이 결과가 당신의 헌신이나 진심이 틀렸다는 뜻은 절대 아닙니다. 당신은 누구보다 순수하고 진지하게 관계에 임했을 확률이 높습니다. 문제는, 당신의 그 헌신이 <strong>'가장 쉬운 선택지'</strong>가 되어버렸다는 점입니다.</p>
-                        <p>그녀는 당신을 '필요할 때 언제든 나를 도와줄 사람'으로 인식하지만, '쟁취하고 싶은 남자'로 인식하지 않습니다. 당신의 배려가 그녀의 무의식에 <strong>"나는 노력하지 않아도 이 사람을 가질 수 있다"</strong>는 잘못된 신호를 주었기 때문입니다.</p>
-                        <p>이것은 가치 문제가 아닙니다. 단지 당신이 선택해온 '희생적' 행동 패턴이, 상대방에게 "나는 당신의 2순위여도 괜찮다"는 착각을 주고 있다는 것입니다.</p>
-                    `,
-                    prediction: '<strong>단기적으로:</strong> 지금처럼 헌신하면 그녀는 당신을 \'편한 사람\'으로만 남겨둘 것입니다.<br><strong>장기적으로:</strong> 이 패턴이 고착화되면, 앞으로 만날 모든 관계에서 \'헌신하다 헌신짝\' 되는 비극적인 역사가 반복될 확률이 매우 높습니다.',
-                    customStrategy: `
-                        <h3>💡 맞춤 해결 전략 (Level 3: 보험)</h3>
-                        <p class="strategy-intro">당신은 '헌신'과 '희생'이 사랑이라 믿었지만, 그녀는 그것을 <strong>'당연함'</strong>으로 받아들였습니다. 이 패턴을 깨기 위해선, <strong>'친절한 거절'</strong>과 <strong>'자기중심적 시간표'</strong>가 시급합니다.</p>
-                        <ul class="strategy-list">
-                            <li><strong>'당신의 스케줄'을 최우선하기:</strong> 그녀의 연락에 즉시 반응하기보다, 지금 하는 일(업무, 운동 등)을 먼저 완료하는 '태도'를 보이세요. 당신의 시간을 스스로 존중해야, 그녀도 당신을 '가치 있는 사람'으로 인식합니다.</li>
-                            <li><strong>'선약' 만들기:</strong> 그녀가 갑자기 불러도 "미안, 오늘은 선약이 있어."라고 말하는 연습이 필요합니다. 당신의 시간을 되찾아야 합니다.</li>
-                            <li><strong>'감정 쓰레기통' 거부:</strong> 그녀의 하소연을 10분 이상 들어주지 마세요. "그건 네가 현명하게 잘 해결할 거야."라고 말하고 화제를 돌리세요.</li>
-                        </ul>`
-                },
-                // 🥈 LEVEL 2: 후보 선수 (10~19점 or 강등된 20점 이상)
-                level2: {
-                    level: 'LEVEL 2',
-                    name: '🥈 후보 선수 (The Candidate)',
-                    badgeColor: '#FF9800', // 경고 오렌지
-                    coreProblem: `
-                        <p class="diagnosis-title">당신은 <strong>'🥈 후보 선수 (The Candidate)'</strong>로 진단되었습니다.</p>
-                        <p>이 결과는 당신의 매력이 부족하다는 뜻이 절대 아닙니다. 오히려 당신은 충분히 매력적인 사람일 확률이 높습니다. 문제는 매력의 부족이 아니라, 그 매력이 상대방의 무의식에 <strong>'강력하게'</strong> 각인되지 않고 있다는 점입니다.</p>
-                        <p>그 결과 상대방은 당신과 함께 있을 때 편안함을 느끼지만, 동시에 "지금 당장 결정하지 않아도 괜찮다"는 여유를 갖게 됩니다. 그녀의 무의식에 <strong>"이 남자를 놓치면 안 된다"</strong>는 위기감을 심어주지 못하고 있는 것이죠.</p>
-                        <p>이것은 가치 문제가 아닙니다. 단지 당신이 선택해온 '안정적인' 행동 패턴이, 상대방에게 "언제든 내 곁에 있을 것"이라는 착각을 주고 있다는 것입니다.</p>
-                    `,
-                    prediction: '<strong>단기적으로:</strong> 그녀는 당신을 \'괜찮은 옵션\' 정도로만 생각하며 계속 다른 대안을 탐색할 것입니다.<br><strong>장기적으로:</strong> 결정적인 순간에 항상 당신보다 더 매력적이거나 적극적인 경쟁자에게 밀려, 연애의 \'결정권\'을 평생 상대에게 넘겨주게 될 수 있습니다.',
-                    customStrategy: `
-                        <h3>💡 맞춤 해결 전략 (Level 2: 후보)</h3>
-                        <p class="strategy-intro">'좋은 사람'이지만 '매력적인 남자'는 아니었습니다. 그녀는 당신을 '안전'하다고 느끼지만 '설렌다'고 느끼진 않습니다. <strong>'예측 불가능성'</strong>과 <strong>'감정의 낙차'</strong>가 필요합니다.</p>
-                        <ul class="strategy-list">
-                            <li><strong>'착한 남자' 가면 벗기:</strong> 그녀의 의견에 무조건 동의하지 마세요. "난 그 생각 좀 달라."라고 당신의 주관을 뚜렷이 밝혀야 '남자'로 보입니다.</li>
-                            <li><strong>'감정의 낙차' 만들기:</strong> 한없이 다정하다가도, 한 번은 일에 집중하느라 무심한 모습을 보여주세요. 이 '낙차'가 그녀를 혼란스럽고 매달리게 만듭니다.</li>
-                            <li><strong>'경쟁자' 암시:</strong> "주말에 재밌는 일이 있었다" 정도로만 말하고 구체적으로 설명하지 마세요. 그녀가 "혹시 다른 여자?"라고 상상하게 만드는 것이 핵심입니다.</li>
-                        </ul>`
-                },
-                // 🥇 LEVEL 1: 1순위 (20~25점 & 0점 답변 없음)
-                level1: {
-                    level: 'LEVEL 1',
-                    name: '🥇 1순위 (The Priority)',
-                    badgeColor: '#4CAF50', // 안전 그린
-                    coreProblem: `
-                        <p class="diagnosis-title">당신은 <strong>'🥇 1순위 (The Priority)'</strong>로 진단되었습니다.</p>
-                        <p>축하합니다. 이 결과는 당신이 이미 관계의 주도권을 잡는 법을 <strong>'본능적'</strong>으로 알고 있음을 의미합니다. 그녀는 당신의 가치를 높게 평가하며, 당신을 '놓치면 안 될 남자'로 명확히 인식하고 있습니다.</p>
-                        <p><strong>하지만, 바로 이 지점에서 가장 중요한 질문을 드려야겠습니다.</strong></p>
-                        <p>지금의 이 성공이, 혹시 '당신이 그녀보다 높은 가치를 가졌거나, 덜 아쉬웠기 때문'은 아닐까요? 만약, 당신의 모든 것을 걸고 싶을 만큼 <strong>'매력적인 여자'</strong>를 만났을 때도... 당신은 지금처럼 여유롭게 행동할 자신이 있습니까?</p>
-                        <p>이것이 '1순위'들이 겪는 <strong>'승자의 저주'</strong>입니다. '어쩌다 성공'은 누구나 할 수 있지만, 그것을 '의식적인 시스템'으로 만들지 못하면, 더 높은 가치의 여자 앞에서 반드시 무너지게 되어있습니다.</p>
-                    `,
-                    prediction: '<strong>단기적으로:</strong> 현재의 관계를 잘 유지할 것입니다.<br><strong>장기적으로:</strong> 하지만 이 성공을 \'시스템\'으로 만들지 못한다면, 당신의 \'프레임\'을 시험하는 더 높은 가치의 여자를 만나거나, 현재 관계가 편안해지는 순간, 당신은 자신도 모르게 \'보험\'처럼 행동하게 될 것입니다. \'1순위\'의 자리는 영원하지 않습니다.',
-                    customStrategy: `
-                        <h3>💡 맞춤 해결 전략 (Level 1: 1순위)</h3>
-                        <p class="strategy-intro">당신은 이미 주도권을 가졌습니다. 하지만 '본능'에 의존한 성공은 '압박감' 앞에서 무너집니다. <strong>『프레임 전쟁』</strong>은 당신의 그 '본능적인 매력'을, 어떤 여자 앞에서도 흔들리지 않는 <strong>'의식적인 시스템'</strong>으로 바꿔줄 유일한 전략서입니다.</p>
-                        <ul class="strategy-list">
-                            <li><strong>'본능'을 '설계도'로 바꾸기:</strong> 당신이 왜 성공했는지 모른다면, 다시 성공할 수 없습니다. 『프레임 전쟁』은 당신의 '본능'을 '전략적 바운더리'와 같은 '설계도'로 만들어, 의도적으로 성공을 복제하게 합니다.</li>
-                            <li><strong>'압박감' 속에서 프레임 유지하기:</strong> 그녀를 '정말' 좋아하게 되면 당신도 무너집니다. 이 책은 당신의 감정이 아닌 '시스템'에 따라 행동하게 만들어, '가장 아쉬운 순간'에도 주도권을 잃지 않게 만듭니다.</li>
-                            <li><strong>'1순위'를 넘어 '대체 불가능'으로:</strong> '1순위'는 언제든 바뀔 수 있습니다. 『프레임 전쟁』의 PART 3(THE ATTITUDE)는 당신을 '대체 불가능한 남자'로 격상시켜, 그녀가 당신을 잃을까 두려워하게 만듭니다.</li>
-                        </ul>`
-                }
-            };
-
-            // =========================================
-            // 3. 핵심 로직 함수 (Core Logic)
-            // =========================================
+    <div id="gate" class="screen">
+        <h1>분석 완료</h1>
+        <p>귀하의 연애 지능(SIQ) 점수와<br>처방전이 준비되었습니다.</p>
+        <p style="font-size: 13px; color: #888; margin-bottom: 20px;">
+            결과 리포트는 입력하신 이메일로도 자동 발송됩니다.<br>
+            (스팸은 절대 보내지 않습니다.)
+        </p>
+        
+        <form id="stibee-form" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit();">
             
-            // DOM 요소 캐시
-            const loadingPage = document.getElementById('loading-page');
-            const resultPage = document.getElementById('result-page');
-            const progressBar = document.getElementById('progress-bar');
+            <input type="hidden" name="action_url" id="stibee_action_url" value="★여기에_스티비_URL_붙여넣기★">
             
-            // 3-1. 답변 처리 및 다음 질문 이동
-            window.handleAnswer = function(score, answerText) {
-                const currentQ = state.currentQuestion; // 0-indexed
-                score = parseInt(score);
+            <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required>
+            
+            <div style="text-align: left; font-size: 12px; color: #666; margin-bottom: 15px;">
+                <label><input type="checkbox" required checked> (필수) 개인정보 수집 및 이용 동의</label>
+            </div>
 
-                // 상태 업데이트
-                state.answers.push({ questionId: currentQ + 1, score: score, answerText: answerText });
-                state.totalScore += score;
-                if (score === 0) state.hasZeroPointAnswer = true; // 0점 답변 체크
+            <button type="submit" class="btn btn-primary">결과 확인하기</button>
+        </form>
+    </div>
 
-                // 다음 단계로
-                if (currentQ < state.totalQuestions - 1) {
-                    showQuestion(currentQ + 1);
-                } else {
-                    showLoadingAndResult();
-                }
-            };
+    <div id="result" class="screen">
+        <h2 id="result-title">결과 유형</h2>
+        <div class="score-box" id="result-score">0점</div>
+        <div class="result-desc" id="result-desc">
+            상세 분석 내용이 들어갑니다.
+        </div>
+        
+        <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
 
-            // 3-2. 질문 페이지 표시
-            function showQuestion(questionIndex) { // 0-indexed
-                hideAllPages();
-                const nextPage = document.getElementById(`question-${questionIndex + 1}`);
-                if (nextPage) {
-                    nextPage.classList.remove('hidden');
-                    nextPage.classList.add('active');
-                    state.currentQuestion = questionIndex;
-                    updateProgressBar(questionIndex + 1);
-                }
-            }
+        <h3>처방전 선택</h3>
+        
+        <a href="https://your-blog-or-sales-page.com/bundle" target="_blank" class="cta-btn cta-best">
+            <span class="tag tag-best">추천: 뇌 구조 개조</span>
+            <span style="font-size: 18px; font-weight: bold;">🔥 프레임 재설계 합본 PDF</span>
+            <span style="font-size: 14px; opacity: 0.9;">1.9만(침묵) + 5만(유혹) = 6.9만 원</span>
+        </a>
 
-            // 3-3. 로딩 후 결과 계산 및 표시
-            function showLoadingAndResult() {
-                hideAllPages();
-                loadingPage.classList.remove('hidden');
-                loadingPage.classList.add('active');
-                progressBar.classList.add('hidden');
+        <a href="https://your-booking-link.com" target="_blank" class="cta-btn cta-vip">
+            <span class="tag">상위 1% 마스터</span>
+            <span>👑 1:1 VIP 코칭 신청</span>
+            <span style="font-size: 12px; font-weight: normal;">150만 원 (월 3명 한정)</span>
+        </a>
 
-                setTimeout(() => {
-                    calculateAndRenderResult();
-                    loadingPage.classList.add('hidden');
-                    loadingPage.classList.remove('active');
-                    
-                    // 결과 페이지만 표시
-                    resultPage.classList.remove('hidden');
-                    resultPage.classList.add('active');
-                    
-                    // 결과 페이지 최상단으로 스크롤
-                    window.scrollTo(0, 0); 
-                }, 2500); // 2.5초 로딩 연출
-            }
+        <a href="https://your-blog-or-sales-page.com/basic" target="_blank" class="cta-btn cta-basic">
+            <span>💊 급한 불 끄기: 침묵의 기술 (1.9만 원)</span>
+        </a>
 
-            // 3-4. 결과 계산 및 렌더링 (핵심!)
-            function calculateAndRenderResult() {
-                let resultData;
-                const score = state.totalScore;
-                
-                // 원본 데이터를 복제하여 수정 (강등 메시지 등)
-                let level3Data = { ...diagnosticResults.level3 };
-                let level2Data = { ...diagnosticResults.level2 };
-                let level1Data = { ...diagnosticResults.level1 };
+    </div>
 
+</div>
 
-                // 레벨 판정 로직 (최종 확정안 반영: 0~9 / 10~19 / 20~25)
-                if (score <= 9) {
-                    resultData = level3Data; // 보험 (0~9)
-                } else if (score <= 19) {
-                    resultData = level2Data; // 후보 (10~19)
-                } else {
-                    // 20점 이상이지만 0점 답변이 있는 경우 -> 강등
-                    if (state.hasZeroPointAnswer) {
-                        resultData = level2Data; // 강등된 후보
-                        // 강등 안내 메시지 추가 (coreProblem을 덮어쓰기)
-                         resultData.coreProblem = `
-                            <p class="diagnosis-title"><strong>[강등 판정] '🥈 후보 선수'</strong>로 진단되었습니다.</p>
-                            <p>총점은 높지만, <strong>치명적인 약점(0점 답변)</strong>이 발견되어 '1순위'에서 강등되었습니다. 이 약점은 당신의 높은 가치에도 불구하고, 상대방에게 '이 사람은 나를 떠나지 못할 것'이라는 확신을 심어줍니다.</p>
-                            <p>그 결과, 그녀는 당신의 헌신을 당연하게 여기며 관계의 주도권을 쉽게 가져갑니다. 당신의 '결정적 실수' 하나가 전체 관계의 균형을 무너뜨리고 있는 것입니다.</p>
-                            <p>이것은 당신이 '좋은 사람'이기 때문에 발생하는 문제입니다. '좋은 사람'을 넘어 '매력적인 남자'가 되는 법을 배우지 않으면, 이 패턴은 반복됩니다.</p>
-                        `;
-                    } else {
-                        resultData = level1Data; // 1순위 (20~25 & No 0점)
-                    }
-                }
-                
-                // [강등 로직 수정] - 위에서 이미 처리됨.
-                // if (score >= 20 && state.hasZeroPointAnswer) { ... }
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
+<script>
+    /* --- [Logic System] --- */
+    
+    // 1. Question Data (7 Questions)
+    const questions = [
+        { q: "썸녀가 '오빠는 좋은 사람인데 아직 준비가 안 됐어'라고 했다. 속뜻은?", options: [
+            { t: "힘든가 보다. 기다려주자.", s: 0 },
+            { t: "타이밍 문제다. 더 노력하자.", s: 3 },
+            { t: "'매력 없다'는 뜻이군. 손절한다.", s: 10 }
+        ]},
+        { q: "분위기 좋은데 상대가 스킨십을 살짝 피했다. 당신의 행동은?", options: [
+            { t: "즉시 사과하고 물러선다.", s: 0 },
+            { t: "아무 일 없던 척 화제를 돌린다.", s: 3 },
+            { t: "아무 말 없이 미소 짓고 천천히 물러난다.", s: 10 }
+        ]},
+        { q: "그녀가 데이트에 30분 늦고 사과도 대충 한다. 당신은?", options: [
+            { t: "남자의 그릇으로 이해해 준다.", s: 0 },
+            { t: "기분 나쁘지만 티 내지 않는다.", s: 3 },
+            { t: "'이건 예의가 아니지'라고 선을 긋는다.", s: 10 }
+        ]},
+        { q: "카톡 보냈는데 4시간째 읽씹 중이다. 당신의 심리는?", options: [
+            { t: "바쁜가 보다. 내 할 일 한다.", s: 10 },
+            { t: "내가 말실수했나? 다시 읽어본다.", s: 3 },
+            { t: "'많이 바빠?' 하나 더 보낸다.", s: 0 }
+        ]},
+        { q: "식사비 15만원 썼는데, 카페에서 그녀가 지갑을 안 꺼낸다.", options: [
+            { t: "쪼잔해 보일까 봐 내가 낸다.", s: 3 },
+            { t: "당연히 내가 낸다.", s: 0 },
+            { t: "'커피는 네가 사'라고 말하고 기다린다.", s: 10 }
+        ]},
+        { q: "그녀가 갑자기 '오빠, 우리 무슨 사이야?'라고 묻는다.", options: [
+            { t: "'좋아해! 사귀자!' 고백한다.", s: 0 },
+            { t: "'글쎄.. 너는?' 이라고 회피한다.", s: 3 },
+            { t: "'왜? 나랑 사귀고 싶어서?'라고 되묻는다.", s: 10 }
+        ]},
+        { q: "약속 1시간 전, '몸이 안 좋아서 못 나가겠어' 통보가 왔다.", options: [
+            { t: "'약 사갈까?' 걱정해준다.", s: 0 },
+            { t: "'알겠어 푹 쉬어' 하고 바로 다음 약속 잡는다.", s: 3 },
+            { t: "'알겠어 푹 쉬어' 보내고 연락 끊는다.", s: 10 }
+        ]}
+    ];
 
-                // DOM 렌더링
-                renderResultPage(resultData, score);
-            }
+    let currentQ = 0;
+    let totalScore = 0;
 
-            // 3-5. 결과 페이지 DOM 업데이트
-            function renderResultPage(data, score) {
-                // 기본 정보
-                document.getElementById('result-type-name').innerHTML = data.name;
-                document.getElementById('result-level-badge').textContent = data.level;
-                document.getElementById('result-level-badge').style.backgroundColor = data.badgeColor;
-                document.getElementById('total-score').textContent = `${score}점`;
+    // 2. Quiz Logic
+    function startQuiz() {
+        document.getElementById('intro').classList.remove('active');
+        document.getElementById('quiz').classList.add('active');
+        showQuestion();
+    }
 
-                // 원형 차트 애니메이션
-                const percentage = (score / 25) * 100;
-                const scorePath = document.getElementById('score-path');
-                scorePath.style.stroke = data.badgeColor; // 차트 색상도 레벨에 맞춤
-                setTimeout(() => {
-                    scorePath.style.strokeDasharray = `${percentage}, 100`;
-                }, 100);
-
-                // 텍스트 콘텐츠 삽입
-                document.getElementById('core-problem-text').innerHTML = data.coreProblem;
-                document.getElementById('future-prediction').innerHTML = data.prediction;
-                
-                // NEW: Render custom strategy
-                document.getElementById('custom-strategy-section').innerHTML = data.customStrategy;
-
-                // 증거(답변 인용) 렌더링
-                renderEvidence(data.level);
-            }
-
-            // 3-6. 증거(답변 인용) 렌더링 로직
-            function renderEvidence(level) {
-                const listContainer = document.getElementById('worst-answers-list');
-                listContainer.innerHTML = '';
-                
-                let evidenceAnswers = [];
-
-                if (level === 'LEVEL 1' && !state.hasZeroPointAnswer) { // 1순위일 때만 (강등 아님)
-                    // Level 1은 잘한 답변(5점) 위주로 칭찬
-                    evidenceAnswers = state.answers.filter(a => a.score === 5).slice(0, 2);
-                    if (evidenceAnswers.length > 0) {
-                        listContainer.innerHTML = '<p>당신이 주도권을 쥐고 있다는 신호입니다:</p>';
-                    }
-                } else {
-                     // Level 2, 3, 강등된 Level 1은 못한 답변(0~3점) 위주로 지적
-                     // 0점 우선 추출 후 3점 추출
-                     const zeroPoints = state.answers.filter(a => a.score === 0);
-                     const lowPoints = state.answers.filter(a => a.score <= 3 && a.score > 0);
-                     evidenceAnswers = [...zeroPoints, ...lowPoints].slice(0, 2);
-
-                     if (evidenceAnswers.length > 0) {
-                         listContainer.innerHTML = '<p>이 답변들이 당신의 서열을 낮추는 결정적 증거입니다:</p>';
-                     }
-                }
-
-                // 인용구 생성
-                evidenceAnswers.forEach(item => {
-                    const p = document.createElement('p');
-                    p.className = 'quoted-answer';
-                    p.innerHTML = `Q${item.questionId}. "<strong>${item.answerText}</strong>"`;
-                    listContainer.appendChild(p);
-                });
-            }
-
-            // =========================================
-            // 4. 유틸리티 및 이벤트 리스너
-            // =========================================
-
-            function hideAllPages() {
-                document.querySelectorAll('.page').forEach(page => {
-                    page.classList.remove('active');
-                    page.classList.add('hidden');
-                });
-            }
-
-            function updateProgressBar(current) { // 1-indexed
-                const progressFill = document.getElementById('progress-fill');
-                const progressText = document.getElementById('progress-text');
-
-                if (current > 0 && current <= state.totalQuestions) {
-                    progressBar.classList.remove('hidden');
-                    // [오타 수정] state.Tota -> state.totalQuestions
-                    progressFill.style.width = `${(current / state.totalQuestions) * 100}%`;
-                    progressText.textContent = `${current} / ${state.totalQuestions}`;
-                }
-            }
-
-            // 시작 버튼 이벤트
-            const startBtn = document.getElementById('start-btn');
-            if (startBtn) {
-                startBtn.addEventListener('click', () => showQuestion(0)); // 0-indexed로 첫 질문 시작
-            }
-
-            // 옵션 버튼 이벤트 바인딩
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const score = this.getAttribute('data-score');
-                    const answer = this.getAttribute('data-answer');
-                    handleAnswer(score, answer);
-                });
-            });
+    function showQuestion() {
+        const qData = questions[currentQ];
+        document.getElementById('question-text').innerText = `Q${currentQ+1}. ${qData.q}`;
+        document.getElementById('progress').style.width = `${((currentQ+1)/questions.length)*100}%`;
+        
+        const optsDiv = document.getElementById('options-container');
+        optsDiv.innerHTML = "";
+        
+        qData.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.innerText = opt.t;
+            btn.onclick = () => nextQuestion(opt.s);
+            optsDiv.appendChild(btn);
         });
-    </script>
+    }
+
+    function nextQuestion(score) {
+        totalScore += score;
+        currentQ++;
+        if (currentQ < questions.length) {
+            showQuestion();
+        } else {
+            showLoading();
+        }
+    }
+
+    // 3. Fake Loading (Theatre)
+    function showLoading() {
+        document.getElementById('quiz').classList.remove('active');
+        document.getElementById('loading').classList.add('active');
+        
+        const msgs = ["답변 데이터 분석 중...", "착한 남자 패턴 대조 중...", "프레임 권력 계산 중..."];
+        let i = 0;
+        const interval = setInterval(() => {
+            document.getElementById('loading-msg').innerText = msgs[i];
+            i++;
+            if (i >= msgs.length) clearInterval(interval);
+        }, 1000);
+
+        setTimeout(() => {
+            document.getElementById('loading').classList.remove('active');
+            document.getElementById('gate').classList.add('active'); // Go to Email Gate
+        }, 3500);
+    }
+
+    // 4. Stibee Submission & Result Display
+    function handleFormSubmit() {
+        // Form sends data to Stibee via iframe.
+        // We immediately show the result screen.
+        
+        // *Actual Stibee logic*: To make the hidden iframe work, 
+        // we need to actually set the form action via JS if it wasn't set in HTML
+        const realUrl = document.getElementById('stibee_action_url').value;
+        const form = document.getElementById('stibee-form');
+        form.action = realUrl;
+
+        // Hide Gate, Show Result
+        setTimeout(() => {
+            document.getElementById('gate').classList.remove('active');
+            showResult();
+        }, 500); // Small delay to ensure form submits
+    }
+
+    function showResult() {
+        const rDiv = document.getElementById('result');
+        rDiv.classList.add('active');
+        
+        const title = document.getElementById('result-title');
+        const scoreDisplay = document.getElementById('result-score');
+        const desc = document.getElementById('result-desc');
+
+        scoreDisplay.innerText = totalScore + "점";
+
+        if (totalScore <= 20) {
+            title.innerText = "🔴 ERROR 404: 호구 바이러스 감염";
+            title.style.color = "#ff4757";
+            desc.innerHTML = `
+                <strong>"당신은 100점짜리 남자친구입니다. 매력만 0점입니다."</strong><br><br>
+                당신의 헌신은 사랑이 아니라 '구애(Begging)'였습니다. 
+                여자는 당신을 고마워하는 게 아니라 부담스러워합니다.
+                <br><br>
+                지금 당신에게 필요한 건 '더 잘해주는 것'이 아니라, 
+                관계를 리셋할 <strong>충격 요법</strong>입니다.
+            `;
+        } else if (totalScore <= 50) {
+            title.innerText = "🟡 WARNING 302: 프레임 불안정";
+            title.style.color = "#ffa502";
+            desc.innerHTML = `
+                <strong>"알고는 있지만, 결정적일 때 무너집니다."</strong><br><br>
+                이론적으로는 밀당을 알지만, 막상 그녀 앞에서는 
+                '이번만은 예외'라며 합리화하고 있지 않습니까?
+                <br><br>
+                어설픈 나쁜 남자는 오히려 더 비참해집니다.
+                확실한 <strong>기준(Anchor)</strong>을 세워야 할 때입니다.
+            `;
+        } else {
+            title.innerText = "🟢 STATUS 200: 논리 회로 정상 (But...)";
+            title.style.color = "#2ed573";
+            desc.innerHTML = `
+                <strong>"경고: 이 점수는 시뮬레이션일 뿐입니다."</strong><br><br>
+                당신은 머리로는 상위 10%입니다. 
+                하지만 <strong>실제 그녀의 향수 냄새 앞에서도</strong> 이 이성을 유지할 수 있습니까?
+                <br><br>
+                방심하는 순간, 본능적인 '착한 남자' 기질이 
+                관계를 망칠 확률은 여전히 90%입니다.
+                <strong>자만하지 마십시오.</strong>
+            `;
+        }
+    }
+</script>
+
 </body>
 </html>
