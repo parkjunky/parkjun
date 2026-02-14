@@ -3,417 +3,468 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내성적 유혹자 - 연애 지능 진단</title>
+    <title>말 없이 매력적인 남자가 되는 법 | 내성적 유혹자</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Stibee Default CSS -->
+    <link rel="stylesheet" href="https://resource.stibee.com/subscribe/stb_subscribe_form_style.css">
+
     <style>
-        /* [Design System] Dark Theme & Red Accent */
-        :root {
-            --bg-color: #121212;
-            --card-color: #1e1e1e;
-            --text-main: #ffffff;
-            --text-sub: #b0b0b0;
-            --accent: #ff4757; /* Warning Red */
-            --point: #2ed573;  /* Success Green */
-            --gold: #ffa502;   /* VIP Gold */
-        }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            line-height: 1.6;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0f1115; /* Deep Dark Background */
+            color: #e2e8f0; /* Lighter Gray for better contrast */
+            line-height: 2.0; /* Increased line-height for readability */
+            font-size: 17px; /* Slightly larger base font size */
+            letter-spacing: -0.02em; /* Tighter letter spacing for Korean */
+            word-break: keep-all; /* Prevent awkward word breaks */
         }
 
-        .container {
-            background-color: var(--card-color);
-            max-width: 500px;
-            width: 100%;
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        /* Mobile Typography Adjustments */
+        @media (max-width: 768px) {
+            body {
+                line-height: 1.8;
+                font-size: 16px;
+            }
+        }
+        
+        h1, h2, h3, h4, .serif {
+            font-family: 'Noto Serif KR', serif;
         }
 
-        h1 { font-size: 24px; margin-bottom: 10px; color: var(--accent); }
-        h2 { font-size: 20px; margin-bottom: 20px; }
-        p { color: var(--text-sub); margin-bottom: 30px; font-size: 15px; }
+        .highlight {
+            background: linear-gradient(120deg, rgba(180, 83, 9, 0.4) 0%, rgba(180, 83, 9, 0.2) 100%);
+            color: #fbbf24;
+            padding: 0 4px;
+            font-weight: 600;
+        }
 
-        /* Buttons */
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            margin: 10px 0;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background: #2c2c2c;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-            text-align: left;
+        .card-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .btn:hover { background: #3d3d3d; border-color: var(--accent); }
-        .btn-primary {
-            background: var(--accent);
-            border: none;
-            text-align: center;
-            font-weight: bold;
+        
+        /* Consistent paragraph spacing */
+        article p {
+            margin-bottom: 1.8rem;
         }
-        .btn-primary:hover { background: #ff6b81; }
 
-        /* Progress Bar */
-        .progress-container {
-            width: 100%;
-            background: #333;
-            height: 6px;
-            border-radius: 3px;
-            margin-bottom: 30px;
-            display: none; /* 초기에는 숨김 */
-        }
-        .progress-bar {
-            height: 100%;
-            background: var(--accent);
+        /* Reading Progress Bar */
+        #progress-bar {
             width: 0%;
-            transition: width 0.3s;
+            height: 4px;
+            background: #d97706;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            transition: width 0.1s;
         }
 
-        /* Screens */
-        .screen { display: none; animation: fadeIn 0.5s; }
-        .active { display: block; }
-
-        /* Loading Animation */
-        .loading-text {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-        .spinner {
-            margin: 20px auto;
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        /* Custom Selection Color */
+        ::selection {
+            background: #d97706;
+            color: #fff;
         }
 
-        /* Inputs */
-        input[type="email"] {
-            width: 90%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            background: #252525;
-            color: white;
-            font-size: 16px;
+        /* --- Stibee Form Custom Overrides for Dark Mode --- */
+        #stb_subscribe {
+            width: 100% !important;
+            max-width: 100% !important;
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
         }
-
-        /* Result Section */
-        .score-box {
-            font-size: 48px;
-            font-weight: bold;
-            color: var(--accent);
-            margin: 20px 0;
+        .stb_form_title {
+            display: none !important; /* Hide default title to use our own */
         }
-        .result-desc {
-            background: #252525;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: left;
-            margin-bottom: 30px;
-            font-size: 14px;
+        .stb_form_set {
+            margin-bottom: 15px !important;
         }
-        
-        /* 3-Tier Pricing Buttons */
-        .cta-box { margin-top: 30px; }
-        .cta-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s;
+        .stb_form_set_label {
+            color: #9ca3af !important; /* Gray-400 */
+            margin-bottom: 8px !important;
+            font-weight: 500 !important;
+            font-size: 0.95rem !important;
         }
-        .cta-btn:active { transform: scale(0.98); }
-        
-        .cta-basic { background: #333; color: #bbb; border: 1px solid #444; font-size: 14px; }
-        .cta-best { 
-            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%); 
-            color: white; 
-            border: none; 
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+        .stb_form_set_input {
+            width: 100% !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            padding: 16px 16px !important; /* Larger touch target */
+            font-size: 1rem !important;
+            border-radius: 0.5rem !important;
+            box-sizing: border-box !important;
+            transition: all 0.2s !important;
         }
-        .cta-vip { 
-            background: linear-gradient(135deg, #ffa502 0%, #e17055 100%); 
-            color: white; 
-            font-weight: bold;
+        .stb_form_set_input:focus {
+            outline: none !important;
+            border-color: #d97706 !important; /* Amber-600 */
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2) !important;
         }
-
-        .tag { font-size: 12px; padding: 2px 6px; border-radius: 4px; margin-bottom: 4px; }
-        .tag-best { background: rgba(0,0,0,0.3); color: #fff; }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .stb_form_policy {
+            color: #6b7280 !important; /* Gray-500 */
+            margin-bottom: 24px !important;
+            text-align: left !important;
+            font-size: 0.85rem !important;
+            line-height: 1.5 !important;
+        }
+        .stb_form_submit_button {
+            width: 100% !important;
+            background-color: #d97706 !important; /* Amber-600 */
+            color: white !important;
+            font-weight: bold !important;
+            padding: 18px !important; /* More prominent button */
+            border-radius: 0.5rem !important;
+            font-size: 1.15rem !important;
+            cursor: pointer !important;
+            border: none !important;
+            transition: all 0.2s !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+        }
+        .stb_form_submit_button:hover {
+            background-color: #b45309 !important; /* Amber-700 */
+            transform: translateY(-1px) !important;
+        }
+        .stb_form_modal_open_btn {
+            color: #9ca3af !important;
+            text-decoration: underline !important;
+            font-size: 0.85rem !important;
+        }
+        .stb_form_msg_error {
+            color: #f87171 !important; /* Red-400 */
+            font-size: 0.875rem !important;
+            margin-top: 6px !important;
+        }
+        /* Modal dark theme fix */
+        .stb_form_modal_body {
+            background: #1f2937 !important;
+            color: #e2e8f0 !important;
+            border: 1px solid #374151 !important;
+        }
+        .stb_form_modal_title {
+            color: white !important;
+        }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-<div class="container">
-    
-    <div id="intro" class="screen active">
-        <h1>착한 남자 딜레마 진단</h1>
-        <p>"왜 당신의 진심만 거절당할까?"<br>감정을 배제하고 논리적으로 분석합니다.</p>
-        <div style="font-size: 13px; color: #666; margin-bottom: 30px;">
-            소요 시간: 3분 | 문항 수: 7개 | 익명 보장
+    <!-- Scroll Progress -->
+    <div id="progress-bar"></div>
+
+    <!-- Navigation (Simple Brand) -->
+    <nav class="fixed w-full z-40 bg-[#0f1115]/90 backdrop-blur-md border-b border-white/5 py-4">
+        <div class="max-w-3xl mx-auto px-6 flex justify-between items-center">
+            <div class="text-xl font-bold tracking-widest serif text-white">내성적 유혹자</div>
+            <button onclick="copyLink()" class="text-sm text-gray-400 hover:text-white transition flex items-center gap-2">
+                <i data-lucide="share-2" class="w-4 h-4"></i> 공유하기
+            </button>
         </div>
-        <button class="btn btn-primary" onclick="startQuiz()">진단 시작하기</button>
-    </div>
+    </nav>
 
-    <div id="quiz" class="screen">
-        <div class="progress-container" style="display:block;">
-            <div class="progress-bar" id="progress"></div>
+    <!-- Header / Hero Section -->
+    <header class="pt-32 pb-12 px-6 text-center">
+        <div class="max-w-3xl mx-auto">
+            <span class="inline-block py-1 px-3 rounded-full bg-amber-900/30 text-amber-500 text-xs font-bold mb-6 tracking-wider border border-amber-900/50">EDITOR'S PICK • RELATIONSHIP</span>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight serif">
+                말 없이 매력적인 남자가 되는<br>가장 현실적인 방법
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl font-light mt-4">
+                조용한 남자를 위한 압도적인 연애전략
+            </p>
         </div>
-        <h2 id="question-text">질문 내용</h2>
-        <div id="options-container">
-            </div>
-    </div>
+    </header>
 
-    <div id="loading" class="screen">
-        <div class="spinner"></div>
-        <div class="loading-text" id="loading-msg">데이터 분석 중...</div>
-        <p>착한 남자 바이러스 탐지 중</p>
-    </div>
-
-    <div id="gate" class="screen">
-        <h1>분석 완료</h1>
-        <p>귀하의 연애 지능(SIQ) 점수와<br>처방전이 준비되었습니다.</p>
-        <p style="font-size: 13px; color: #888; margin-bottom: 20px;">
-            결과 리포트는 입력하신 이메일로도 자동 발송됩니다.<br>
-            (스팸은 절대 보내지 않습니다.)
-        </p>
+    <!-- Main Content -->
+    <article class="max-w-3xl mx-auto px-6 pb-24">
         
-        <form id="stibee-form" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit();">
+        <!-- Intro Story -->
+        <section class="mb-20">
+            <p>솔직히 고백하겠다. 나는 외모도, 말빨도 평범 이하였다.</p>
             
-            <input type="hidden" name="action_url" id="stibee_action_url" value="★여기에_스티비_URL_붙여넣기★">
-            
-            <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required>
-            
-            <div style="text-align: left; font-size: 12px; color: #666; margin-bottom: 15px;">
-                <label><input type="checkbox" required checked> (필수) 개인정보 수집 및 이용 동의</label>
+            <div class="card-glass p-8 rounded-xl border-l-4 border-amber-600 my-10 italic text-gray-300">
+                <p class="mb-4 text-lg">크리스마스 이브. 약속 장소에서 그녀를 기다렸다.<br>
+                30분. 1시간. <strong class="text-white">3시간이 지나서야 볼 수 있었다.</strong></p>
+                <p class="text-lg">평일, 새벽 2시. 전화 한 통에 택시를 타고 1시간을 달려 홍대에 갔다.<br>
+                도착해서 2시간을 더 기다려 그녀를 만났다.</p>
             </div>
 
-            <button type="submit" class="btn btn-primary">결과 확인하기</button>
-        </form>
-    </div>
+            <p>2가지 상황에서 내가 했던 말이 뭔지 아는가?</p>
+            <p class="text-2xl text-white font-medium mb-8 serif pl-4 border-l-2 border-white/20">"신경 쓰지 마. 별거 아냐. 괜찮아."</p>
+            <p>나는 괜찮지 않았다. 나는 그게 매력인 줄 알았다.</p>
+            <p>그렇게 5년이 흘렀다. 나는 대한민국에서 가장 화려하고, 말 많고, 에너지 넘치는 남자들이 득실대는 곳에서 일하게 됐다.</p>
+            <p class="text-4xl font-bold text-white mt-16 mb-8 serif text-center tracking-widest text-shadow">호스트바.</p>
+            <p>입담, 텐션, 외모. 이 3가지로 승부하는 전쟁터다. 내가 가진 건 하나도 없었다. 그런데 어떻게 살아남았을까?</p>
+            <p>나는 가장 시끄러운 곳에서, 그들과 정반대의 무기를 썼다. <span class="highlight">남들이 떠들 때 침묵했고, 남들이 웃길 때 여유를 보였다.</span></p>
+            <p>출근 첫날 모든 사람들이 나를 걱정했다. 하지만 나는 5년간의 치열한 시행착오로 이미 알고 있었다. 여자는 남자의 말이 아니라, 태도에 반응한다는 것을. 그리고 그것은 가장 화려한 곳에서도 증명됐다.</p>
+        </section>
 
-    <div id="result" class="screen">
-        <h2 id="result-title">결과 유형</h2>
-        <div class="score-box" id="result-score">0점</div>
-        <div class="result-desc" id="result-desc">
-            상세 분석 내용이 들어갑니다.
+        <hr class="border-white/10 my-16">
+
+        <!-- Social Proof -->
+        <section class="mb-20">
+            <h3 class="text-2xl text-white font-bold mb-8 serif">증명된 시스템</h3>
+            <p>이후 500명 넘게 상담하며 이 방법을 시스템으로 정리했다. 82페이지에 압축했고, 출시 3일 만에 1차 완판됐다. 지금부터 그 시스템의 핵심 원리를 공개한다.</p>
+            <p class="mb-10">물론 오늘 읽은 걸 실행하지 않으면 아무것도 바뀌지 않는다. 하지만 실행한 사람들은 이런 결과를 내고 있다.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <div class="bg-[#161920] p-6 rounded-lg border border-white/10 shadow-lg hover:border-amber-900/50 transition duration-300">
+                    <div class="flex text-amber-500 mb-3 text-lg">★★★★★</div>
+                    <p class="text-base font-medium">"형님한테 배운 대로 했는데 너무 자연스럽게 번호도 받고 즐거운 시간 보냈어요."</p>
+                    <p class="text-sm text-gray-500 mt-3">— 30대 초반, 대기업 근무</p>
+                </div>
+                <div class="bg-[#161920] p-6 rounded-lg border border-white/10 shadow-lg hover:border-amber-900/50 transition duration-300">
+                    <div class="flex text-amber-500 mb-3 text-lg">★★★★★</div>
+                    <p class="text-base font-medium">"기준이 점점 잡혀가네요… 흔들리지 않는 내면의 기준이 생기고 있습니다."</p>
+                    <p class="text-sm text-gray-500 mt-3">— 30대 중반, 전문직 종사자</p>
+                </div>
+            </div>
+            <p class="text-gray-400 text-base">실행 의지가 있고, 반복되는 연애 실패 때문에 힘든 남자라면 이 글은 당신을 위한 것이다. 끝까지 읽어라.</p>
+        </section>
+
+        <!-- The Problem -->
+        <section class="mb-20">
+            <h3 class="text-2xl text-white font-bold mb-8 serif">왜 당신의 연애는 실패하는가?</h3>
+            <p>지금 연애 시장을 보라. 남자들이 전부 같은 걸 하고 있다. 유튜브에서 배운 "텐션 올리기", SNS에서 본 "나쁜 남자 연기", 커뮤니티에서 퍼온 "밀당 공식". 모든 남자가 같은 영상을 보고, 같은 대사를 외우고, 같은 방식으로 접근한다.</p>
+            <p>여자들은 이미 그 패턴에 면역이 됐다. 첫 마디만 들어도 안다. <br><em class="text-gray-400">"아, 이것도 어디서 배워온 거구나."</em></p>
+            <p>모든 남자가 같은 방향으로 뛰고 있을 때, 반대 방향에 기회가 있다. 시끄러운 남자들 틈에서 조용한 남자가 오히려 눈에 띄는 시대다. 당신이 말수가 적다는 것 자체가 지금 이 시장에서는 희소 가치다.</p>
+            
+            <div class="bg-red-900/10 border border-red-900/30 p-8 rounded-xl my-10">
+                <h4 class="text-red-400 font-bold mb-6 flex items-center gap-2 text-lg">
+                    <i data-lucide="alert-triangle" class="w-6 h-6"></i> 잘못된 게임의 징후
+                </h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="check-square" class="w-6 h-6 text-red-400 mt-1 shrink-0"></i>
+                        <span class="text-lg">2~3번 만나면 연락이 뜸해진다</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="check-square" class="w-6 h-6 text-red-400 mt-1 shrink-0"></i>
+                        <span class="text-lg">"좋은 사람인데…" 뒤에 항상 거절이 온다</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="check-square" class="w-6 h-6 text-red-400 mt-1 shrink-0"></i>
+                        <span class="text-lg">여자 앞에서 할 말이 떠오르지 않아 불안하다</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="check-square" class="w-6 h-6 text-red-400 mt-1 shrink-0"></i>
+                        <span class="text-lg">억지로 텐션을 높였다가 집에 오면 녹초가 된다</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="check-square" class="w-6 h-6 text-red-400 mt-1 shrink-0"></i>
+                        <span class="text-lg">내가 다 맞춰줬는데도 결국 차였다</span>
+                    </li>
+                </ul>
+                <p class="text-red-300/80 text-base mt-6 font-medium">이 중 3개 이상 해당된다면, 당신은 지금 잘못된 게임을 하고 있는 것이다.</p>
+            </div>
+        </section>
+
+        <!-- The Solution: 3 Types -->
+        <section class="mb-20">
+            <h3 class="text-2xl text-white font-bold mb-10 serif">유혹의 3가지 루트</h3>
+            <p>대한민국에서 남자가 여자를 유혹하는 루트는 딱 3가지뿐이다.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <!-- Improved contrast by removing opacity-60 and setting specific background -->
+                <div class="bg-[#1f2937] p-8 rounded-xl border border-white/5 flex flex-col justify-between">
+                    <div>
+                        <div class="text-gray-500 font-bold mb-2">TYPE 1</div>
+                        <h4 class="text-xl font-bold text-white mb-3">객관적 스펙</h4>
+                        <p class="text-base text-gray-300">외모, 돈.<br>만드는 데 수년이 걸린다.</p>
+                    </div>
+                </div>
+                <div class="bg-[#1f2937] p-8 rounded-xl border border-white/5 flex flex-col justify-between">
+                    <div>
+                        <div class="text-gray-500 font-bold mb-2">TYPE 2</div>
+                        <h4 class="text-xl font-bold text-white mb-3">자극적 에너지</h4>
+                        <p class="text-base text-gray-300">텐션, 유머.<br>외향적인 남자의 무기다. 내성적인 남자에겐 고문이다.</p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-amber-900/40 to-amber-800/20 border border-amber-600/50 p-8 rounded-xl relative overflow-hidden flex flex-col justify-between shadow-lg shadow-amber-900/10">
+                    <div class="absolute top-0 right-0 bg-amber-600 text-white text-xs px-3 py-1 font-bold">WINNER</div>
+                    <div>
+                        <div class="text-amber-500 font-bold mb-2">TYPE 3</div>
+                        <h4 class="text-xl font-bold text-white mb-3">정서적 주도권</h4>
+                        <p class="text-base text-white/90">침묵, 여유,<br>흔들리지 않는 태도.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p>대부분의 남자는 Type 1 아니면 Type 2에 목숨을 건다. 하지만 <span class="highlight">내성적인 당신이 이길 수 있는 전장은 오직 Type 3뿐이다.</span></p>
+
+            <!-- Mid-Content CTA -->
+            <div class="bg-amber-900/20 border border-amber-600/30 p-6 rounded-xl my-10 text-center">
+                <p class="text-amber-200 mb-4">여기까지 공감된다면, 무료 PDF에서 더 깊은 원리를 확인하세요.</p>
+                <a href="#stb_subscribe" class="text-amber-500 font-bold hover:underline">↓ 무료 PDF 받으러 가기</a>
+            </div>
+        </section>
+
+        <!-- The Formula -->
+        <section class="mb-20">
+            <h3 class="text-2xl text-white font-bold mb-8 serif">끌림의 공식</h3>
+            <p>이것을 나는 <strong>'정서적 주도권(Frame)'</strong>이라고 부른다. 작동 원리는 간단하다.</p>
+            
+            <div class="py-12 my-10 bg-black/40 rounded-2xl border border-white/10 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]"></div>
+                <p class="text-xl md:text-3xl font-serif text-white relative z-10 leading-relaxed">
+                    끌림 = <span class="text-blue-400 font-bold">편안함</span> × <span class="text-red-400 font-bold">예측 불가능성</span>
+                </p>
+            </div>
+
+            <p>편안함만 있으면 '좋은 친구'가 된다. 예측 불가능성만 있으면 '이상한 사람'이 된다. 두 가지가 곱해질 때 여자는 "이 남자 뭐지?"라고 생각하며 빠져든다.</p>
+            <p>도입에서 봤던 그 남자를 떠올려봐라. 크리스마스에 3시간을 기다려주고, 새벽에 택시를 타고 1시간을 달려가는 남자. 편안하다. 하지만 다음 행동이 뻔히 보인다. 예측 불가능성이 0이면, 곱셈의 결과는 항상 0이다.</p>
+        </section>
+
+        <!-- Actionable Advice -->
+        <section class="mb-20">
+            <h3 class="text-2xl text-white font-bold mb-8 serif">실전 적용: 덜어냄의 미학</h3>
+            <p>당신이 여자를 만났을 때 가장 먼저 하는 것은 무엇인가? 다정함, 배려, 매너. 이것은 인간 대 인간으로 만날 때의 기본값이다. 압도적인 매너는 편안함만 극대화시킨다.</p>
+            <p>최소한의 친절. 나머지는 차라리 오해하게 만들어라. 그녀의 머릿속이 복잡해지게 만들어라.</p>
+            <blockquote class="border-l-4 border-amber-500 pl-6 my-10 text-xl italic text-gray-300">
+                "이 사람 정체가 뭐지? 말이 없는 건가 아닌 건가? 친절한 건가 아닌 건가?"
+            </blockquote>
+            <p>이 혼란이 끌림의 시작이다.</p>
+
+            <h4 class="text-xl text-white font-bold mt-12 mb-6 serif border-b border-white/10 pb-2 inline-block">절대로 먼저 잘난 척하지 마라</h4>
+            <p>당신이 노래를 압도적으로 잘한다고 해보자. 처음에 밝히면 "와 대단하다"로 끝난다. 하지만 몇 번 만나면서 전혀 드러내지 않았는데, 어느 날 우연히 알게 된다면? 그 순간 그녀의 머릿속에서 폭탄이 터진다.</p>
+            <p>연애는 이런 것이다. 해도 될까? 하면 안 될까? 하면 좋을 것 같은 것들을 참아내는 것이다. <span class="highlight">더하는 게 아니다. 덜어내는 것이다.</span> 덜어낼수록 당신의 존재감은 커진다.</p>
+            
+            <h4 class="text-xl text-white font-bold mt-12 mb-6 serif border-b border-white/10 pb-2 inline-block">가장 재미있을 때 끊어라</h4>
+            <p>대화가 가장 재밌을 때, "그럼 늦었으니 내일 연락드릴게요." 이 한 마디로 끊어라. 가장 맛있을 때 숟가락을 뺏기면 갈증이 폭발한다.</p>
+            <p>그녀는 자기 전에 당신을 떠올린다. "왜 끊었지?" 이 한 가지 생각이 당신을 그녀의 머릿속에 각인시킨다.</p>
+        </section>
+
+        <hr class="border-white/10 my-16">
+
+        <!-- Conclusion & CTA -->
+        <section class="text-center pb-12">
+            <p class="mb-12 text-lg">
+                여기까지 읽은 것만으로 당신은 시중 연애 강의를 수십만 원 주고 듣는 남자들보다 핵심을 더 정확히 이해하고 있다.<br>
+                하지만 원리를 아는 것과, 당신의 실전에서 몸에 배게 만드는 것은 완전히 다른 문제다.
+            </p>
+
+            <!-- CTA Card with Stibee Form -->
+            <div class="bg-gradient-to-b from-[#1a1e26] to-[#0f1115] p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl max-w-2xl mx-auto ring-1 ring-white/5">
+                <div class="text-amber-500 font-bold tracking-widest text-xs mb-3">FREE RESOURCE</div>
+                <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-6">무료 PDF 「프레임 전쟁」</h3>
+                <p class="text-gray-300 mb-10 text-base md:text-lg leading-relaxed">
+                    왜 착한 남자는 구조적으로 실패하는가?<br>
+                    "싫어"를 말하는 남자가 매력적인 이유.<br>
+                    <strong>지금 이메일을 입력하면 1분 안에 보내드립니다.</strong>
+                </p>
+                
+                <!-- Stibee Embed Code Start -->
+                <div id="stb_subscribe" class="mb-8 text-left">
+                    <form action="https://stibee.com/api/v1.0/lists/AaBciP-s19dSyFUWbBAU6mXm4_DrTQ==/public/subscribers" method="POST" target="_blank" accept-charset="utf-8" class="stb_form" name="stb_subscribe_form" id="stb_subscribe_form" novalidate>
+                        
+                        <!-- Title hidden via CSS -->
+                        <h1 class="stb_form_title">프레임 전쟁 구독하기</h1>
+                        
+                        <fieldset class="stb_form_set">
+                            <label for="stb_email" class="stb_form_set_label">
+                                이메일 주소 <span class="stb_asterisk text-amber-500">*</span>
+                            </label>
+                            <input type="text" class="stb_form_set_input" id="stb_email" name="email" placeholder="자주 사용하는 이메일을 입력해주세요" required="required">
+                            <div class="stb_form_msg_error" id="stb_email_error"></div>
+                        </fieldset>
+                        
+                        <div class="stb_form_policy">
+                            <label class="flex items-start gap-3 cursor-pointer group">
+                                <input type="checkbox" id="stb_policy" value="stb_policy_true" class="accent-amber-600 w-5 h-5 mt-0.5">
+                                <span class="text-gray-400 group-hover:text-gray-300 transition">(필수) <button id="stb_form_modal_open" data-modal="stb_form_policy_modal" class="stb_form_modal_open_btn hover:text-white" type="button">개인정보 수집 및 이용</button>에 동의합니다.</span>
+                            </label>
+                            <div class="stb_form_msg_error" id="stb_policy_error"></div>
+                            
+                            <!-- Stibee Modal -->
+                            <div class="stb_form_modal stb_form_policy_text blind" id="stb_form_policy_modal">
+                                <div class="stb_form_modal_body">
+                                    <h1 class="stb_form_modal_title">개인정보 수집 및 이용</h1>
+                                    <div class="stb_form_modal_text">뉴스레터 발송을 위한 최소한의 개인정보를 수집하고 이용합니다.<br>수집된 정보는 발송 외 다른 목적으로 이용되지 않으며, 서비스가 종료되거나 구독을 해지할 경우 즉시 파기됩니다.</div>
+                                    <div class="stb_form_modal_btn">
+                                        <button id="stb_form_modal_close" class="stb_form_modal_close_btn" data-modal="stb_form_policy_modal" type="button">닫기</button>
+                                    </div>
+                                </div>
+                                <div class="stb_form_modal_bg" id="stb_form_modal_bg"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stb_form_result" id="stb_form_result"></div>
+                        
+                        <fieldset class="stb_form_set_submit">
+                            <button type="submit" class="stb_form_submit_button shadow-lg shadow-amber-900/20 group flex items-center justify-center gap-2">
+                                <i data-lucide="mail" class="w-5 h-5 group-hover:scale-110 transition"></i>
+                                무료 PDF 지금 받기
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- Stibee Embed Code End -->
+                
+                <div class="flex flex-col gap-4">
+                    <a href="#" class="w-full bg-white/10 hover:bg-white/15 text-white font-medium py-4 px-8 rounded-lg border border-white/20 transition duration-200 text-center text-sm md:text-base">
+                        바로 실전 시스템이 필요하다면 → 침묵의 기술 / 내성적 유혹자 보기
+                    </a>
+                </div>
+            </div>
+
+            <p class="mt-16 text-gray-500 italic text-base">
+                내성적 유혹자, 박준.<br>
+                떠들지 않아도 된다. 이미 충분하다.<br>
+                다만 보여주는 기술이 없었을 뿐이다.
+            </p>
+
+            <p class="mt-8 text-gray-500 text-sm">
+                이 글이 도움이 됐다면, 같은 고민을 하는 친구에게 공유해주세요.
+                <button onclick="copyLink()" class="text-amber-500 hover:underline ml-2">링크 복사</button>
+            </p>
+        </section>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-[#0a0a0a] py-16 text-center text-gray-600 text-sm">
+        <div class="max-w-3xl mx-auto px-6">
+            <p class="mb-4 font-serif text-gray-500 text-lg">내성적 유혹자</p>
+            <p>Copyright © 2026 내성적 유혹자. All rights reserved.</p>
+            <p class="mt-2">본 콘텐츠의 저작권은 저자에게 있으며 무단 전재 및 재배포를 금합니다.</p>
         </div>
-        
-        <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
+    </footer>
 
-        <h3>처방전 선택</h3>
-        
-        <a href="https://your-blog-or-sales-page.com/bundle" target="_blank" class="cta-btn cta-best">
-            <span class="tag tag-best">추천: 뇌 구조 개조</span>
-            <span style="font-size: 18px; font-weight: bold;">🔥 프레임 재설계 합본 PDF</span>
-            <span style="font-size: 14px; opacity: 0.9;">1.9만(침묵) + 5만(유혹) = 6.9만 원</span>
-        </a>
-
-        <a href="https://your-booking-link.com" target="_blank" class="cta-btn cta-vip">
-            <span class="tag">상위 1% 마스터</span>
-            <span>👑 1:1 VIP 코칭 신청</span>
-            <span style="font-size: 12px; font-weight: normal;">150만 원 (월 3명 한정)</span>
-        </a>
-
-        <a href="https://your-blog-or-sales-page.com/basic" target="_blank" class="cta-btn cta-basic">
-            <span>💊 급한 불 끄기: 침묵의 기술 (1.9만 원)</span>
-        </a>
-
-    </div>
-
-</div>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-<script>
-    /* --- [Logic System] --- */
+    <!-- Stibee Script -->
+    <script type="text/javascript" src="https://resource.stibee.com/subscribe/stb_subscribe_form.js"></script>
     
-    // 1. Question Data (7 Questions)
-    const questions = [
-        { q: "썸녀가 '오빠는 좋은 사람인데 아직 준비가 안 됐어'라고 했다. 속뜻은?", options: [
-            { t: "힘든가 보다. 기다려주자.", s: 0 },
-            { t: "타이밍 문제다. 더 노력하자.", s: 3 },
-            { t: "'매력 없다'는 뜻이군. 손절한다.", s: 10 }
-        ]},
-        { q: "분위기 좋은데 상대가 스킨십을 살짝 피했다. 당신의 행동은?", options: [
-            { t: "즉시 사과하고 물러선다.", s: 0 },
-            { t: "아무 일 없던 척 화제를 돌린다.", s: 3 },
-            { t: "아무 말 없이 미소 짓고 천천히 물러난다.", s: 10 }
-        ]},
-        { q: "그녀가 데이트에 30분 늦고 사과도 대충 한다. 당신은?", options: [
-            { t: "남자의 그릇으로 이해해 준다.", s: 0 },
-            { t: "기분 나쁘지만 티 내지 않는다.", s: 3 },
-            { t: "'이건 예의가 아니지'라고 선을 긋는다.", s: 10 }
-        ]},
-        { q: "카톡 보냈는데 4시간째 읽씹 중이다. 당신의 심리는?", options: [
-            { t: "바쁜가 보다. 내 할 일 한다.", s: 10 },
-            { t: "내가 말실수했나? 다시 읽어본다.", s: 3 },
-            { t: "'많이 바빠?' 하나 더 보낸다.", s: 0 }
-        ]},
-        { q: "식사비 15만원 썼는데, 카페에서 그녀가 지갑을 안 꺼낸다.", options: [
-            { t: "쪼잔해 보일까 봐 내가 낸다.", s: 3 },
-            { t: "당연히 내가 낸다.", s: 0 },
-            { t: "'커피는 네가 사'라고 말하고 기다린다.", s: 10 }
-        ]},
-        { q: "그녀가 갑자기 '오빠, 우리 무슨 사이야?'라고 묻는다.", options: [
-            { t: "'좋아해! 사귀자!' 고백한다.", s: 0 },
-            { t: "'글쎄.. 너는?' 이라고 회피한다.", s: 3 },
-            { t: "'왜? 나랑 사귀고 싶어서?'라고 되묻는다.", s: 10 }
-        ]},
-        { q: "약속 1시간 전, '몸이 안 좋아서 못 나가겠어' 통보가 왔다.", options: [
-            { t: "'약 사갈까?' 걱정해준다.", s: 0 },
-            { t: "'알겠어 푹 쉬어' 하고 바로 다음 약속 잡는다.", s: 3 },
-            { t: "'알겠어 푹 쉬어' 보내고 연락 끊는다.", s: 10 }
-        ]}
-    ];
+    <script>
+        // Icon initialization
+        lucide.createIcons();
 
-    let currentQ = 0;
-    let totalScore = 0;
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
 
-    // 2. Quiz Logic
-    function startQuiz() {
-        document.getElementById('intro').classList.remove('active');
-        document.getElementById('quiz').classList.add('active');
-        showQuestion();
-    }
-
-    function showQuestion() {
-        const qData = questions[currentQ];
-        document.getElementById('question-text').innerText = `Q${currentQ+1}. ${qData.q}`;
-        document.getElementById('progress').style.width = `${((currentQ+1)/questions.length)*100}%`;
-        
-        const optsDiv = document.getElementById('options-container');
-        optsDiv.innerHTML = "";
-        
-        qData.options.forEach(opt => {
-            const btn = document.createElement('button');
-            btn.className = 'btn';
-            btn.innerText = opt.t;
-            btn.onclick = () => nextQuestion(opt.s);
-            optsDiv.appendChild(btn);
-        });
-    }
-
-    function nextQuestion(score) {
-        totalScore += score;
-        currentQ++;
-        if (currentQ < questions.length) {
-            showQuestion();
-        } else {
-            showLoading();
+        // Copy Link Feature
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("링크가 복사되었습니다.");
+            });
         }
-    }
-
-    // 3. Fake Loading (Theatre)
-    function showLoading() {
-        document.getElementById('quiz').classList.remove('active');
-        document.getElementById('loading').classList.add('active');
-        
-        const msgs = ["답변 데이터 분석 중...", "착한 남자 패턴 대조 중...", "프레임 권력 계산 중..."];
-        let i = 0;
-        const interval = setInterval(() => {
-            document.getElementById('loading-msg').innerText = msgs[i];
-            i++;
-            if (i >= msgs.length) clearInterval(interval);
-        }, 1000);
-
-        setTimeout(() => {
-            document.getElementById('loading').classList.remove('active');
-            document.getElementById('gate').classList.add('active'); // Go to Email Gate
-        }, 3500);
-    }
-
-    // 4. Stibee Submission & Result Display
-    function handleFormSubmit() {
-        // Form sends data to Stibee via iframe.
-        // We immediately show the result screen.
-        
-        // *Actual Stibee logic*: To make the hidden iframe work, 
-        // we need to actually set the form action via JS if it wasn't set in HTML
-        const realUrl = document.getElementById('stibee_action_url').value;
-        const form = document.getElementById('stibee-form');
-        form.action = realUrl;
-
-        // Hide Gate, Show Result
-        setTimeout(() => {
-            document.getElementById('gate').classList.remove('active');
-            showResult();
-        }, 500); // Small delay to ensure form submits
-    }
-
-    function showResult() {
-        const rDiv = document.getElementById('result');
-        rDiv.classList.add('active');
-        
-        const title = document.getElementById('result-title');
-        const scoreDisplay = document.getElementById('result-score');
-        const desc = document.getElementById('result-desc');
-
-        scoreDisplay.innerText = totalScore + "점";
-
-        if (totalScore <= 20) {
-            title.innerText = "🔴 ERROR 404: 호구 바이러스 감염";
-            title.style.color = "#ff4757";
-            desc.innerHTML = `
-                <strong>"당신은 100점짜리 남자친구입니다. 매력만 0점입니다."</strong><br><br>
-                당신의 헌신은 사랑이 아니라 '구애(Begging)'였습니다. 
-                여자는 당신을 고마워하는 게 아니라 부담스러워합니다.
-                <br><br>
-                지금 당신에게 필요한 건 '더 잘해주는 것'이 아니라, 
-                관계를 리셋할 <strong>충격 요법</strong>입니다.
-            `;
-        } else if (totalScore <= 50) {
-            title.innerText = "🟡 WARNING 302: 프레임 불안정";
-            title.style.color = "#ffa502";
-            desc.innerHTML = `
-                <strong>"알고는 있지만, 결정적일 때 무너집니다."</strong><br><br>
-                이론적으로는 밀당을 알지만, 막상 그녀 앞에서는 
-                '이번만은 예외'라며 합리화하고 있지 않습니까?
-                <br><br>
-                어설픈 나쁜 남자는 오히려 더 비참해집니다.
-                확실한 <strong>기준(Anchor)</strong>을 세워야 할 때입니다.
-            `;
-        } else {
-            title.innerText = "🟢 STATUS 200: 논리 회로 정상 (But...)";
-            title.style.color = "#2ed573";
-            desc.innerHTML = `
-                <strong>"경고: 이 점수는 시뮬레이션일 뿐입니다."</strong><br><br>
-                당신은 머리로는 상위 10%입니다. 
-                하지만 <strong>실제 그녀의 향수 냄새 앞에서도</strong> 이 이성을 유지할 수 있습니까?
-                <br><br>
-                방심하는 순간, 본능적인 '착한 남자' 기질이 
-                관계를 망칠 확률은 여전히 90%입니다.
-                <strong>자만하지 마십시오.</strong>
-            `;
-        }
-    }
-</script>
-
+    </script>
 </body>
 </html>
