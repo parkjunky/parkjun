@@ -381,6 +381,9 @@
                         
                         <!-- Title hidden via CSS -->
                         <h1 class="stb_form_title">프레임 전쟁 구독하기</h1>
+
+                        <!-- Source Tracking Hidden Field -->
+                        <input type="hidden" name="source" id="stb_source" value="">
                         
                         <fieldset class="stb_form_set">
                             <label for="stb_email" class="stb_form_set_label">
@@ -473,6 +476,27 @@
                 alert("링크가 복사되었습니다.");
             });
         }
+
+        // Source Parameter Tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. URL에서 source 파라미터 추출
+            const urlParams = new URLSearchParams(window.location.search);
+            const source = urlParams.get('source') || '';
+
+            // 2. 디버깅 로그
+            console.log('=== SOURCE TRACKING DEBUG ===');
+            console.log('Current URL:', window.location.href);
+            console.log('Source parameter:', source);
+
+            // 3. 폼의 숨김 필드에 값 세팅
+            const sourceInput = document.getElementById('stb_source');
+            if (sourceInput) {
+                sourceInput.value = source;
+                console.log('✅ Form source input set to:', sourceInput.value);
+            } else {
+                console.log('❌ Could not find source input element');
+            }
+        });
     </script>
 </body>
 </html>
