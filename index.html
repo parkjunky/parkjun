@@ -117,7 +117,7 @@
             box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2) !important;
         }
         .stb_form_policy {
-            color: #6b7280 !important; /* Gray-500 */
+            color: #9ca3af !important; /* Gray-400 (Updated from #6b7280) */
             margin-bottom: 24px !important;
             text-align: left !important;
             font-size: 0.85rem !important;
@@ -479,24 +479,85 @@
             });
         }
 
-        // Source Parameter Tracking
+        // Stibee Customization & Tracking Script
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. URL에서 source 파라미터 추출
+            // 1. Source Parameter Tracking
             const urlParams = new URLSearchParams(window.location.search);
             const source = urlParams.get('source') || '';
-
-            // 2. 디버깅 로그
-            console.log('=== SOURCE TRACKING DEBUG ===');
-            console.log('Current URL:', window.location.href);
-            console.log('Source parameter:', source);
-
-            // 3. 폼의 숨김 필드에 값 세팅
             const sourceInput = document.getElementById('stb_source');
             if (sourceInput) {
                 sourceInput.value = source;
-                console.log('✅ Form source input set to:', sourceInput.value);
-            } else {
-                console.log('❌ Could not find source input element');
+                console.log('✅ Tracking source set to:', source);
+            }
+
+            // 2. Success Message Customization
+            const resultDiv = document.getElementById('stb_form_result');
+            const form = document.getElementById('stb_subscribe_form');
+            
+            if (resultDiv && form) {
+                const observer = new MutationObserver(function(mutations) {
+                    if (resultDiv.classList.contains('custom-success-shown')) return;
+
+                    if (resultDiv.style.display !== 'none' && resultDiv.textContent.trim() !== '') {
+                        const text = resultDiv.textContent.toLowerCase();
+                        // Detect success keywords (Korean/English)
+                        const isSuccess = text.includes('발송') || text.includes('구독') || text.includes('확인') || text.includes('감사') || text.includes('sent');
+                        // Detect error keywords
+                        const isError = text.includes('오류') || text.includes('입력') || text.includes('형식') || text.includes('실패') || text.includes('error');
+
+                        if (isSuccess && !isError) {
+                            // Hide original form fields
+                            const elementsToHide = form.querySelectorAll('.stb_form_set, .stb_form_policy, .stb_form_set_submit');
+                            elementsToHide.forEach(el => el.style.display = 'none');
+
+                            // Inject Custom HTML Message with INLINE STYLES to override Stibee CSS
+                            // Updated styles for BETTER VISIBILITY (Lighter background for contrast)
+                            resultDiv.innerHTML = `
+                                <div class="text-left p-8 rounded-xl mt-4 animate-[fadeIn_0.5s_ease-out]" 
+                                     style="background-color: #1f2937 !important; border: 2px solid #22c55e !important; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3) !important; text-align: center !important;">
+                                    
+                                    <!-- Header Section (Centered for Focus) -->
+                                    <div class="flex flex-col items-center gap-4 mb-6">
+                                        <div class="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 shrink-0 mb-2" style="background-color: rgba(34, 197, 94, 0.15) !important; border: 1px solid rgba(34, 197, 94, 0.3) !important;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-2xl font-bold text-white" style="color: #ffffff !important; margin: 0 0 8px 0 !important; font-size: 1.6rem !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;">이메일이 발송되었습니다!</h4>
+                                            <p class="text-gray-300" style="color: #e5e7eb !important; margin: 0 !important; font-size: 1.15rem !important;">지금 바로 메일함을 확인해보세요.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="w-full h-px bg-white/10 my-8" style="background-color: rgba(255,255,255,0.15) !important;"></div>
+                                    
+                                    <!-- Content Section (Centered for consistency) -->
+                                    <div style="text-align: center !important;">
+                                        <h5 class="text-lg font-bold text-amber-500 mb-4 flex items-center justify-center gap-2" style="color: #fbbf24 !important; margin: 0 0 1rem 0 !important; font-size: 1.2rem !important; font-weight: 700 !important;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                                            그런데, 혹시 아시나요?
+                                        </h5>
+                                        <div class="text-gray-300 space-y-2 leading-relaxed" style="color: #e5e7eb !important; line-height: 1.7 !important; font-size: 1.05rem !important;">
+                                            <p style="margin: 0 0 0.5rem 0 !important; color: #e5e7eb !important;">이메일을 다운받아도 80% 이상은 "나중에 봐야지" 하면서 읽지 않습니다.</p>
+                                            <p style="margin: 0 !important; color: #e5e7eb !important;">그리고 끝까지 읽는 사람은 그 중에서도 10%도 되지 않습니다.</p>
+                                        </div>
+                                        
+                                        <!-- Highlight Box -->
+                                        <div class="mt-6 p-6 rounded-lg border border-amber-500/30 text-amber-100 font-medium" style="background: rgba(0, 0, 0, 0.2) !important; border: 1px solid rgba(245, 158, 11, 0.4) !important; color: #fef3c7 !important; margin-top: 2rem !important; padding: 1.5rem !important; text-align: center !important;">
+                                            <p style="margin: 0 !important; font-size: 1.1rem !important; line-height: 1.6 !important;">
+                                                "변화를 원한다면 가장 기본적인 것은 실행력입니다.<br>
+                                                <span style="color: #fbbf24 !important; font-weight: 800 !important; text-decoration: underline !important; text-decoration-color: rgba(251, 191, 36, 0.5) !important;">꼭 메일함을 확인하고, 끝까지 읽어보세요.</span>"
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            resultDiv.classList.add('custom-success-shown');
+                            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                });
+                
+                observer.observe(resultDiv, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
             }
         });
     </script>
