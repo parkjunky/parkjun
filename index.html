@@ -1,554 +1,1018 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>평범한 남자가 대체 불가능한 남자가 되는 방법 | 내성적 유혹자</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내성적 유혹자 — 박준 코치</title>
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
 
-    <!-- Stibee Default CSS -->
-    <link rel="stylesheet" href="https://resource.stibee.com/subscribe/stb_subscribe_form_style.css">
+  /* ===== UTILITY ===== */
+  .container { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 80px 0; }
+  .section--dark { background: #0a0a0a; }
+  .section--card { background: #111; }
+  .text-center { text-align: center; }
+  .text-gold { color: #c9a84c; }
+  .text-muted { color: #888; }
+  .text-small { font-size: 0.85rem; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mt-32 { margin-top: 32px; }
+  .mt-48 { margin-top: 48px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-32 { margin-bottom: 32px; }
 
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #0f1115; /* Deep Dark Background */
-            color: #e2e8f0; /* Lighter Gray for better contrast */
-            line-height: 2.0; /* Increased line-height for readability */
-            font-size: 17px; /* Slightly larger base font size */
-            letter-spacing: -0.02em; /* Tighter letter spacing for Korean */
-            word-break: keep-all; /* Prevent awkward word breaks */
-        }
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2, h3, h4 { color: #fff; line-height: 1.35; }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 800; }
+  h2 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; }
+  h3 { font-size: 1.2rem; font-weight: 600; }
+  p { color: #ccc; }
 
-        /* Mobile Typography Adjustments */
-        @media (max-width: 768px) {
-            body {
-                line-height: 1.8;
-                font-size: 16px;
-            }
-        }
-        
-        h1, h2, h3, h4, .serif {
-            font-family: 'Noto Serif KR', serif;
-        }
+  /* ===== HERO ===== */
+  .hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    background: linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 100%);
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .hero__badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.12);
+    color: #c9a84c;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(201,168,76,0.25);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+  }
+  .hero h1 { margin-bottom: 16px; }
+  .hero__sub {
+    font-size: 1.05rem;
+    color: #999;
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
 
-        .highlight {
-            background: linear-gradient(120deg, rgba(180, 83, 9, 0.4) 0%, rgba(180, 83, 9, 0.2) 100%);
-            color: #fbbf24;
-            padding: 0 4px;
-            font-weight: 600;
-        }
+  /* ===== CTA BUTTON ===== */
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #c9a84c 0%, #a88832 100%);
+    color: #000;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 16px 48px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+  }
+  .cta-btn--large {
+    font-size: 1.15rem;
+    padding: 18px 56px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .cta-note {
+    font-size: 0.82rem;
+    color: #777;
+    margin-top: 12px;
+  }
+  .cta-note span { color: #c9a84c; }
 
-        .card-glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        /* Consistent paragraph spacing */
-        article p {
-            margin-bottom: 1.8rem;
-        }
+  /* ===== STATS ROW ===== */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    text-align: center;
+  }
+  @media (max-width: 480px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat__num {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+    color: #c9a84c;
+  }
+  .stat__label {
+    font-size: 0.82rem;
+    color: #888;
+    margin-top: 4px;
+  }
 
-        /* Reading Progress Bar */
-        #progress-bar {
-            width: 0%;
-            height: 4px;
-            background: #d97706;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 50;
-            transition: width 0.1s;
-        }
+  /* ===== TYPE TABLE ===== */
+  .type-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+  }
+  .type-table th, .type-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #1e1e1e;
+    font-size: 0.95rem;
+  }
+  .type-table th {
+    color: #888;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .type-table tr.highlight td {
+    color: #c9a84c;
+    font-weight: 600;
+    background: rgba(201,168,76,0.05);
+  }
 
-        /* Custom Selection Color */
-        ::selection {
-            background: #d97706;
-            color: #fff;
-        }
+  /* ===== CHECKMARKS ===== */
+  .checklist { list-style: none; margin-top: 24px; }
+  .checklist li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 14px;
+    color: #ccc;
+    font-size: 0.95rem;
+  }
+  .checklist li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #c9a84c;
+    font-weight: 700;
+  }
 
-        /* --- Stibee Form Custom Overrides for Dark Mode --- */
-        #stb_subscribe {
-            width: 100% !important;
-            max-width: 100% !important;
-            background: transparent !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            border: none !important;
-        }
-        .stb_form_title {
-            display: none !important; /* Hide default title to use our own */
-        }
-        .stb_form_set {
-            margin-bottom: 15px !important;
-        }
-        .stb_form_set_label {
-            color: #9ca3af !important; /* Gray-400 */
-            margin-bottom: 8px !important;
-            font-weight: 500 !important;
-            font-size: 0.95rem !important;
-        }
-        .stb_form_set_input {
-            width: 100% !important;
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
-            padding: 16px 16px !important; /* Larger touch target */
-            font-size: 1rem !important;
-            border-radius: 0.5rem !important;
-            box-sizing: border-box !important;
-            transition: all 0.2s !important;
-        }
-        .stb_form_set_input:focus {
-            outline: none !important;
-            border-color: #d97706 !important; /* Amber-600 */
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2) !important;
-        }
-        .stb_form_policy {
-            color: #9ca3af !important; /* Gray-400 (Updated from #6b7280) */
-            margin-bottom: 24px !important;
-            text-align: left !important;
-            font-size: 0.85rem !important;
-            line-height: 1.5 !important;
-        }
-        .stb_form_submit_button {
-            width: 100% !important;
-            background-color: #d97706 !important; /* Amber-600 */
-            color: white !important;
-            font-weight: bold !important;
-            padding: 18px !important; /* More prominent button */
-            border-radius: 0.5rem !important;
-            font-size: 1.15rem !important;
-            cursor: pointer !important;
-            border: none !important;
-            transition: all 0.2s !important;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
-        }
-        .stb_form_submit_button:hover {
-            background-color: #b45309 !important; /* Amber-700 */
-            transform: translateY(-1px) !important;
-        }
-        .stb_form_modal_open_btn {
-            color: #9ca3af !important;
-            text-decoration: underline !important;
-            font-size: 0.85rem !important;
-        }
-        .stb_form_msg_error {
-            color: #f87171 !important; /* Red-400 */
-            font-size: 0.875rem !important;
-            margin-top: 6px !important;
-        }
-        /* Modal dark theme fix */
-        .stb_form_modal_body {
-            background: #1f2937 !important;
-            color: #e2e8f0 !important;
-            border: 1px solid #374151 !important;
-        }
-        .stb_form_modal_title {
-            color: white !important;
-        }
-    </style>
+  /* ===== DIVIDER ===== */
+  .divider {
+    height: 1px;
+    background: #1e1e1e;
+    margin: 0;
+  }
+
+  /* ===== QUOTE BLOCK ===== */
+  .quote-block {
+    border-left: 3px solid #c9a84c;
+    padding: 20px 24px;
+    background: rgba(201,168,76,0.04);
+    border-radius: 0 8px 8px 0;
+    margin-top: 32px;
+  }
+  .quote-block p { color: #ccc; font-style: italic; }
+  .quote-block .author { color: #888; font-style: normal; font-size: 0.85rem; margin-top: 8px; }
+
+  /* ===== THEORY CARDS ===== */
+  .theory-card {
+    background: #151515;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .theory-card h3 { color: #c9a84c; margin-bottom: 8px; font-size: 1.05rem; }
+  .theory-card p { font-size: 0.92rem; color: #aaa; }
+
+  /* ===== PROBLEM/SOLUTION ===== */
+  .ps-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #151515;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+  .ps-row__icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .ps-row__problem { color: #999; font-size: 0.92rem; }
+  .ps-row__arrow { color: #c9a84c; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .ps-row__solution { color: #e0e0e0; font-weight: 600; font-size: 0.92rem; }
+
+  /* ===== STEPS ===== */
+  .step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .step__num {
+    width: 40px;
+    height: 40px;
+    background: rgba(201,168,76,0.12);
+    color: #c9a84c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+  .step__content h3 { margin-bottom: 6px; }
+  .step__content p { font-size: 0.92rem; color: #aaa; }
+
+  /* ===== BEFORE/AFTER ===== */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  @media (max-width: 480px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-col { background: #151515; border: 1px solid #1e1e1e; border-radius: 12px; padding: 24px; }
+  .ba-col--after { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.04); }
+  .ba-col h3 { margin-bottom: 16px; font-size: 1rem; }
+  .ba-col ul { list-style: none; }
+  .ba-col ul li { padding: 6px 0; font-size: 0.92rem; color: #aaa; border-bottom: 1px solid #1e1e1e; }
+  .ba-col ul li:last-child { border-bottom: none; }
+  .ba-col--after ul li { color: #ddd; }
+
+  /* ===== REVIEWS ===== */
+  .review {
+    background: #151515;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+  .review p { font-size: 0.92rem; color: #ccc; font-style: italic; line-height: 1.7; }
+  .review .review__tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 12px;
+    font-style: normal;
+  }
+
+  /* ===== PRICE COMPARE ===== */
+  .price-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  @media (max-width: 480px) { .price-compare { grid-template-columns: 1fr; } }
+  .price-box {
+    background: #151515;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+  .price-box--highlight {
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.05);
+  }
+  .price-box__label { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+  .price-box__amount { font-size: 1.5rem; font-weight: 800; color: #fff; }
+  .price-box--highlight .price-box__amount { color: #c9a84c; }
+
+  /* ===== COACH ===== */
+  .coach {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-top: 32px;
+  }
+  @media (max-width: 480px) { .coach { flex-direction: column; } }
+  .coach__avatar {
+    width: 80px;
+    height: 80px;
+    background: rgba(201,168,76,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+    border: 2px solid rgba(201,168,76,0.25);
+  }
+  .coach__info h3 { margin-bottom: 4px; }
+  .coach__info .coach__title { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
+  .coach__info p { font-size: 0.92rem; color: #aaa; }
+
+  /* ===== GUARANTEE CARDS ===== */
+  .guarantee-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  @media (max-width: 480px) { .guarantee-grid { grid-template-columns: 1fr; } }
+  .guarantee-card {
+    background: #151515;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .guarantee-card__icon { font-size: 1.5rem; margin-bottom: 12px; }
+  .guarantee-card h4 { font-size: 0.95rem; margin-bottom: 8px; }
+  .guarantee-card p { font-size: 0.85rem; color: #999; }
+
+  /* ===== CHOICE TABLE ===== */
+  .choice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  @media (max-width: 480px) { .choice-grid { grid-template-columns: 1fr; } }
+  .choice-col {
+    background: #151515;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .choice-col--positive {
+    border-color: rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.04);
+  }
+  .choice-col h3 { font-size: 1rem; margin-bottom: 16px; }
+  .choice-col ul { list-style: none; }
+  .choice-col ul li {
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: #999;
+    border-bottom: 1px solid #1e1e1e;
+    padding-left: 24px;
+    position: relative;
+  }
+  .choice-col ul li:last-child { border-bottom: none; }
+  .choice-col ul li::before {
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  .choice-col--negative ul li::before { content: '✗'; color: #555; }
+  .choice-col--positive ul li { color: #ddd; }
+  .choice-col--positive ul li::before { content: '✓'; color: #c9a84c; }
+
+  /* ===== PRODUCT BOX ===== */
+  .product-box {
+    background: #111;
+    border: 2px solid rgba(201,168,76,0.3);
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    margin-top: 32px;
+  }
+  .product-box__price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #c9a84c;
+    margin: 16px 0 8px;
+  }
+  .product-box__includes {
+    font-size: 0.88rem;
+    color: #999;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  /* ===== FLOW STEPS ===== */
+  .flow-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .flow-step__num {
+    width: 32px;
+    height: 32px;
+    background: rgba(201,168,76,0.12);
+    color: #c9a84c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+  .flow-step__text { font-size: 0.92rem; color: #ccc; }
+  .flow-step__text strong { color: #fff; }
+
+  /* ===== REFUND ===== */
+  .refund-box {
+    background: #151515;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 32px;
+  }
+  .refund-box h3 { font-size: 1.3rem; margin-bottom: 8px; }
+
+  /* ===== FAQ ===== */
+  .faq-item {
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #ddd;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 20px 0;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+  }
+  .faq-q::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: #c9a84c;
+    transition: transform 0.3s;
+  }
+  .faq-q.active::after { content: '−'; }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    font-size: 0.9rem;
+    color: #999;
+    line-height: 1.7;
+  }
+  .faq-a.open {
+    max-height: 300px;
+    padding-bottom: 20px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid #1e1e1e;
+    font-size: 0.82rem;
+    color: #555;
+  }
+  .footer a { color: #888; }
+
+  /* ===== STICKY CTA ===== */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #1e1e1e;
+    padding: 12px 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .sticky-cta__text {
+    font-size: 0.9rem;
+    color: #ccc;
+    font-weight: 600;
+  }
+  .sticky-cta__text span { color: #c9a84c; font-weight: 800; }
+  .sticky-cta .cta-btn {
+    padding: 12px 32px;
+    font-size: 0.95rem;
+  }
+  @media (max-width: 480px) {
+    .sticky-cta { flex-direction: column; gap: 8px; padding: 10px 16px; }
+    .sticky-cta .cta-btn { width: 100%; text-align: center; }
+  }
+
+  /* ===== SPACER for sticky ===== */
+  .sticky-spacer { height: 80px; }
+</style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- Scroll Progress -->
-    <div id="progress-bar"></div>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="container">
+    <span class="hero__badge">BEST SELLER · 3일 만에 1차 완판</span>
+    <h1>🎯 내성적 유혹자</h1>
+    <p class="hero__sub">매력이 없는 게 아닙니다.<br>보여주는 법을 몰랐을 뿐입니다.</p>
+    <p class="text-muted text-small">호스트바 출신이 밝히는 조용한 남자 전용 연애 시스템</p>
+    <div class="mt-32">
+      <a href="#purchase" class="cta-btn cta-btn--large">지금 구매하기 →</a>
+      <p class="cta-note">✅ 72시간 내 100% 환불 보장 · <span>결제 즉시 발송</span></p>
+    </div>
+  </div>
+</section>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-40 bg-[#0f1115]/90 backdrop-blur-md border-b border-white/5 py-4">
-        <div class="max-w-3xl mx-auto px-6 flex justify-between items-center">
-            <!-- Left Menu Items -->
-            <div class="flex items-center gap-6">
-                <a href="#" class="text-sm font-bold text-gray-300 hover:text-white transition border-b-2 border-transparent hover:border-amber-600 py-1">연애 성공공식</a>
-                <!-- Link Updated -->
-                <a href="https://uvhktjqm.gensparkspace.com/index-v2.html?source=landing" class="text-sm font-bold text-gray-300 hover:text-white transition border-b-2 border-transparent hover:border-amber-600 py-1">전자책 소개</a>
-            </div>
-            
-            <!-- Right Share Button -->
-            <button onclick="copyLink()" class="text-sm text-gray-400 hover:text-white transition flex items-center gap-2">
-                <i data-lucide="share-2" class="w-4 h-4"></i> 공유하기
-            </button>
+<!-- ==================== TYPE TABLE ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">냉정하게 인정합시다</h2>
+    <p class="text-center text-muted mt-8">남자가 여자를 유혹하는 루트는 딱 3가지뿐입니다.</p>
+    <table class="type-table">
+      <thead>
+        <tr><th>유형</th><th>무기</th><th>현실</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Type 1: 객관적 스펙</td><td>외모 / 돈</td><td>타고나야 함</td></tr>
+        <tr><td>Type 2: 자극적 에너지</td><td>텐션 / 유머</td><td>어색하고 피로함</td></tr>
+        <tr class="highlight"><td><strong>Type 3: 정서적 주도권 ✅</strong></td><td><strong>침묵 / 여유</strong></td><td><strong>여자가 매달림</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="mt-48">
+      <p style="color:#999;">만약 Type 2(텐션, 드립, 유흥)를 원한다면, 지금 바로 뒤로 가기를 누르십시오. 유튜브에 널린 다른 강의가 더 빠릅니다.</p>
+      <p class="mt-24" style="color:#e0e0e0;">하지만,</p>
+      <ul class="checklist mt-16">
+        <li>억지 텐션을 올리는 게 죽기보다 싫은 내향인이라면,</li>
+        <li>가벼운 '원나잇'이 아니라, 깊은 관계의 주도권을 원한다면,</li>
+        <li>말만 많은 놈들을 '조용한 한 방'으로 제압하고 싶다면.</li>
+      </ul>
+      <p class="mt-24" style="color:#c9a84c; font-weight:700; font-size:1.1rem;">이 시스템이 유일한 해답입니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== CREDIBILITY ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">어떻게 확신하냐고요?</h2>
+    <p class="mt-24" style="color:#ccc;">저는 외모도, 말빨도 평범 이하였습니다.</p>
+    <p class="mt-16" style="color:#ccc;">하지만 오직 이 'Type 3(정서적 주도권)' 전략 하나만으로, 세상에서 가장 화려하고 말 많은 남자들이 득실대는 <strong style="color:#fff;">호스트바에서도 살아남았습니다.</strong></p>
+    <p class="mt-16 text-gold" style="font-weight:600;">가장 시끄러운 곳에서, 가장 조용한 무기로 이겼습니다.</p>
+    <p class="mt-32" style="color:#ddd; font-size:1.05rem;">당신은 <span style="color:#888;">광대</span>가 되시겠습니까, 아니면 <span class="text-gold">유혹자</span>가 되시겠습니까?</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== STATS ==================== -->
+<section class="section section--card">
+  <div class="container">
+    <h2 class="text-center">숫자로 증명된 변화</h2>
+    <div class="stats mt-48">
+      <div>
+        <div class="stat__num">10+</div>
+        <div class="stat__label">년 이상<br>검증된 시스템</div>
+      </div>
+      <div>
+        <div class="stat__num">500+</div>
+        <div class="stat__label">명 이상<br>코칭 데이터</div>
+      </div>
+      <div>
+        <div class="stat__num">82</div>
+        <div class="stat__label">페이지<br>압축된 핵심</div>
+      </div>
+      <div>
+        <div class="stat__num">3일</div>
+        <div class="stat__label">만에<br>1차 완판</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== FACT CHECK ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">이것은 '책'이 아니라<br>처절한 '실전 기록'입니다</h2>
+    <div class="theory-card mt-32">
+      <h3>500명 이상의 실제 상담 로그</h3>
+      <p>인터넷 뇌피셜이 아닙니다. "형, 지금 카톡 뭐라고 보내?"라며 절박하게 매달리던 남자들을 실제로 구원해낸 검증된 솔루션만 정제했습니다.</p>
+    </div>
+    <div class="theory-card">
+      <h3>그들이 해냈다면, 당신도 해냅니다</h3>
+      <p>모태솔로와 호구였던 그들이 변화했던 과정과 대화를 그대로 담았습니다. 이 책은 단순한 지도가 아니라, 목적지까지 당신을 안내할 정밀한 내비게이션입니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== CONTENTS ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">무엇을 다루는가?</h2>
+    <p class="text-center text-muted mt-8">10년 이상의 실전 경험과 수백 명의 코칭 데이터로 검증된 시스템</p>
+    <div class="mt-32">
+      <div class="theory-card">
+        <h3>의도적 인식 모델 3단계</h3>
+        <p>여성의 무의식을 움직이는 인식 설계의 3단계 메커니즘</p>
+      </div>
+      <div class="theory-card">
+        <h3>프레임 전쟁의 이해</h3>
+        <p>모든 관계는 프레임 싸움입니다. 주도권을 잡는 프레임 설계 원리</p>
+      </div>
+      <div class="theory-card">
+        <h3>길고양이 원리</h3>
+        <p>추격하지 않고 매력적으로 끌어당기는 근본 메커니즘</p>
+      </div>
+      <div class="theory-card">
+        <h3>내면 기준(앵커) 확립법</h3>
+        <p>흔들리지 않는 남자가 되는 내면 시스템 구축</p>
+      </div>
+      <div class="theory-card">
+        <h3>가치 증명 시스템</h3>
+        <p>말이 아닌 삶으로 증명하는 실전 매력 설계</p>
+      </div>
+      <div class="theory-card">
+        <h3>500명+ 실전 케이스</h3>
+        <p>코칭 현장에서 검증된 성공과 실패의 핵심 교훈</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== PROBLEM → SOLUTION ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">이런 상황이 해결됩니다</h2>
+    <div class="mt-32">
+      <div class="ps-row">
+        <span class="ps-row__icon">😰</span>
+        <div>
+          <p class="ps-row__problem">2~3번 만나고 연락 끊김</p>
+          <p class="ps-row__solution mt-8">→ 관계 진전시키는 정확한 타이밍</p>
         </div>
-    </nav>
-
-    <!-- Header / Hero Section -->
-    <header class="pt-32 pb-12 px-6 text-center">
-        <div class="max-w-3xl mx-auto">
-            <span class="inline-block py-1 px-3 rounded-full bg-amber-900/30 text-amber-500 text-xs font-bold mb-6 tracking-wider border border-amber-900/50">PREMIUM COLUMN</span>
-            <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight serif">
-                호스트바 출신이 말하는<br>'말 없이도 유리할 수 있는 이유'
-            </h1>
-            <p class="text-gray-400 text-lg md:text-xl font-light mt-4">
-                조용한 남자를 위한 압도적인 연애전략
-            </p>
+      </div>
+      <div class="ps-row">
+        <span class="ps-row__icon">😰</span>
+        <div>
+          <p class="ps-row__problem">맨날 "을"의 연애</p>
+          <p class="ps-row__solution mt-8">→ 주도권 잡는 프레임 설계법</p>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <article class="max-w-3xl mx-auto px-6 pb-24">
-        
-        <!-- Intro Story -->
-        <section class="mb-20">
-            <p>솔직히 고백하겠다. 나는 외모도, 말빨도 평범 이하였다.</p>
-            
-            <div class="card-glass p-8 rounded-xl border-l-4 border-amber-600 my-10 italic text-gray-300">
-                <p class="mb-4 text-lg">크리스마스 이브. 약속 장소에서 그녀를 기다렸다.<br>
-                하지만 <strong class="text-white">3시간이 지나서야 연락이 됐다.</strong></p>
-                <p class="text-lg">평일, 새벽 2시. 전화 한 통에 택시를 타고 1시간을 달려 홍대에 갔다.<br>
-                그리고 2시간을 더 기다려야 했다.</p>
-            </div>
-
-            <p>2가지 상황에서 내가 했던 말이 뭔지 아는가?</p>
-            <p class="text-2xl text-white font-medium mb-8 serif pl-4 border-l-2 border-white/20">"별거 아냐. 괜찮아."</p>
-            <p>하지만 나는 괜찮지 않았다. 단지, 그게 매력인 줄 알았을 뿐이다.</p>
-            <p>그렇게 5년이 흘렀다. 나는 대한민국에서 가장 화려하고, 말 많고, 에너지 넘치는 남자들이 득실대는 곳에서 일하게 됐다.</p>
-            <p class="text-4xl font-bold text-white mt-16 mb-8 serif text-center tracking-widest text-shadow">호스트바.</p>
-            <p>입담, 텐션, 외모. 이 3가지로 승부하는 전쟁터다. 내가 가진 건 하나도 없었다. 그런데 어떻게 살아남았을까?</p>
-            <p>나는 가장 시끄러운 곳에서, 그들과 정반대의 무기를 썼다. <span class="highlight">남들이 떠들 때 침묵했고, 남들이 웃길 때 여유를 보였다.</span></p>
-            <p>출근 첫날 모든 사람들이 나를 걱정했다. 하지만 나는 5년간의 시행착오로 이미 알고 있었다. 여자는 남자의 말이 아니라, 태도에 반응한다는 것을.</p>
-        </section>
-
-        <hr class="border-white/10 my-16">
-
-        <!-- Social Proof -->
-        <section class="mb-20">
-            <p>이후 500명 넘게 상담하며 이 방법을 시스템으로 정리했다. 실행한 사람들은 이런 결과를 내고 있다.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 mt-8">
-                <div class="bg-[#161920] p-6 rounded-lg border border-white/10 shadow-lg hover:border-amber-900/50 transition duration-300">
-                    <div class="flex text-amber-500 mb-3 text-lg">★★★★★</div>
-                    <p class="text-base font-medium">"흔들리지 않는 내면의 기준이 생기고 있습니다."</p>
-                    <p class="text-sm text-gray-500 mt-3">— 34세, 전문직, 소개팅 연패 중이었음</p>
-                </div>
-                <div class="bg-[#161920] p-6 rounded-lg border border-white/10 shadow-lg hover:border-amber-900/50 transition duration-300">
-                    <div class="flex text-amber-500 mb-3 text-lg">★★★★★</div>
-                    <p class="text-base font-medium">"형님한테 배운 대로 했는데 자연스럽게 번호도 받고 즐거운 시간 보냈어요."</p>
-                    <p class="text-sm text-gray-500 mt-3">— 32세, 대기업 근무, 연애 경험 1회</p>
-                </div>
-            </div>
-            <p class="text-gray-400 text-base">실행 의지가 있고, 반복되는 연애 실패 때문에 힘든 남자라면 이 글은 당신을 위한 것이다. 끝까지 읽어라.</p>
-        </section>
-
-        <!-- The Formula -->
-        <section class="mb-20">
-            <h3 class="text-2xl text-white font-bold mb-8 serif">여자가 빠지는 유일한 공식</h3>
-            <p>당신이 매력적인 남자가 되기 위해 해야 할 첫 번째는 <strong>"여자를 가지고 놀 줄 알아야 한다"</strong>는 생각을 버리는 것이다.</p>
-            <p class="text-gray-400 mt-4">"여자를 흔들고 주도권을 잡아라." "능글맞게 멘트를 던져라." "나쁜 남자가 돼라."</p>
-            <p class="mt-4">내성적인 당신에게 이런 조언은 연애를 망치는 지름길이다. 전부 <strong>'연기'</strong>이기 때문이다.</p>
-            
-            <blockquote class="border-l-4 border-amber-500 pl-6 my-10 text-lg italic text-gray-300">
-                "사람은 자신에게 끌리는 이유를 논리로 설명하지 못한다. 하지만 가짜는 본능적으로 알아챈다."<br>
-                — 로버트 그린, 『유혹의 기술』
-            </blockquote>
-
-            <p>어떻게 해야 할까? 남녀 관계에서 매력이 작동하는 원리는 이 공식 하나로 설명된다.</p>
-            
-            <div class="py-12 my-10 bg-black/40 rounded-2xl border border-white/10 text-center relative overflow-hidden">
-                <div class="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]"></div>
-                <p class="text-xl md:text-3xl font-serif text-white relative z-10 leading-relaxed">
-                    나의 매력 = (<span class="text-blue-400 font-bold">편안함</span> × <span class="text-red-400 font-bold">긴장감</span>) ^ <span class="text-amber-400 font-bold">신뢰성</span>
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                <div class="bg-blue-900/10 border border-blue-500/30 p-6 rounded-xl">
-                    <h4 class="text-blue-400 font-bold mb-3 flex items-center gap-2">
-                        <i data-lucide="shield" class="w-5 h-5"></i> 편안함에만 몰두하는 남자
-                    </h4>
-                    <!-- Text Updated -->
-                    <p class="text-sm text-gray-300 mb-4">5분 대기조처럼 답장하고 공감해주며, 주말마다 그녀가 하자는 대로 한다. 이 남자가 어떤 반응을 할지 예측 가능하기 때문에 긴장감이 없다.</p>
-                    <p class="text-sm font-medium text-blue-200">편안함 100 × 긴장감 0 = 매력 0</p>
-                    <p class="text-xs text-gray-400 mt-2">착한 남자가 구조적으로 실패하는 이유다. 하지만 역으로, 당신에게 편안함이 높다는 건 공식의 절반을 이미 갖고 있다는 뜻이다.</p>
-                </div>
-
-                <div class="bg-red-900/10 border border-red-500/30 p-6 rounded-xl">
-                    <h4 class="text-red-400 font-bold mb-3 flex items-center gap-2">
-                        <i data-lucide="flame" class="w-5 h-5"></i> 긴장감에만 집중하는 남자
-                    </h4>
-                    <!-- Text Updated -->
-                    <p class="text-sm text-gray-300 mb-4">픽업 아티스트들이 해당한다. 화려한 기술로 긴장감(텐션)을 만든다. 하지만 꾸며낸 멘트나 기술은 신뢰도를 0으로 만든다.</p>
-                    <p class="text-sm font-medium text-red-200">신뢰성 0 → 매력 0</p>
-                    <p class="text-xs text-gray-400 mt-2">여자는 연기인 걸 본능적으로 안다. 반대로 작은 매력이라도 진심을 바탕으로 하는 순간, 신뢰성은 승수가 되어 매력을 폭발적으로 끌어올린다.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Actionable Advice -->
-        <section class="mb-20">
-            <h3 class="text-2xl text-white font-bold mb-8 serif">그럼 무엇을 해야하는가?</h3>
-
-            <div class="space-y-8">
-                <div class="bg-[#1f2937] border-l-4 border-amber-500 p-8 rounded-r-xl shadow-lg">
-                    <h4 class="text-xl text-white font-bold mb-4 serif flex items-center gap-3">
-                        <span class="bg-amber-500/20 text-amber-500 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
-                        최소한에 익숙해져라
-                    </h4>
-                    <p>편안함은 무기가 아니라 <span class="highlight">최소한</span>이다. 문제는 편안함을 무기로 쓰려는 순간 생긴다. 더 다정하게, 더 빠르게 맞춰주면 어장 속 물고기가 되거나, 픽업아티스트 흉내를 내게 된다.</p>
-                    <p class="mt-4 p-4 bg-black/30 rounded text-gray-300 text-sm">
-                        "내가 할 수 있는 범위를 유지해라. 그 이상도 이하도 아니다. 아무리 예쁜 여자가 와도 평소 이상으로 올리지 마라. 이 한결같음이 신뢰성, 사회적 지능을 동시에 가져온다."
-                    </p>
-                </div>
-
-                <div class="bg-[#1f2937] border-l-4 border-amber-500 p-8 rounded-r-xl shadow-lg">
-                    <h4 class="text-xl text-white font-bold mb-4 serif flex items-center gap-3">
-                        <span class="bg-amber-500/20 text-amber-500 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
-                        혼자 하려고 하지 마라
-                    </h4>
-                    <p>대화도, 리드도 혼자 만들려고 하면 그녀는 노력할 기회를 잃는다. 말이 끊겼을 때 3초만 기다려봐라. 그녀가 먼저 입을 연다. 투자하지 않은 사람은 빠져들지 않는다.</p>
-                    <p class="mt-4 italic text-gray-400 border-l-2 border-white/20 pl-4">
-                        "내가 이 사람한테 왜 자꾸 말을 걸지? 관심이 있나 보다."
-                    </p>
-                    <p class="mt-2 text-sm">당신이 빈칸을 만들 때, 그녀가 그 빈칸을 채운다. 그녀가 채운 것은 당신이 준 것보다 항상 더 강하다.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Next Steps -->
-        <section class="mb-20">
-            <!-- Flow Connection (Bridge Text) -->
-            <p class="mb-8 text-lg">
-                하지만 원리를 아는 것과, 실제 상황에서 당황하지 않고 적용하는 것은 다른 문제다. <br>
-                그래서 나는 이 원칙을 실전에서 바로 쓸 수 있도록 3단계 시스템으로 정리했다.
-            </p>
-
-            <div class="bg-[#1f2937] p-8 rounded-xl border border-white/5">
-                <h3 class="text-xl text-white font-bold mb-6 serif">착한 남자가 주도권 잡는 3단계</h3>
-                <ul class="space-y-6">
-                    <li class="flex gap-4">
-                        <div class="text-amber-500 font-bold shrink-0">1단계</div>
-                        <div>
-                            <strong class="text-white block mb-1">왜 착한 남자는 실패하는가</strong>
-                            <span class="text-gray-400 text-sm">'만만함'의 3가지 요소. 당신이 무의식적으로 하고 있는 매력 깎는 행동들.</span>
-                        </div>
-                    </li>
-                    <li class="flex gap-4">
-                        <div class="text-amber-500 font-bold shrink-0">2단계</div>
-                        <div>
-                            <strong class="text-white block mb-1">의도적 인식 모델</strong>
-                            <span class="text-gray-400 text-sm">편안함 → 텐션 → 현실화. 여자가 당신에게 빠져드는 3단계 메커니즘.</span>
-                        </div>
-                    </li>
-                    <li class="flex gap-4">
-                        <div class="text-amber-500 font-bold shrink-0">3단계</div>
-                        <div>
-                            <strong class="text-white block mb-1">전략적 바운더리</strong>
-                            <span class="text-gray-400 text-sm">"싫어"를 말하는 남자가 매력적인 이유. 관계의 주도권을 잡는 경계선 설정법.</span>
-                        </div>
-                    </li>
-                </ul>
-                <p class="mt-6 text-sm text-gray-500 border-t border-white/10 pt-4">무료 PDF에서 이 3단계를 구체적으로 다룬다. 10분이면 읽을 수 있다.</p>
-            </div>
-        </section>
-
-        <!-- Conclusion & CTA -->
-        <section class="text-center pb-12">
-            <!-- CTA Card with Stibee Form -->
-            <div class="bg-gradient-to-b from-[#1a1e26] to-[#0f1115] p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl max-w-2xl mx-auto ring-1 ring-white/5">
-                <div class="text-amber-500 font-bold tracking-widest text-xs mb-3">FREE RESOURCE</div>
-                <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-6">무료 PDF 「프레임 전쟁」</h3>
-                <p class="text-gray-300 mb-10 text-base md:text-lg leading-relaxed">
-                    왜 착한 남자는 구조적으로 실패하는가?<br>
-                    "싫어"를 말하는 남자가 매력적인 이유.<br>
-                    <strong>지금 이메일을 입력하면 1분 안에 보내드립니다.</strong>
-                </p>
-                
-                <!-- Stibee Embed Code Start -->
-                <div id="stb_subscribe" class="mb-8 text-left">
-                    <form action="https://stibee.com/api/v1.0/lists/AaBciP-s19dSyFUWbBAU6mXm4_DrTQ==/public/subscribers" method="POST" target="_blank" accept-charset="utf-8" class="stb_form" name="stb_subscribe_form" id="stb_subscribe_form" novalidate>
-                        
-                        <!-- Title hidden via CSS -->
-                        <h1 class="stb_form_title">프레임 전쟁 구독하기</h1>
-
-                        <!-- Source Tracking Hidden Field -->
-                        <input type="hidden" name="source" id="stb_source" value="">
-                        
-                        <fieldset class="stb_form_set">
-                            <label for="stb_email" class="stb_form_set_label">
-                                이메일 주소 <span class="stb_asterisk text-amber-500">*</span>
-                            </label>
-                            <input type="text" class="stb_form_set_input" id="stb_email" name="email" placeholder="자주 사용하는 이메일을 입력해주세요" required="required">
-                            <div class="stb_form_msg_error" id="stb_email_error"></div>
-                        </fieldset>
-                        
-                        <div class="stb_form_policy">
-                            <label class="flex items-start gap-3 cursor-pointer group">
-                                <input type="checkbox" id="stb_policy" value="stb_policy_true" class="accent-amber-600 w-5 h-5 mt-0.5">
-                                <span class="text-gray-400 group-hover:text-gray-300 transition">(필수) <button id="stb_form_modal_open" data-modal="stb_form_policy_modal" class="stb_form_modal_open_btn hover:text-white" type="button">개인정보 수집 및 이용</button>에 동의합니다.</span>
-                            </label>
-                            <div class="stb_form_msg_error" id="stb_policy_error"></div>
-                            
-                            <!-- Stibee Modal -->
-                            <div class="stb_form_modal stb_form_policy_text blind" id="stb_form_policy_modal">
-                                <div class="stb_form_modal_body">
-                                    <h1 class="stb_form_modal_title">개인정보 수집 및 이용</h1>
-                                    <div class="stb_form_modal_text">뉴스레터 발송을 위한 최소한의 개인정보를 수집하고 이용합니다.<br>수집된 정보는 발송 외 다른 목적으로 이용되지 않으며, 서비스가 종료되거나 구독을 해지할 경우 즉시 파기됩니다.</div>
-                                    <div class="stb_form_modal_btn">
-                                        <button id="stb_form_modal_close" class="stb_form_modal_close_btn" data-modal="stb_form_policy_modal" type="button">닫기</button>
-                                    </div>
-                                </div>
-                                <div class="stb_form_modal_bg" id="stb_form_modal_bg"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="stb_form_result" id="stb_form_result"></div>
-                        
-                        <fieldset class="stb_form_set_submit">
-                            <button type="submit" class="stb_form_submit_button shadow-lg shadow-amber-900/20 group flex items-center justify-center gap-2">
-                                <i data-lucide="mail" class="w-5 h-5 group-hover:scale-110 transition"></i>
-                                무료 PDF 지금 받기
-                            </button>
-                        </fieldset>
-                    </form>
-                </div>
-                <!-- Stibee Embed Code End -->
-                
-                <div class="flex flex-col gap-4">
-                    <!-- Link Updated -->
-                    <a href="https://uvhktjqm.gensparkspace.com/index-v2.html?source=landing" class="w-full bg-white/10 hover:bg-white/15 text-white font-medium py-4 px-8 rounded-lg border border-white/20 transition duration-200 text-center text-sm md:text-base">
-                        바로 실전 시스템이 필요하다면 → 침묵의 기술 / 내성적 유혹자 보기
-                    </a>
-                </div>
-            </div>
-
-            <p class="mt-16 text-gray-500 italic text-base">
-                "떠들지 않아도 된다. 이미 충분하다.<br>
-                다만 보여주는 기술이 없었을 뿐이다."<br>
-                - 내성적 유혹자
-            </p>
-
-            <p class="mt-8 text-gray-500 text-sm">
-                이 글이 도움이 됐다면, 같은 고민을 하는 친구에게 공유해주세요.
-                <button onclick="copyLink()" class="text-amber-500 hover:underline ml-2">링크 복사</button>
-            </p>
-        </section>
-
-    </article>
-
-    <!-- Footer -->
-    <footer class="border-t border-white/5 bg-[#0a0a0a] py-16 text-center text-gray-600 text-sm">
-        <div class="max-w-3xl mx-auto px-6">
-            <p class="mb-4 font-serif text-gray-500 text-lg">내성적 유혹자</p>
-            <p>Copyright © 2026 내성적 유혹자. All rights reserved.</p>
-            <p class="mt-2">본 콘텐츠의 저작권은 저자에게 있으며 무단 전재 및 재배포를 금합니다.</p>
+      </div>
+      <div class="ps-row">
+        <span class="ps-row__icon">😰</span>
+        <div>
+          <p class="ps-row__problem">썸만 타다 흐지부지</p>
+          <p class="ps-row__solution mt-8">→ 썸 → 연인 전환 3단계 시스템</p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Stibee Script -->
-    <script type="text/javascript" src="https://resource.stibee.com/subscribe/stb_subscribe_form.js"></script>
-    
-    <script>
-        // Icon initialization
-        lucide.createIcons();
+<div class="divider"></div>
 
-        // Scroll Progress Bar
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
+<!-- ==================== FRAMEWORK ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">매력 설계 프레임워크™</h2>
+    <div class="quote-block">
+      <p>"매력은 기술이 아니라 증거입니다. 당신이 어떤 삶을 살고 있는가, 어떤 기준을 가지고 있는가가 여성의 무의식을 움직입니다."</p>
+      <p class="author">— 박준 코치</p>
+    </div>
+    <div class="mt-48">
+      <div class="step">
+        <div class="step__num">01</div>
+        <div class="step__content">
+          <h3>내면 기준 확립</h3>
+          <p>당신만의 확고한 앵커를 세워 흔들리지 않는 프레임을 만듭니다</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num">02</div>
+        <div class="step__content">
+          <h3>가치 증명</h3>
+          <p>말이 아닌 삶으로 증명하는 매력의 실체를 구축합니다</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num">03</div>
+        <div class="step__content">
+          <h3>관계 프레임 설계</h3>
+          <p>관계의 판을 당신이 직접 설계하고 주도하는 방법을 배웁니다</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Copy Link Feature
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                alert("링크가 복사되었습니다.");
-            });
-        }
+<div class="divider"></div>
 
-        // Stibee Customization & Tracking Script
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. Source Parameter Tracking
-            const urlParams = new URLSearchParams(window.location.search);
-            const source = urlParams.get('source') || '';
-            const sourceInput = document.getElementById('stb_source');
-            if (sourceInput) {
-                sourceInput.value = source;
-                console.log('✅ Tracking source set to:', source);
-            }
+<!-- ==================== BEFORE / AFTER ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">Before & After</h2>
+    <div class="ba-grid">
+      <div class="ba-col">
+        <h3>❌ 현재 당신</h3>
+        <ul>
+          <li>여성의 반응에 일희일비</li>
+          <li>착하지만 매력 없는 남자</li>
+          <li>관계에서 끌려다님</li>
+          <li>반복되는 실패 패턴</li>
+        </ul>
+      </div>
+      <div class="ba-col ba-col--after">
+        <h3 class="text-gold">✅ 책을 읽은 후</h3>
+        <ul>
+          <li>흔들리지 않는 내면 기준</li>
+          <li>여성이 다가오는 프레임</li>
+          <li>관계의 주도권 확립</li>
+          <li>원하는 관계를 설계하는 능력</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-            // 2. Success Message Customization
-            const resultDiv = document.getElementById('stb_form_result');
-            const form = document.getElementById('stb_subscribe_form');
-            
-            if (resultDiv && form) {
-                const observer = new MutationObserver(function(mutations) {
-                    if (resultDiv.classList.contains('custom-success-shown')) return;
+<div class="divider"></div>
 
-                    if (resultDiv.style.display !== 'none' && resultDiv.textContent.trim() !== '') {
-                        const text = resultDiv.textContent.toLowerCase();
-                        // Detect success keywords (Korean/English)
-                        const isSuccess = text.includes('발송') || text.includes('구독') || text.includes('확인') || text.includes('감사') || text.includes('sent');
-                        // Detect error keywords
-                        const isError = text.includes('오류') || text.includes('입력') || text.includes('형식') || text.includes('실패') || text.includes('error');
+<!-- ==================== REVIEWS ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">실제 수강생 후기</h2>
+    <p class="text-center text-muted mt-8">이론의 효과를 실제 코칭 결과로 증명합니다</p>
+    <div class="mt-32">
+      <div class="review">
+        <p>"형님한테 배운대로 했는데 너무 자연스럽게 번호도 받고 즐거운 시간 보냈어요. 와와와 감사합니다!"</p>
+        <span class="review__tag">— 실제 코칭 수강생 · 즉각적 변화</span>
+      </div>
+      <div class="review">
+        <p>"정말 값어치의 몇십배 이상을 해주시는 것을 잘 알고있습니다. 진심으로 깊이있게 대해주셔서 감사합니다."</p>
+        <span class="review__tag">— 실제 코칭 수강생 · 압도적 가치</span>
+      </div>
+      <div class="review">
+        <p>"기준이 점점 잡혀가네요.. 흔들리지 않는 내면의 기준이 생기고 있습니다."</p>
+        <span class="review__tag">— 실제 코칭 수강생 · 내면 기준 확립</span>
+      </div>
+      <div class="review">
+        <p>"코칭받으면서 연애에 대해 새로운 시각을 얻게되면서 '어떤 사람이 되어야겠구나' 까지 생각하게 되는 유익한 시간이었습니다."</p>
+        <span class="review__tag">— 실제 코칭 수강생 · 깊은 깨달음</span>
+      </div>
+      <div class="review">
+        <p>"답변의 질이 너무 좋아서 내공의 깊이가 다르시다는 게 느껴집니다."</p>
+        <span class="review__tag">— 실제 이메일 컨설팅 수강생 · 인증 완료</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        if (isSuccess && !isError) {
-                            // Hide original form fields
-                            const elementsToHide = form.querySelectorAll('.stb_form_set, .stb_form_policy, .stb_form_set_submit');
-                            elementsToHide.forEach(el => el.style.display = 'none');
+<div class="divider"></div>
 
-                            // Inject Custom HTML Message with INLINE STYLES to override Stibee CSS
-                            // Updated styles for BETTER VISIBILITY (Lighter background for contrast)
-                            resultDiv.innerHTML = `
-                                <div class="text-left p-8 rounded-xl mt-4 animate-[fadeIn_0.5s_ease-out]" 
-                                     style="background-color: #1f2937 !important; border: 2px solid #22c55e !important; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3) !important; text-align: center !important;">
-                                    
-                                    <!-- Header Section (Centered for Focus) -->
-                                    <div class="flex flex-col items-center gap-4 mb-6">
-                                        <div class="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 shrink-0 mb-2" style="background-color: rgba(34, 197, 94, 0.15) !important; border: 1px solid rgba(34, 197, 94, 0.3) !important;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-2xl font-bold text-white" style="color: #ffffff !important; margin: 0 0 8px 0 !important; font-size: 1.6rem !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;">이메일이 발송되었습니다!</h4>
-                                            <p class="text-gray-300" style="color: #e5e7eb !important; margin: 0 !important; font-size: 1.15rem !important;">지금 바로 메일함을 확인해보세요.</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="w-full h-px bg-white/10 my-8" style="background-color: rgba(255,255,255,0.15) !important;"></div>
-                                    
-                                    <!-- Content Section (Centered for consistency) -->
-                                    <div style="text-align: center !important;">
-                                        <h5 class="text-lg font-bold text-amber-500 mb-4 flex items-center justify-center gap-2" style="color: #fbbf24 !important; margin: 0 0 1rem 0 !important; font-size: 1.2rem !important; font-weight: 700 !important;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                                            그런데, 혹시 아시나요?
-                                        </h5>
-                                        <div class="text-gray-300 space-y-2 leading-relaxed" style="color: #e5e7eb !important; line-height: 1.7 !important; font-size: 1.05rem !important;">
-                                            <p style="margin: 0 0 0.5rem 0 !important; color: #e5e7eb !important;">이메일을 다운받아도 80% 이상은 "나중에 봐야지" 하면서 읽지 않습니다.</p>
-                                            <p style="margin: 0 !important; color: #e5e7eb !important;">그리고 끝까지 읽는 사람은 그 중에서도 10%도 되지 않습니다.</p>
-                                        </div>
-                                        
-                                        <!-- Highlight Box -->
-                                        <div class="mt-6 p-6 rounded-lg border border-amber-500/30 text-amber-100 font-medium" style="background: rgba(0, 0, 0, 0.2) !important; border: 1px solid rgba(245, 158, 11, 0.4) !important; color: #fef3c7 !important; margin-top: 2rem !important; padding: 1.5rem !important; text-align: center !important;">
-                                            <p style="margin: 0 !important; font-size: 1.1rem !important; line-height: 1.6 !important;">
-                                                "변화를 원한다면 가장 기본적인 것은 실행력입니다.<br>
-                                                <span style="color: #fbbf24 !important; font-weight: 800 !important; text-decoration: underline !important; text-decoration-color: rgba(251, 191, 36, 0.5) !important;">꼭 메일함을 확인하고, 끝까지 읽어보세요.</span>"
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                            
-                            resultDiv.classList.add('custom-success-shown');
-                            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
-                    }
-                });
-                
-                observer.observe(resultDiv, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
-            }
-        });
-    </script>
+<!-- ==================== PRICE COMPARE ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">가격 비교</h2>
+    <p class="text-center text-muted mt-8">시중 연애 코칭, 얼마인지 아십니까?</p>
+    <div class="price-compare">
+      <div class="price-box">
+        <p class="price-box__label">1:1 대면 코칭 1회</p>
+        <p class="price-box__amount">10~30만원</p>
+      </div>
+      <div class="price-box">
+        <p class="price-box__label">온라인 연애 강의</p>
+        <p class="price-box__amount">20~50만원</p>
+      </div>
+    </div>
+
+    <div class="theory-card mt-32" style="text-align:center;">
+      <p style="color:#888; font-size:0.85rem;">내성적 유혹자에 포함된 가치</p>
+      <div style="margin-top:16px;">
+        <p style="color:#ccc; font-size:0.92rem;">내성적 유혹자 본편 — 59,000원</p>
+        <p style="color:#ccc; font-size:0.92rem;">1:1 이메일 코칭 1회 — 50,000원 상당</p>
+        <p style="color:#888; font-size:0.85rem; margin-top:12px; border-top:1px solid #1e1e1e; padding-top:12px;">총 가치 109,000원 상당</p>
+      </div>
+      <p style="color:#c9a84c; font-size:1.4rem; font-weight:800; margin-top:16px;">실제 가격: 59,000원</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== COACH ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">누가 이걸 알려주는가?</h2>
+    <div class="coach">
+      <div class="coach__avatar">👤</div>
+      <div class="coach__info">
+        <h3>박준 코치</h3>
+        <p class="coach__title">연애 프레임 전문 코치 · 매력 설계 프레임워크™ 개발자</p>
+        <p>10년 이상 실전 경험 및 연구 · 수백 명 1:1 코칭 진행 · 호스트바 경험을 통한 여성 심리 심층 분석</p>
+      </div>
+    </div>
+    <div class="mt-32">
+      <p style="color:#ccc;">저도 한때 '착한 남자'였습니다. 10년 전, 저 역시 여성 앞에서 작아지고 관계에서 주도권을 잡지 못하는 남자였습니다. 수없이 실패하고, 감정을 소진하면서 깨달았습니다. "기술이 아니라 본질을 바꿔야 한다"는 것을요.</p>
+      <p class="mt-16" style="color:#ccc;">그 후 10년간의 시행착오, 호스트바에서의 경험과 검증, 수백 명과의 상담을 통해 매력의 근본 원리를 발견했습니다. 이제 그 검증된 시스템을 여러분과 나누고자 합니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== GUARANTEE SYSTEM ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">변화 보장 시스템</h2>
+    <p class="text-center text-muted mt-8">당신이 변화할 수밖에 없도록 안전장치를 걸어두었습니다</p>
+    <div class="guarantee-grid">
+      <div class="guarantee-card">
+        <div class="guarantee-card__icon">📨</div>
+        <h4>개인 맞춤 상담</h4>
+        <p>적용이 어려운 부분이 있으면 저자에게 직접 1:1 이메일을 보내십시오. 맞춤형 해답을 드립니다.</p>
+      </div>
+      <div class="guarantee-card">
+        <div class="guarantee-card__icon">🎯</div>
+        <h4>페이백 미션</h4>
+        <p>행동 과제를 인증하면 구매 비용의 50~100%를 페이백 해드립니다.</p>
+      </div>
+      <div class="guarantee-card">
+        <div class="guarantee-card__icon">☕</div>
+        <h4>평생 질의응답</h4>
+        <p>수강생 전용 카페에서 언제든 질문하십시오. 평생 답변해 드립니다.</p>
+      </div>
+      <div class="guarantee-card">
+        <div class="guarantee-card__icon">🔄</div>
+        <h4>평생 업데이트</h4>
+        <p>콘텐츠가 추가되고 가격이 올라도, 기존 구매자는 평생 무료로 업데이트본을 받습니다.</p>
+      </div>
+    </div>
+    <p class="text-center mt-32" style="color:#c9a84c; font-weight:600;">"당신이 포기하지 않는 한, 저도 당신을 포기하지 않습니다."</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== TWO PATHS ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">두 갈래의 길</h2>
+    <div class="choice-grid">
+      <div class="choice-col choice-col--negative">
+        <h3>❌ 이곳에 머무르면</h3>
+        <ul>
+          <li>1년 후에도 같은 실패 패턴 반복</li>
+          <li>다음 달부터 더 비싼 가격</li>
+          <li>5만 원 상당 1:1 컨설팅 기회 상실</li>
+          <li>자존감은 낮아지고 회의감만 커짐</li>
+        </ul>
+      </div>
+      <div class="choice-col choice-col--positive">
+        <h3 class="text-gold">✅ 내성적 유혹자가 되면</h3>
+        <ul>
+          <li>오늘부터 근본적인 변화 시작</li>
+          <li>현재 최저가로 평생 업데이트 확보</li>
+          <li>1:1 맞춤 컨설팅 무료 획득</li>
+          <li>관계의 주도권을 잡는 시스템 획득</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== PURCHASE ==================== -->
+<section class="section section--dark" id="purchase">
+  <div class="container">
+    <h2 class="text-center">🎯 내성적 유혹자</h2>
+    <div class="product-box">
+      <p class="text-muted text-small">조용한 남자를 위한 압도적 연애 전략</p>
+      <p class="product-box__price">59,000원</p>
+      <div class="product-box__includes">
+        정서적 주도권을 잡는 프레임 설계 시스템<br>
+        500명+ 실전 케이스<br>
+        1:1 이메일 코칭 1회 (5만원 상당)<br>
+        평생 무료 업데이트
+      </div>
+      <a href="#" class="cta-btn cta-btn--large">지금 구매하기 →</a>
+      <p class="cta-note">✅ 72시간 내 100% 환불 보장 · <span>결제 즉시 발송</span></p>
+      <p class="text-muted text-small mt-16">💡 콘텐츠 추가 시 가격이 조정됩니다. 현재가 가장 낮은 가격입니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== FLOW ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">구매 후 진행 과정</h2>
+    <div class="mt-32">
+      <div class="flow-step">
+        <div class="flow-step__num">1</div>
+        <p class="flow-step__text"><strong>결제 완료</strong> → 1분 내 이메일로 전용 열람 링크 발송</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step__num">2</div>
+        <p class="flow-step__text"><strong>링크 클릭</strong> → 웹에서 바로 읽기 (스마트폰/태블릿/PC 모두 지원)</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step__num">3</div>
+        <p class="flow-step__text"><strong>1:1 코칭 신청</strong> → 안내 이메일에 회신하면 끝</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== REFUND ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="refund-box">
+      <h3>100% 환불 보장</h3>
+      <p class="text-muted mt-8">묻지도 따지지도 않습니다</p>
+      <p class="mt-16" style="color:#ccc; font-size:0.92rem;">구매 후 72시간 이내에는 어떤 사유로든 100% 환불이 가능합니다.<br>환불 요청 시 별도의 사유 설명 없이 즉시 처리됩니다.</p>
+      <p class="mt-16 text-gold" style="font-weight:600;">당신이 책임질 것은 오직 "결정" 뿐입니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section section--dark">
+  <div class="container">
+    <h2 class="text-center">자주 묻는 질문</h2>
+    <div class="mt-32">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">책만 읽는다고 정말 변할 수 있을까요?</button>
+        <div class="faq-a">책은 변화의 시작점입니다. 500명 이상의 실제 코칭 데이터를 기반으로 '실행 가능한 단계별 시스템'으로 설계되어 있습니다. 또한 페이백 미션과 1:1 이메일 코칭이 포함되어, 혼자 읽고 끝나지 않도록 구조화했습니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">읽어도 이해가 안 되거나 적용이 어려우면 어떡하죠?</button>
+        <div class="faq-a">그래서 1:1 이메일 코칭이 포함되어 있습니다. 당신의 구체적인 상황을 보내주시면, 저자가 직접 맞춤형 해답을 드립니다. 코칭 이후에도 수강생 전용 카페에서 평생 질의응답이 가능합니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">업데이트는 얼마나 자주 이루어지나요?</button>
+        <div class="faq-a">매달 새로운 상담 사례와 트렌드를 반영하여 지속적으로 업데이트됩니다. 한 번 구매하시면 모든 업데이트를 평생 무료로 받아보실 수 있습니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">구매하면 바로 받아볼 수 있나요?</button>
+        <div class="faq-a">네, 결제 완료 즉시 이메일로 전용 열람 링크가 발송됩니다. 별도의 다운로드 없이 웹에서 바로 읽을 수 있으며, 스마트폰·태블릿·PC 모두 지원합니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">환불 정책은 어떻게 되나요?</button>
+        <div class="faq-a">구매 후 72시간 이내에는 어떤 사유로든 100% 환불이 가능합니다. 별도의 사유 설명 없이 즉시 처리됩니다. 이메일 한 통이면 끝입니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">어떤 사람에게 가장 도움이 되나요?</button>
+        <div class="faq-a">내성적이거나 말수가 적어서 연애에 어려움을 겪는 남성, 관계에서 항상 "을"이 되는 패턴을 반복하는 분, 착하지만 매력 없다는 소리를 듣는 분께 가장 큰 변화를 만들어 드립니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <p>고객 지원: <a href="mailto:juneqp@gmail.com">juneqp@gmail.com</a></p>
+    <p class="mt-8">© 2024 박준 코치. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- STICKY SPACER -->
+<div class="sticky-spacer"></div>
+
+<!-- ==================== STICKY CTA ==================== -->
+<div class="sticky-cta">
+  <p class="sticky-cta__text">내성적 유혹자 <span>59,000원</span></p>
+  <a href="#purchase" class="cta-btn">지금 구매하기 →</a>
+</div>
+
+<!-- ==================== JS ==================== -->
+<script>
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.classList.contains('open');
+
+  // close all
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('active'));
+
+  if (!isOpen) {
+    answer.classList.add('open');
+    btn.classList.add('active');
+  }
+}
+</script>
+
 </body>
 </html>
-
